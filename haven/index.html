@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Max Sandell — Strength Coaching for Women 40+</title>
+<meta name="description" content="Private strength coaching for women 40+ in Östermalm, Stockholm. Ex-close-protection, now protecting your strength. One client at a time. No judgment, no diet culture — just quiet, patient coaching.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Mulish:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Cormorant:ital,wght@1,500;1,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ivory:#f6f1ea;
+    --ivory-deep:#efe8dd;
+    --porcelain:#faf7f2;
+    --ink:#221c18;
+    --ink-soft:#4c423a;
+    --ink-faint:#7a6e63;
+    --espresso:#241d18;
+    --espresso-2:#2d251f;
+    --clay:#b0685a;
+    --clay-deep:#95544a;
+    --clay-wash:#eeddd6;
+    --sand:#cbb9a2;
+    --sage:#8e9484;
+    --hairline:rgba(34,28,24,.16);
+    --hairline-light:rgba(246,241,234,.22);
+    --shadow:0 24px 60px -28px rgba(34,28,24,.28);
+    --radius-arch:200px;
+    --ease:cubic-bezier(.22,.61,.21,1);
+    --font-display:'Marcellus',Georgia,serif;
+    --font-body:'Mulish',-apple-system,'Helvetica Neue',sans-serif;
+    --font-accent:'Cormorant',Georgia,serif;
+  }
+
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:96px}
+  html,body{overflow-x:clip}
+  body{
+    font-family:var(--font-body);
+    background:var(--ivory);
+    color:var(--ink);
+    font-size:1.0625rem;
+    line-height:1.7;
+    font-weight:400;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  ::selection{background:var(--clay);color:var(--ivory)}
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  ul{list-style:none}
+  button{font:inherit;cursor:pointer;border:none;background:none}
+
+  :focus-visible{
+    outline:2px solid var(--clay);
+    outline-offset:3px;
+    border-radius:2px;
+  }
+
+  /* ————— utilities ————— */
+  .wrap{width:min(1180px,calc(100% - 3rem));margin-inline:auto}
+  @media(max-width:560px){.wrap{width:calc(100% - 2.5rem)}}
+
+  .micro{
+    font-size:.7rem;
+    letter-spacing:.24em;
+    text-transform:uppercase;
+    font-weight:600;
+    color:var(--clay);
+  }
+  .micro--ink{color:var(--ink-faint)}
+  .micro-rule{
+    display:inline-flex;align-items:center;gap:.9rem;
+  }
+  .micro-rule::before{
+    content:"";width:34px;height:1px;background:var(--clay);flex:none;
+  }
+
+  h1,h2,h3{font-family:var(--font-display);font-weight:400;line-height:1.14;letter-spacing:.01em}
+  h2{font-size:clamp(1.9rem,4.2vw,2.9rem)}
+  h3{font-size:1.3rem}
+
+  .lede{color:var(--ink-soft);max-width:56ch}
+
+  /* reveal on scroll */
+  .rv{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+  .rv.in{opacity:1;transform:none}
+  .rv-d1{transition-delay:.08s}
+  .rv-d2{transition-delay:.16s}
+  .rv-d3{transition-delay:.24s}
+  .rv-d4{transition-delay:.32s}
+  @media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .rv{opacity:1;transform:none;transition:none}
+    *,*::before,*::after{animation-duration:.01ms !important;transition-duration:.01ms !important}
+  }
+
+  /* underline link animation */
+  .u-link{position:relative;padding-bottom:2px}
+  .u-link::after{
+    content:"";position:absolute;left:0;bottom:0;width:100%;height:1px;
+    background:currentColor;transform:scaleX(0);transform-origin:right;
+    transition:transform .45s var(--ease);
+  }
+  .u-link:hover::after,.u-link:focus-visible::after{transform:scaleX(1);transform-origin:left}
+
+  /* buttons */
+  .btn{
+    display:inline-flex;align-items:center;gap:.65rem;
+    font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;
+    padding:1.05rem 1.9rem;border-radius:999px;
+    transition:background .35s var(--ease),color .35s var(--ease),transform .35s var(--ease),box-shadow .35s var(--ease);
+  }
+  .btn svg{flex:none;transition:transform .35s var(--ease)}
+  .btn:hover svg{transform:translateX(4px)}
+  .btn--clay{background:var(--clay);color:var(--porcelain);box-shadow:0 14px 30px -14px rgba(176,104,90,.55)}
+  .btn--clay:hover{background:var(--clay-deep);transform:translateY(-2px)}
+  .btn--ghost{border:1px solid var(--hairline);color:var(--ink)}
+  .btn--ghost:hover{border-color:var(--ink);transform:translateY(-2px)}
+  .btn--ivory{background:var(--ivory);color:var(--ink)}
+  .btn--ivory:hover{background:#fff;transform:translateY(-2px)}
+
+  /* ————— nav ————— */
+  .nav{
+    position:fixed;inset:0 0 auto 0;z-index:50;
+    transition:background .4s var(--ease),box-shadow .4s var(--ease),backdrop-filter .4s var(--ease);
+  }
+  .nav.scrolled{
+    background:rgba(246,241,234,.88);
+    -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+    box-shadow:0 1px 0 var(--hairline);
+  }
+  .nav__inner{
+    display:flex;align-items:center;justify-content:space-between;gap:1.5rem;
+    padding:1.15rem 0;
+  }
+  .nav.scrolled .nav__inner{padding:.85rem 0}
+  .brand{display:flex;flex-direction:column;line-height:1.25}
+  .brand__mark{font-family:var(--font-display);font-size:1.28rem;letter-spacing:.05em}
+  .brand__tag{font-size:.61rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-faint);font-weight:600}
+  .nav__links{display:flex;align-items:center;gap:2.1rem;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:var(--ink-soft)}
+  .nav__cta{white-space:nowrap}
+  .nav .btn{padding:.8rem 1.4rem;font-size:.7rem}
+  @media(max-width:900px){.nav__links{display:none}}
+  @media(max-width:430px){
+    .brand__tag{display:none}
+    .nav .btn{padding:.7rem 1.05rem;font-size:.62rem;letter-spacing:.1em}
+  }
+
+  /* ————— hero ————— */
+  .hero{
+    position:relative;
+    padding:clamp(8.5rem,16vh,11.5rem) 0 clamp(4rem,8vw,6.5rem);
+    overflow:hidden;
+  }
+  .hero__grid{
+    display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.9fr);
+    gap:clamp(2.5rem,6vw,5.5rem);align-items:center;
+  }
+  .hero h1{
+    font-size:clamp(2.6rem,5.6vw,4.35rem);
+    margin:1.4rem 0 1.5rem;
+  }
+  .hero h1 em{
+    font-family:var(--font-accent);font-style:italic;font-weight:500;
+    color:var(--clay);letter-spacing:0;
+  }
+  .hero__sub{max-width:46ch;color:var(--ink-soft);margin-bottom:2.3rem}
+  .hero__actions{display:flex;align-items:center;gap:1.4rem;flex-wrap:wrap}
+  .hero__assure{
+    margin-top:1.4rem;font-size:.8rem;letter-spacing:.06em;color:var(--ink-faint);
+    display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;
+  }
+  .hero__assure span::after{content:"·";margin-left:.6rem;color:var(--sand)}
+  .hero__assure span:last-child::after{content:""}
+
+  .hero__figure{position:relative}
+  .arch{
+    position:relative;overflow:hidden;
+    border-radius:var(--radius-arch) var(--radius-arch) 18px 18px;
+    box-shadow:var(--shadow);
+    background:var(--ivory-deep);
+  }
+  .arch img{width:100%;height:100%;object-fit:cover}
+  .hero__figure .arch{aspect-ratio:4/5}
+  .hero__figure .arch img{transform:scale(1.02);transition:transform 1.6s var(--ease)}
+  .hero__figure:hover .arch img{transform:scale(1.06)}
+  .hero__figcap{
+    position:absolute;left:-1.1rem;bottom:2.2rem;
+    background:var(--porcelain);border:1px solid var(--hairline);
+    padding:.9rem 1.25rem;border-radius:14px;max-width:240px;
+    box-shadow:0 18px 40px -22px rgba(34,28,24,.3);
+  }
+  .hero__figcap strong{font-family:var(--font-display);font-weight:400;display:block;font-size:.98rem;letter-spacing:.02em}
+  .hero__figcap span{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);font-weight:600}
+  .hero__halo{
+    position:absolute;z-index:-1;border-radius:50%;
+    filter:blur(70px);opacity:.55;pointer-events:none;
+  }
+  .hero__halo--1{width:520px;height:520px;background:#ecdcd2;top:-120px;right:-140px}
+  .hero__halo--2{width:420px;height:420px;background:#e5e2d4;bottom:-160px;left:-160px}
+  @media(max-width:860px){
+    .hero__grid{grid-template-columns:1fr}
+    .hero__figure{max-width:440px}
+    .hero__figcap{left:.9rem;bottom:.9rem}
+  }
+
+  /* ————— section scaffolding ————— */
+  section{position:relative}
+  .sec-pad{padding:clamp(4.5rem,9vw,7.5rem) 0}
+  .sec-head{max-width:640px;margin-bottom:clamp(2.6rem,5vw,4rem)}
+  .sec-head h2{margin:1.1rem 0 1rem}
+  .hairline-top{border-top:1px solid var(--hairline)}
+
+  /* ————— empathy ————— */
+  .empathy{background:var(--porcelain)}
+  .empathy__grid{
+    display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:clamp(1.5rem,3vw,2.75rem);
+  }
+  .truth{
+    border-top:1px solid var(--hairline);
+    padding-top:1.8rem;
+  }
+  .truth__num{
+    font-family:var(--font-accent);font-style:italic;font-weight:500;
+    font-size:1.05rem;color:var(--sand);letter-spacing:.06em;
+  }
+  .truth h3{margin:.7rem 0 .9rem}
+  .truth p{color:var(--ink-soft);font-size:.98rem}
+  .truth__promise{
+    margin-top:1.4rem;padding-top:1.2rem;
+    border-top:1px dashed var(--hairline);
+    display:flex;gap:.8rem;align-items:flex-start;
+    font-size:.95rem;
+  }
+  .truth__promise svg{flex:none;margin-top:.3rem;color:var(--clay)}
+  .truth__promise strong{font-weight:700;color:var(--ink)}
+  @media(max-width:860px){.empathy__grid{grid-template-columns:1fr;gap:2.2rem}}
+
+  /* ————— meet max (dark) ————— */
+  .meet{
+    background:var(--espresso);
+    color:#efe7dc;
+    overflow:hidden;
+  }
+  .meet::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(700px 480px at 82% 10%,rgba(176,104,90,.14),transparent 65%),
+      radial-gradient(600px 500px at 8% 90%,rgba(142,148,132,.1),transparent 65%);
+  }
+  .meet .micro-rule::before{background:var(--clay)}
+  .meet__grid{
+    position:relative;
+    display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.05fr);
+    gap:clamp(2.6rem,6vw,5.5rem);align-items:start;
+  }
+  .meet__figwrap{position:sticky;top:110px}
+  .meet .arch{box-shadow:0 34px 80px -30px rgba(0,0,0,.65)}
+  .meet .arch{aspect-ratio:3/4}
+  .meet .arch::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(36,29,24,.05) 30%,rgba(36,29,24,.55) 100%),
+               linear-gradient(0deg,rgba(176,104,90,.14),rgba(176,104,90,.14));
+    mix-blend-mode:multiply;
+  }
+  .meet .arch img{filter:saturate(.55) contrast(1.05) brightness(.92)}
+  .meet__second{
+    position:absolute;right:-1rem;bottom:-2.4rem;width:44%;
+    border-radius:16px;overflow:hidden;
+    border:6px solid var(--espresso);
+    box-shadow:0 24px 50px -20px rgba(0,0,0,.6);
+  }
+  .meet__second img{filter:saturate(.5) brightness(.85);aspect-ratio:4/5;object-fit:cover;width:100%}
+  .meet h2{color:var(--ivory);margin:1.1rem 0 1.6rem}
+  .meet__story p{color:rgba(239,231,220,.78);margin-bottom:1.25rem;font-size:1.02rem;max-width:58ch}
+  .meet__story p strong{color:var(--ivory);font-weight:600}
+  .meet__quote{
+    font-family:var(--font-accent);font-style:italic;font-weight:500;
+    font-size:clamp(1.5rem,2.8vw,2rem);line-height:1.35;
+    color:#d9a294;
+    border-left:2px solid var(--clay);
+    padding:.4rem 0 .4rem 1.6rem;
+    margin:2.2rem 0;
+    max-width:30ch;
+  }
+  .meet__timeline{
+    margin:2.4rem 0 2.6rem;
+    display:grid;gap:1.1rem;
+  }
+  .meet__step{
+    display:grid;grid-template-columns:110px 1fr;gap:1.2rem;align-items:baseline;
+    border-top:1px solid var(--hairline-light);padding-top:1.05rem;
+  }
+  .meet__step dt{
+    font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--sand);font-weight:700;
+  }
+  .meet__step dd{color:rgba(239,231,220,.82);font-size:.97rem}
+  .meet__trust{
+    display:flex;flex-wrap:wrap;gap:.6rem;margin-top:2rem;
+  }
+  .meet__trust li{
+    display:inline-flex;align-items:center;gap:.5rem;
+    font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;
+    border:1px solid var(--hairline-light);border-radius:999px;
+    padding:.55rem 1rem;color:rgba(239,231,220,.85);
+  }
+  .meet__trust svg{color:var(--clay);flex:none}
+  @media(max-width:900px){
+    .meet__grid{grid-template-columns:1fr}
+    .meet__figwrap{position:relative;top:0;max-width:460px;margin-bottom:2.6rem}
+    .meet__second{right:-.4rem}
+    .meet__step{grid-template-columns:1fr;gap:.25rem}
+  }
+
+  /* ————— why strength ————— */
+  .why__layout{
+    display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.78fr);
+    gap:clamp(2.5rem,6vw,5rem);align-items:center;
+  }
+  .facts{
+    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.1rem;
+  }
+  .fact{
+    background:var(--porcelain);
+    border:1px solid var(--hairline);
+    border-radius:18px;
+    padding:1.7rem 1.5rem 1.5rem;
+    transition:transform .45s var(--ease),box-shadow .45s var(--ease);
+  }
+  .fact:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+  .fact__stat{
+    font-family:var(--font-display);
+    font-size:clamp(1.9rem,3.4vw,2.5rem);
+    color:var(--clay);line-height:1.05;
+  }
+  .fact__label{
+    font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;
+    color:var(--ink-faint);margin:.65rem 0 .7rem;
+  }
+  .fact p{font-size:.9rem;color:var(--ink-soft);line-height:1.6}
+  .why__figure .arch{aspect-ratio:3/4}
+  .why__note{
+    margin-top:2rem;font-size:.85rem;color:var(--ink-faint);
+    border-top:1px solid var(--hairline);padding-top:1.1rem;max-width:52ch;
+  }
+  @media(max-width:900px){
+    .why__layout{grid-template-columns:1fr}
+    .why__figure{display:none}
+  }
+  @media(max-width:560px){.facts{grid-template-columns:1fr}}
+
+  /* ————— how it works ————— */
+  .how{background:var(--ivory-deep)}
+  .how__layout{
+    display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr);
+    gap:clamp(2.5rem,6vw,5rem);align-items:center;
+  }
+  .how__figure .arch{aspect-ratio:4/5}
+  .steps{counter-reset:step;display:grid;gap:0}
+  .step{
+    counter-increment:step;
+    display:grid;grid-template-columns:64px 1fr;gap:1.4rem;
+    padding:1.9rem 0;border-top:1px solid var(--hairline);
+  }
+  .step:last-child{border-bottom:1px solid var(--hairline)}
+  .step::before{
+    content:"0" counter(step);
+    font-family:var(--font-display);font-size:1.5rem;color:var(--clay);
+    line-height:1.1;padding-top:.15rem;
+  }
+  .step h3{margin-bottom:.55rem}
+  .step p{color:var(--ink-soft);font-size:.97rem;max-width:52ch}
+  .how__privacy{
+    margin-top:2.2rem;
+    display:flex;flex-wrap:wrap;gap:.6rem;
+  }
+  .how__privacy li{
+    display:inline-flex;align-items:center;gap:.5rem;
+    background:var(--porcelain);border:1px solid var(--hairline);border-radius:999px;
+    padding:.55rem 1.05rem;font-size:.74rem;letter-spacing:.09em;text-transform:uppercase;font-weight:700;
+    color:var(--ink-soft);
+  }
+  .how__privacy svg{color:var(--sage);flex:none}
+  @media(max-width:900px){
+    .how__layout{grid-template-columns:1fr}
+    .how__figure{max-width:440px}
+  }
+  @media(max-width:480px){
+    .step{grid-template-columns:1fr;gap:.5rem}
+  }
+
+  /* ————— offerings ————— */
+  .offers__grid{
+    display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:1.4rem;align-items:stretch;
+  }
+  .offer{
+    display:flex;flex-direction:column;
+    background:var(--porcelain);
+    border:1px solid var(--hairline);
+    border-radius:22px;
+    padding:2.3rem 2rem 2.1rem;
+    transition:transform .45s var(--ease),box-shadow .45s var(--ease),border-color .45s var(--ease);
+  }
+  .offer:hover{transform:translateY(-5px);box-shadow:var(--shadow);border-color:transparent}
+  .offer--feature{
+    background:linear-gradient(170deg,#fdfaf5,var(--clay-wash));
+    border-color:rgba(176,104,90,.35);
+  }
+  .offer__kicker{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:var(--clay);margin-bottom:1rem}
+  .offer h3{font-size:1.45rem;margin-bottom:.8rem}
+  .offer>p{color:var(--ink-soft);font-size:.95rem;margin-bottom:1.5rem}
+  .offer__list{margin-bottom:1.8rem;display:grid;gap:.55rem}
+  .offer__list li{
+    display:flex;gap:.65rem;align-items:flex-start;font-size:.9rem;color:var(--ink-soft);
+  }
+  .offer__list svg{flex:none;margin-top:.32rem;color:var(--clay)}
+  .offer__price{
+    margin-top:auto;padding-top:1.4rem;border-top:1px solid var(--hairline);
+    display:flex;align-items:baseline;gap:.55rem;flex-wrap:wrap;
+  }
+  .offer__price em{font-style:normal;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);font-weight:700}
+  .offer__price strong{font-family:var(--font-display);font-weight:400;font-size:1.6rem}
+  .offer__price span{font-size:.82rem;color:var(--ink-faint)}
+  .offer .u-link{margin-top:1.3rem;font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--clay);align-self:flex-start}
+  @media(max-width:960px){.offers__grid{grid-template-columns:1fr;max-width:560px}}
+
+  /* ————— testimonials ————— */
+  .voices{background:var(--porcelain)}
+  .voices__grid{
+    display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:clamp(1.4rem,3vw,2.4rem);
+  }
+  .voice{
+    display:flex;flex-direction:column;
+    border-top:1px solid var(--hairline);
+    padding-top:1.9rem;
+  }
+  .voice__mark{
+    font-family:var(--font-accent);font-style:italic;font-size:3rem;line-height:.6;
+    color:var(--sand);margin-bottom:1.2rem;
+  }
+  .voice blockquote{
+    font-family:var(--font-accent);font-style:italic;font-weight:500;
+    font-size:1.28rem;line-height:1.5;color:var(--ink);
+    margin-bottom:1.6rem;
+  }
+  .voice figcaption{
+    margin-top:auto;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--ink-faint);
+  }
+  .voice figcaption strong{color:var(--clay);font-weight:700}
+  @media(max-width:860px){.voices__grid{grid-template-columns:1fr}}
+
+  /* ————— faq ————— */
+  .faq__layout{
+    display:grid;grid-template-columns:minmax(0,.72fr) minmax(0,1fr);
+    gap:clamp(2.5rem,6vw,5rem);align-items:start;
+  }
+  .faq__intro{position:sticky;top:120px}
+  .faq details{border-top:1px solid var(--hairline)}
+  .faq details:last-child{border-bottom:1px solid var(--hairline)}
+  .faq summary{
+    list-style:none;cursor:pointer;
+    display:flex;align-items:center;justify-content:space-between;gap:1.5rem;
+    padding:1.5rem 0;
+    font-family:var(--font-display);font-size:1.18rem;letter-spacing:.01em;
+    transition:color .3s var(--ease);
+  }
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary:hover{color:var(--clay-deep)}
+  .faq summary .faq__icon{
+    flex:none;width:34px;height:34px;border:1px solid var(--hairline);border-radius:50%;
+    display:grid;place-items:center;color:var(--clay);
+    transition:transform .45s var(--ease),background .45s var(--ease),color .45s var(--ease);
+  }
+  .faq details[open] summary .faq__icon{transform:rotate(45deg);background:var(--clay);color:var(--porcelain);border-color:var(--clay)}
+  .faq details p{
+    padding:0 3.4rem 1.7rem 0;color:var(--ink-soft);font-size:.98rem;max-width:60ch;
+  }
+  @media(max-width:900px){
+    .faq__layout{grid-template-columns:1fr}
+    .faq__intro{position:static}
+    .faq details p{padding-right:1rem}
+  }
+
+  /* ————— final cta ————— */
+  .final{
+    background:linear-gradient(180deg,var(--ivory) 0%,var(--clay-wash) 130%);
+    text-align:center;
+  }
+  .final__inner{max-width:640px;margin-inline:auto}
+  .final h2{font-size:clamp(2.1rem,4.6vw,3.2rem);margin:1.2rem 0 1.1rem}
+  .final h2 em{font-family:var(--font-accent);font-style:italic;font-weight:500;color:var(--clay)}
+  .final p{color:var(--ink-soft);margin-bottom:2.4rem}
+  .final__actions{display:flex;justify-content:center;gap:1.2rem;flex-wrap:wrap}
+  .final__mail{margin-top:1.6rem;font-size:.85rem;color:var(--ink-faint)}
+  .final__mail a{color:var(--clay-deep);font-weight:600}
+
+  /* ————— footer ————— */
+  .footer{background:var(--espresso);color:rgba(239,231,220,.72);padding:3.4rem 0 2.4rem}
+  .footer__grid{
+    display:flex;justify-content:space-between;gap:2rem;flex-wrap:wrap;align-items:flex-start;
+    padding-bottom:2.2rem;border-bottom:1px solid var(--hairline-light);
+  }
+  .footer .brand__mark{color:var(--ivory)}
+  .footer .brand__tag{color:rgba(239,231,220,.5)}
+  .footer__links{display:flex;gap:1.8rem;flex-wrap:wrap;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+  .footer__meta{
+    display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+    padding-top:1.6rem;font-size:.76rem;letter-spacing:.04em;color:rgba(239,231,220,.45);
+  }
+  .footer__meta a{color:rgba(239,231,220,.7)}
+</style>
+</head>
+<body>
+
+<!-- ————————— NAV ————————— -->
+<header class="nav" id="nav">
+  <div class="wrap nav__inner">
+    <a class="brand" href="#top" aria-label="Max Sandell — home">
+      <span class="brand__mark">Max Sandell</span>
+      <span class="brand__tag">Strength coaching for women 40+</span>
+    </a>
+    <nav class="nav__links" aria-label="Primary">
+      <a class="u-link" href="#meet">Meet Max</a>
+      <a class="u-link" href="#why">Why strength</a>
+      <a class="u-link" href="#how">How it works</a>
+      <a class="u-link" href="#offerings">Coaching</a>
+      <a class="u-link" href="#faq">FAQ</a>
+    </nav>
+    <div class="nav__cta">
+      <a class="btn btn--clay" href="#book">Book a free intro call</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ————————— HERO ————————— -->
+<section class="hero">
+  <div class="hero__halo hero__halo--1"></div>
+  <div class="hero__halo hero__halo--2"></div>
+  <div class="wrap hero__grid">
+    <div>
+      <p class="micro micro-rule rv in">Private studio · Östermalm, Stockholm</p>
+      <h1 class="rv rv-d1 in">Your strongest decade is <em>ahead</em> of you.</h1>
+      <p class="hero__sub rv rv-d2 in">Patient, private strength coaching for women over 40 — built around your body, your history, and your life. No shouting, no shrinking, no judgment. Just quiet, steady work that makes everything else easier.</p>
+      <div class="hero__actions rv rv-d3 in">
+        <a class="btn btn--clay" href="#book">
+          Book a free intro call
+          <svg width="16" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M1 6h13M10 1.5 14.5 6 10 10.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a class="btn btn--ghost" href="#meet">Meet Max first</a>
+      </div>
+      <p class="hero__assure rv rv-d4 in">
+        <span>Free 20-min call</span>
+        <span>No commitment</span>
+        <span>No judgment</span>
+      </p>
+    </div>
+    <div class="hero__figure rv rv-d2 in">
+      <div class="arch">
+        <img src="https://images.unsplash.com/photo-1584863231364-2edc166de576?q=80&w=1200&auto=format&fit=crop" alt="A woman in her forties calmly setting up a deadlift in a private training rack" width="1200" height="1500" fetchpriority="high">
+      </div>
+      <div class="hero__figcap">
+        <span>The Haven standard</span>
+        <strong>One client. One coach. One hour that's yours.</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ————————— EMPATHY ————————— -->
+<section class="empathy sec-pad hairline-top" aria-labelledby="empathy-title">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="micro micro-rule">Sound familiar?</p>
+      <h2 id="empathy-title">You've been sold shrinking long enough.</h2>
+      <p class="lede">Most fitness marketing talks at women over 40 like a problem to be minimized. We think that's exactly backwards. Here's what we hear most often — and what we promise instead.</p>
+    </div>
+    <div class="empathy__grid">
+      <article class="truth rv">
+        <span class="truth__num">No. 1</span>
+        <h3>“Gyms intimidate me.”</h3>
+        <p>Mirrors, machines, twenty-somethings filming themselves — and the sense that everyone knows the rules but you. So you keep putting it off, and the putting-off becomes its own weight.</p>
+        <p class="truth__promise">
+          <svg width="15" height="12" viewBox="0 0 15 12" fill="none" aria-hidden="true"><path d="M1.5 6.5 5.5 10.5 13.5 1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span><strong>The Haven promise:</strong> a private studio, one client at a time, women-only hours. Nobody watching. Nobody to impress.</span>
+        </p>
+      </article>
+      <article class="truth rv rv-d1">
+        <span class="truth__num">No. 2</span>
+        <h3>“I'm done with diet culture.”</h3>
+        <p>Decades of programs that measured your worth in kilos lost. Cheat days, guilt, starting over every January. You're tired — and rightly so. It never had anything to do with health.</p>
+        <p class="truth__promise">
+          <svg width="15" height="12" viewBox="0 0 15 12" fill="none" aria-hidden="true"><path d="M1.5 6.5 5.5 10.5 13.5 1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span><strong>The Haven promise:</strong> we train for strength, energy and bone — never for shrinking. No weigh-ins. No before-and-after photos. Ever.</span>
+        </p>
+      </article>
+      <article class="truth rv rv-d2">
+        <span class="truth__num">No. 3</span>
+        <h3>“Where would I even start?”</h3>
+        <p>A career, a family, maybe a back that acts up — and a thousand contradictory opinions online. Starting from scratch at 45 or 60 feels like it needs a map you were never given.</p>
+        <p class="truth__promise">
+          <svg width="15" height="12" viewBox="0 0 15 12" fill="none" aria-hidden="true"><path d="M1.5 6.5 5.5 10.5 13.5 1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span><strong>The Haven promise:</strong> you start with a conversation, not a workout. Max builds the map — you just show up as you are.</span>
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ————————— MEET MAX ————————— -->
+<section class="meet sec-pad" id="meet" aria-labelledby="meet-title">
+  <div class="wrap meet__grid">
+    <div class="meet__figwrap rv">
+      <div class="arch">
+        <img src="https://images.unsplash.com/photo-1601422407692-ec4eeec1d9b3?q=80&w=1200&auto=format&fit=crop" alt="Max Sandell, a heavily tattooed coach, training calmly with a kettlebell in low light" loading="lazy" width="1200" height="1600">
+      </div>
+      <div class="meet__second">
+        <img src="https://images.unsplash.com/photo-1549476464-37392f717541?q=80&w=800&auto=format&fit=crop" alt="Max carrying a weight plate through a dark gym" loading="lazy" width="800" height="1000">
+      </div>
+    </div>
+    <div>
+      <p class="micro micro-rule rv">Meet Max</p>
+      <h2 id="meet-title" class="rv rv-d1">He spent his career protecting people. Now he protects your strength.</h2>
+      <div class="meet__story rv rv-d2">
+        <p>Max Sandell doesn't look like the gentlest coach in Stockholm. Tattooed from wrist to shoulder, built like the soldier he once was — first impressions usually get him wrong. It takes about five minutes of conversation to get him right.</p>
+        <p>After the Swedish Armed Forces, Max spent <strong>fifteen years in close protection</strong> — a bodyguard for executives and their families across Europe. Years of standing quietly beside people on their most stressful days taught him the things no coaching certificate can: <strong>calm under pressure, meticulous preparation, reading people, and patience</strong> — endless, unhurried patience.</p>
+        <p>It turns out those are exactly the qualities that matter when someone walks into a gym for the first time in twenty years. Max will never rush you, never shame you, never raise his voice. He's watched over people for a living. Watching over your progress is the easy part.</p>
+      </div>
+      <blockquote class="meet__quote rv rv-d2">“The most dangerous-looking man in the gym is the safest person in it.”</blockquote>
+      <dl class="meet__timeline rv rv-d3">
+        <div class="meet__step">
+          <dt>The forces</dt>
+          <dd>Swedish Armed Forces. Where discipline stopped being a word and became a habit.</dd>
+        </div>
+        <div class="meet__step">
+          <dt>15 years</dt>
+          <dd>Close protection for executives and families. Preparation, composure, and trust — earned daily.</dd>
+        </div>
+        <div class="meet__step">
+          <dt>Today</dt>
+          <dd>A private studio in Östermalm and one mission: helping women over 40 build strength that lasts.</dd>
+        </div>
+      </dl>
+      <ul class="meet__trust rv rv-d4" aria-label="Credentials and trust markers">
+        <li><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M3.8 6.2 5.4 7.8 8.4 4.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Licensed personal trainer</li>
+        <li><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M3.8 6.2 5.4 7.8 8.4 4.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Strength &amp; conditioning certified</li>
+        <li><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M3.8 6.2 5.4 7.8 8.4 4.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>First-aid &amp; trauma trained</li>
+        <li><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M3.8 6.2 5.4 7.8 8.4 4.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Fully insured</li>
+        <li><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M3.8 6.2 5.4 7.8 8.4 4.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Background-checked</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ————————— WHY STRENGTH ————————— -->
+<section class="sec-pad" id="why" aria-labelledby="why-title">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="micro micro-rule">Why strength, why now</p>
+      <h2 id="why-title">Strength is the quiet foundation of everything after 40.</h2>
+      <p class="lede">This isn't about aesthetics — it's about the physiology of the decades ahead. The research is remarkably consistent, and remarkably hopeful: it responds at any age.</p>
+    </div>
+    <div class="why__layout">
+      <div class="facts">
+        <article class="fact rv">
+          <div class="fact__stat" data-count>~1<span style="font-size:.55em">%</span></div>
+          <div class="fact__label">Muscle per year</div>
+          <p>From around 40, muscle mass declines roughly 1% a year if untrained. Strength training doesn't just slow it — it reverses it.</p>
+        </article>
+        <article class="fact rv rv-d1">
+          <div class="fact__stat">Bone</div>
+          <div class="fact__label">Density &amp; resilience</div>
+          <p>Loaded, progressive movement signals bone to rebuild — one of the most effective known responses to declining bone density.</p>
+        </article>
+        <article class="fact rv rv-d2">
+          <div class="fact__stat">Joints</div>
+          <div class="fact__label">Support, not strain</div>
+          <p>Strong muscle around a joint is its best protection. Knees and backs usually don't need rest — they need intelligent strength.</p>
+        </article>
+        <article class="fact rv rv-d3">
+          <div class="fact__stat">Energy</div>
+          <div class="fact__label">Daily capacity</div>
+          <p>More muscle means better blood-sugar control, deeper sleep, and more usable energy for the life you actually live.</p>
+        </article>
+      </div>
+      <figure class="why__figure rv rv-d2">
+        <div class="arch">
+          <img src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?q=80&w=1000&auto=format&fit=crop" alt="A woman pressing a barbell overhead with focus and control" loading="lazy" width="1000" height="1333">
+        </div>
+      </figure>
+    </div>
+    <p class="why__note rv">Grip strength and leg strength are among the strongest predictors of healthy, independent longevity. In other words: this is the work that keeps you carrying your own suitcase at 80.</p>
+  </div>
+</section>
+
+<!-- ————————— HOW IT WORKS ————————— -->
+<section class="how sec-pad" id="how" aria-labelledby="how-title">
+  <div class="wrap how__layout">
+    <figure class="how__figure rv">
+      <div class="arch">
+        <img src="https://images.unsplash.com/photo-1518459031867-a89b944bffe4?q=80&w=1000&auto=format&fit=crop" alt="Max coaching a client through mat work in a bright, calm brick studio" loading="lazy" width="1000" height="1250">
+      </div>
+    </figure>
+    <div>
+      <p class="micro micro-rule rv">How it works</p>
+      <h2 id="how-title" class="rv rv-d1">Three unhurried steps. You set the pace.</h2>
+      <div class="steps" style="margin-top:2.4rem">
+        <article class="step rv rv-d1">
+          <div>
+            <h3>The intro call</h3>
+            <p>Twenty minutes, no obligation. You talk, Max listens — your history, your worries, what you want your body to be able to do. If it's not a fit, he'll say so kindly.</p>
+          </div>
+        </article>
+        <article class="step rv rv-d2">
+          <div>
+            <h3>The movement assessment</h3>
+            <p>A gentle first session in the studio. No testing to failure, no judgment of where you are — just a careful look at how you move so the program protects what needs protecting.</p>
+          </div>
+        </article>
+        <article class="step rv rv-d3">
+          <div>
+            <h3>Your program</h3>
+            <p>A plan built for your body and your calendar. Progress measured in what you can do — carrying, climbing, lifting, living — never in what you weigh.</p>
+          </div>
+        </article>
+      </div>
+      <ul class="how__privacy rv rv-d3" aria-label="Privacy commitments">
+        <li><svg width="12" height="13" viewBox="0 0 12 13" fill="none" aria-hidden="true"><rect x="1.5" y="5.5" width="9" height="6" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M3.5 5.5v-1a2.5 2.5 0 0 1 5 0v1" stroke="currentColor" stroke-width="1.4"/></svg>Private studio, Östermalm</li>
+        <li><svg width="12" height="13" viewBox="0 0 12 13" fill="none" aria-hidden="true"><rect x="1.5" y="5.5" width="9" height="6" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M3.5 5.5v-1a2.5 2.5 0 0 1 5 0v1" stroke="currentColor" stroke-width="1.4"/></svg>Never more than one client at a time</li>
+        <li><svg width="12" height="13" viewBox="0 0 12 13" fill="none" aria-hidden="true"><rect x="1.5" y="5.5" width="9" height="6" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M3.5 5.5v-1a2.5 2.5 0 0 1 5 0v1" stroke="currentColor" stroke-width="1.4"/></svg>Women-only hours</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ————————— OFFERINGS ————————— -->
+<section class="sec-pad" id="offerings" aria-labelledby="offerings-title">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="micro micro-rule">Ways to work together</p>
+      <h2 id="offerings-title">Coaching, shaped around your life.</h2>
+      <p class="lede">Every option starts with the same free intro call, and every option comes with the same coach, the same patience, and the same private space.</p>
+    </div>
+    <div class="offers__grid">
+      <article class="offer offer--feature rv">
+        <p class="offer__kicker">Most personal</p>
+        <h3>Private 1:1 Coaching</h3>
+        <p>The full Haven experience. One hour that belongs entirely to you, in a studio nobody else can walk into.</p>
+        <ul class="offer__list">
+          <li><svg width="13" height="10" viewBox="0 0 13 10" fill="none" aria-hidden="true"><path d="M1.5 5.2 4.8 8.5 11.5 1.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Fully individual programming</li>
+          <li><svg width="13" height="10" viewBox="0 0 13 10" fill="none" aria-hidden="true"><path d="M1.5 5.2 4.8 8.5 11.5 1.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>1–3 sessions per week</li>
+          <li><svg width="13" height="10" viewBox="0 0 13 10" fill="none" aria-hidden="true"><path d="M1.5 5.2 4.8 8.5 11.5 1.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Message support between sessions</li>
+        </ul>
+        <p class="offer__price"><em>From</em> <strong>1,150 SEK</strong> <span>/ session</span></p>
+        <a class="u-link" href="#book">Start with the free call</a>
+      </article>
+      <article class="offer rv rv-d1">
+        <p class="offer__kicker">Braver together</p>
+        <h3>Duo Coaching</h3>
+        <p>Train with a friend or your sister. Many clients start this way — the first step is lighter when you don't take it alone.</p>
+        <ul class="offer__list">
+          <li><svg width="13" height="10" viewBox="0 0 13 10" fill="none" aria-hidden="true"><path d="M1.5 5.2 4.8 8.5 11.5 1.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Two clients, still fully private</li>
+          <li><svg width="13" height="10" viewBox="0 0 13 10" fill="none" aria-hidden="true"><path d="M1.5 5.2 4.8 8.5 11.5 1.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Individual programs, shared hour</li>
+          <li><svg width="13" height="10" viewBox="0 0 13 10" fill="none" aria-hidden="true"><path d="M1.5 5.2 4.8 8.5 11.5 1.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Shared cost, shared momentum</li>
+        </ul>
+        <p class="offer__price"><em>From</em> <strong>725 SEK</strong> <span>/ person / session</span></p>
+        <a class="u-link" href="#book">Start with the free call</a>
+      </article>
+      <article class="offer rv rv-d2">
+        <p class="offer__kicker">From anywhere</p>
+        <h3>Stronger After 40</h3>
+        <p>A 12-week online program with Max's coaching in your pocket — for those outside Stockholm, or who prefer to begin at home.</p>
+        <ul class="offer__list">
+          <li><svg width="13" height="10" viewBox="0 0 13 10" fill="none" aria-hidden="true"><path d="M1.5 5.2 4.8 8.5 11.5 1.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>12-week progressive program</li>
+          <li><svg width="13" height="10" viewBox="0 0 13 10" fill="none" aria-hidden="true"><path d="M1.5 5.2 4.8 8.5 11.5 1.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Video check-ins with Max</li>
+          <li><svg width="13" height="10" viewBox="0 0 13 10" fill="none" aria-hidden="true"><path d="M1.5 5.2 4.8 8.5 11.5 1.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Home or gym versions of every week</li>
+        </ul>
+        <p class="offer__price"><em>From</em> <strong>4,900 SEK</strong> <span>/ program</span></p>
+        <a class="u-link" href="#book">Start with the free call</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ————————— TESTIMONIALS ————————— -->
+<section class="voices sec-pad" aria-labelledby="voices-title">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="micro micro-rule">In their words</p>
+      <h2 id="voices-title">Women who walked in nervous, and walk out strong.</h2>
+    </div>
+    <div class="voices__grid">
+      <figure class="voice rv">
+        <div class="voice__mark" aria-hidden="true">“</div>
+        <blockquote>I hadn't set foot in a gym since my thirties, and I was terrified of looking foolish. Max never once made me feel small. Eighteen months later I deadlift my own bodyweight — quietly, on a Tuesday, like it's normal. Because now it is.</blockquote>
+        <figcaption><strong>Karin, 52</strong> · Private 1:1 · Client since 2024</figcaption>
+      </figure>
+      <figure class="voice rv rv-d1">
+        <div class="voice__mark" aria-hidden="true">“</div>
+        <blockquote>I came in with a fragile back and a lot of fear. He was so careful, so patient — we went at my pace, always. Last month I lifted both grandkids into the car, one on each arm, and didn't think about my back once. I cried in the parking lot, honestly.</blockquote>
+        <figcaption><strong>Margareta, 61</strong> · Duo coaching, with her sister</figcaption>
+      </figure>
+      <figure class="voice rv rv-d2">
+        <div class="voice__mark" aria-hidden="true">“</div>
+        <blockquote>Every program I'd tried before was about making myself less. This is the first one about making myself more. On our hike in Abisko this summer I kept up with my teenagers the whole way — and I had energy left at the top.</blockquote>
+        <figcaption><strong>Cecilia, 44</strong> · Stronger After 40 → Private 1:1</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ————————— FAQ ————————— -->
+<section class="sec-pad" id="faq" aria-labelledby="faq-title">
+  <div class="wrap faq__layout">
+    <div class="faq__intro rv">
+      <p class="micro micro-rule">Honest answers</p>
+      <h2 id="faq-title">The questions everyone asks first.</h2>
+      <p class="lede" style="margin-top:1rem">If yours isn't here, ask it on the intro call — there's no question Max hasn't heard, and none he'll judge you for.</p>
+    </div>
+    <div class="faq rv rv-d1">
+      <details>
+        <summary>I haven't trained in 20 years. Is it too late?<span class="faq__icon" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1v11M1 6.5h11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span></summary>
+        <p>Not even close. Muscle responds to training at every age — studies show meaningful strength gains in people starting in their 60s, 70s and beyond. Twenty years away just means we start gently and build carefully. Most clients are surprised how quickly their body remembers.</p>
+      </details>
+      <details>
+        <summary>Will I get bulky?<span class="faq__icon" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1v11M1 6.5h11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span></summary>
+        <p>No — and it's a kind question to answer honestly. Building large muscle takes years of highly specific training, eating and hormones that this program isn't designed for. What you'll actually notice: better posture, easier stairs, steadier energy, and clothes fitting the way you'd like. Strong looks like you, only more capable.</p>
+      </details>
+      <details>
+        <summary>I have a bad back / dodgy knee. Can I still train?<span class="faq__icon" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1v11M1 6.5h11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span></summary>
+        <p>Usually, yes — carefully and intelligently. The movement assessment exists precisely for this: we find what your body tolerates well and build from there. In most cases, appropriate strength work is what backs and knees have been waiting for. Where medical clearance is needed first, Max will tell you straight and work alongside your physiotherapist.</p>
+      </details>
+      <details>
+        <summary>Is the studio really private?<span class="faq__icon" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1v11M1 6.5h11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span></summary>
+        <p>Completely. It's a standalone studio in Östermalm — not a corner of a commercial gym. When you train, the door is closed and the hour is yours: no other members, no walk-ins, no audience. Duo sessions are the only exception, and only with the person you chose to bring.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ————————— FINAL CTA ————————— -->
+<section class="final sec-pad hairline-top" id="book" aria-labelledby="book-title">
+  <div class="wrap final__inner">
+    <p class="micro rv">Whenever you're ready</p>
+    <h2 id="book-title" class="rv rv-d1">The hardest part is the first call. <em>He's easy to talk to — promise.</em></h2>
+    <p class="rv rv-d2">Twenty minutes, free, no commitment. Tell Max where you are and where you'd like to be. The worst outcome is a pleasant conversation and some honest advice.</p>
+    <div class="final__actions rv rv-d3">
+      <a class="btn btn--clay" href="#">
+        Book a free intro call
+        <svg width="16" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M1 6h13M10 1.5 14.5 6 10 10.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <p class="final__mail rv rv-d4">Prefer to write first? <a class="u-link" href="mailto:hello@maxsandell.com">hello@maxsandell.com</a></p>
+  </div>
+</section>
+
+</main>
+
+<!-- ————————— FOOTER ————————— -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div class="brand">
+        <span class="brand__mark">Max Sandell</span>
+        <span class="brand__tag">Strength coaching for women 40+</span>
+      </div>
+      <nav class="footer__links" aria-label="Footer">
+        <a class="u-link" href="#meet">Meet Max</a>
+        <a class="u-link" href="#offerings">Coaching</a>
+        <a class="u-link" href="#faq">FAQ</a>
+        <a class="u-link" href="mailto:hello@maxsandell.com">Contact</a>
+      </nav>
+    </div>
+    <div class="footer__meta">
+      <span>© 2026 Max Sandell Coaching · Private studio, Östermalm, Stockholm</span>
+      <span><a class="u-link" href="mailto:hello@maxsandell.com">hello@maxsandell.com</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* nav scroll state */
+  var nav = document.getElementById("nav");
+  var lastState = false;
+  function onScroll(){
+    var s = window.scrollY > 24;
+    if(s !== lastState){ nav.classList.toggle("scrolled", s); lastState = s; }
+  }
+  window.addEventListener("scroll", onScroll, {passive:true});
+  onScroll();
+
+  /* reveal on scroll */
+  var revealEls = document.querySelectorAll(".rv:not(.in)");
+  if("IntersectionObserver" in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          e.target.classList.add("in");
+          io.unobserve(e.target);
+        }
+      });
+    },{threshold:.12,rootMargin:"0px 0px -8% 0px"});
+    revealEls.forEach(function(el){ io.observe(el); });
+  }else{
+    revealEls.forEach(function(el){ el.classList.add("in"); });
+  }
+
+  /* FAQ: keep it calm — close siblings when opening one */
+  var faqs = document.querySelectorAll(".faq details");
+  faqs.forEach(function(d){
+    d.addEventListener("toggle", function(){
+      if(d.open){
+        faqs.forEach(function(o){ if(o !== d) o.open = false; });
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
