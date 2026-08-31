@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Max Sandell — Private Performance Coach</title>
+<meta name="description" content="Max Sandell is a private performance coach in Stockholm. Bespoke one-to-one strength coaching for a limited number of private clients each season.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  /* ============ RESET / TOKENS ============ */
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --ink:        #0c0b09;
+    --ink-2:      #12100d;
+    --surface:    #171410;
+    --surface-2:  #1c1915;
+    --line:       rgba(201, 168, 106, 0.22);
+    --line-soft:  rgba(233, 227, 214, 0.08);
+    --gold:       #c9a86a;
+    --gold-bright:#e0c48c;
+    --gold-dim:   rgba(201, 168, 106, 0.55);
+    --ivory:      #ece6d8;
+    --ivory-dim:  rgba(236, 230, 216, 0.62);
+    --ivory-faint:rgba(236, 230, 216, 0.38);
+    --serif: 'Cormorant Garamond', 'Times New Roman', Georgia, serif;
+    --sans:  'Jost', 'Avenir Next', 'Helvetica Neue', sans-serif;
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    --pad-x: clamp(1.25rem, 5vw, 5rem);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.001s !important; transition-duration: 0.001s !important; }
+  }
+
+  body {
+    background: var(--ink);
+    color: var(--ivory);
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 1rem;
+    line-height: 1.7;
+    letter-spacing: 0.01em;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection { background: var(--gold); color: var(--ink); }
+
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+  ul { list-style: none; }
+  button { font: inherit; background: none; border: none; cursor: pointer; color: inherit; }
+
+  :focus-visible {
+    outline: 1px solid var(--gold);
+    outline-offset: 4px;
+  }
+
+  /* ============ GRAIN ============ */
+  .grain {
+    position: fixed;
+    inset: -50%;
+    width: 200%;
+    height: 200%;
+    pointer-events: none;
+    z-index: 200;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    animation: grain-shift 9s steps(6) infinite;
+  }
+  @keyframes grain-shift {
+    0%, 100% { transform: translate(0, 0); }
+    20% { transform: translate(-2%, 2%); }
+    40% { transform: translate(2%, -1%); }
+    60% { transform: translate(-1%, -2%); }
+    80% { transform: translate(1%, 2%); }
+  }
+
+  /* ============ TYPO HELPERS ============ */
+  .label {
+    font-family: var(--sans);
+    font-size: 0.6875rem;
+    font-weight: 400;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .label--dim { color: var(--ivory-faint); }
+
+  .rule {
+    width: 3.5rem;
+    height: 1px;
+    background: var(--gold-dim);
+    border: none;
+  }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-bottom: clamp(3rem, 7vw, 5.5rem);
+  }
+  .section-head .numeral {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 1.1rem;
+    color: var(--gold-dim);
+    white-space: nowrap;
+  }
+  .section-head .numeral::after {
+    content: "";
+    display: inline-block;
+    width: 2.5rem;
+    height: 1px;
+    background: var(--line);
+    margin: 0 0 0.28em 1.1rem;
+    vertical-align: baseline;
+  }
+
+  .display {
+    font-family: var(--serif);
+    font-weight: 300;
+    line-height: 1.06;
+    letter-spacing: 0.005em;
+  }
+  .display em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--gold-bright);
+  }
+
+  /* ============ REVEAL ============ */
+  .reveal {
+    opacity: 0;
+    transform: translateY(2.2rem);
+    transition: opacity 1.1s var(--ease), transform 1.1s var(--ease);
+    transition-delay: var(--d, 0s);
+    will-change: opacity, transform;
+  }
+  .reveal.is-in {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ============ NAV ============ */
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 1.4rem var(--pad-x);
+    transition: background 0.5s ease, border-color 0.5s ease, padding 0.5s ease;
+    border-bottom: 1px solid transparent;
+  }
+  .nav.is-scrolled {
+    background: rgba(12, 11, 9, 0.88);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    border-bottom-color: var(--line-soft);
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  .nav__brand {
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 0.8125rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--ivory);
+    white-space: nowrap;
+    transition: color 0.4s ease;
+  }
+  .nav__brand:hover { color: var(--gold-bright); }
+  .nav__brand span { color: var(--gold); }
+
+  .nav__links {
+    display: flex;
+    align-items: center;
+    gap: clamp(1.5rem, 3vw, 3rem);
+  }
+  .nav__link {
+    position: relative;
+    font-size: 0.6875rem;
+    font-weight: 400;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ivory-dim);
+    padding: 0.35rem 0;
+    transition: color 0.4s ease;
+  }
+  .nav__link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.5s var(--ease);
+  }
+  .nav__link:hover { color: var(--ivory); }
+  .nav__link:hover::after { transform: scaleX(1); transform-origin: left; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.9rem;
+    font-size: 0.6875rem;
+    font-weight: 400;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--gold-bright);
+    border: 1px solid var(--line);
+    padding: 1rem 2.2rem;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.5s var(--ease), border-color 0.5s var(--ease);
+    white-space: nowrap;
+  }
+  .btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--gold);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.5s var(--ease);
+    z-index: -1;
+  }
+  .btn:hover { color: var(--ink); border-color: var(--gold); }
+  .btn:hover::before { transform: scaleY(1); transform-origin: top; }
+  .btn--nav { padding: 0.75rem 1.6rem; }
+
+  .btn-arrow { transition: transform 0.5s var(--ease); }
+  .btn:hover .btn-arrow { transform: translateX(4px); }
+
+  .nav__toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 7px;
+    width: 44px;
+    height: 44px;
+    align-items: center;
+    z-index: 120;
+  }
+  .nav__toggle span {
+    display: block;
+    width: 26px;
+    height: 1px;
+    background: var(--ivory);
+    transition: transform 0.45s var(--ease), opacity 0.3s ease, background 0.3s ease;
+  }
+  .nav__toggle:hover span { background: var(--gold-bright); }
+  .nav__toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(4px) rotate(45deg); }
+  .nav__toggle[aria-expanded="true"] span:nth-child(2) { transform: translateY(-4px) rotate(-45deg); }
+
+  /* ============ HERO ============ */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 8rem var(--pad-x) clamp(3.5rem, 8vh, 6.5rem);
+    isolation: isolate;
+    overflow: hidden;
+  }
+  .hero__media {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+  }
+  .hero__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    filter: grayscale(1) brightness(0.42) sepia(0.22) contrast(1.05);
+    animation: hero-drift 22s var(--ease) both;
+  }
+  @keyframes hero-drift {
+    from { transform: scale(1.09); }
+    to   { transform: scale(1); }
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      linear-gradient(to top, var(--ink) 0%, rgba(12,11,9,0.55) 34%, rgba(12,11,9,0.25) 62%, rgba(12,11,9,0.65) 100%);
+  }
+  .hero__inner {
+    max-width: 68rem;
+  }
+  .hero__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    margin-bottom: clamp(1.5rem, 3vh, 2.5rem);
+  }
+  .hero__eyebrow .rule { width: 4.5rem; }
+  .hero__title {
+    font-size: clamp(3.4rem, 11.5vw, 9.5rem);
+    color: var(--ivory);
+    margin-bottom: clamp(1.5rem, 3.5vh, 2.75rem);
+  }
+  .hero__title .line { display: block; overflow: hidden; }
+  .hero__title .line > span {
+    display: inline-block;
+    transform: translateY(110%);
+    animation: line-up 1.4s var(--ease) forwards;
+  }
+  .hero__title .line:nth-child(2) > span { animation-delay: 0.18s; }
+  @keyframes line-up { to { transform: translateY(0); } }
+
+  .hero__foot {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 3rem;
+    flex-wrap: wrap;
+  }
+  .hero__lede {
+    max-width: 26rem;
+    color: var(--ivory-dim);
+    font-size: 0.9375rem;
+    line-height: 1.85;
+  }
+  .hero__cta {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .hero__scroll {
+    position: absolute;
+    right: var(--pad-x);
+    top: 50%;
+    transform: translateY(-50%) rotate(90deg);
+    transform-origin: center;
+    font-size: 0.625rem;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: var(--ivory-faint);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .hero__scroll::after {
+    content: "";
+    width: 3.5rem;
+    height: 1px;
+    background: var(--ivory-faint);
+    animation: scroll-pulse 2.6s ease-in-out infinite;
+  }
+  @keyframes scroll-pulse {
+    0%, 100% { transform: scaleX(0.4); opacity: 0.4; transform-origin: left; }
+    50% { transform: scaleX(1); opacity: 1; transform-origin: left; }
+  }
+
+  /* ============ SECTION SHELL ============ */
+  .section {
+    padding: clamp(5.5rem, 12vw, 10rem) var(--pad-x);
+    position: relative;
+  }
+  .section--tinted { background: var(--ink-2); }
+  .section + .section { border-top: 1px solid var(--line-soft); }
+
+  .shell { max-width: 78rem; margin: 0 auto; }
+
+  /* ============ PHILOSOPHY ============ */
+  .phil {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 4fr);
+    gap: clamp(3rem, 7vw, 7rem);
+    align-items: start;
+  }
+  .phil__title {
+    font-size: clamp(2.3rem, 4.6vw, 4rem);
+    margin-bottom: 2.25rem;
+    max-width: 18ch;
+  }
+  .phil__body p {
+    color: var(--ivory-dim);
+    font-size: 0.9375rem;
+    max-width: 34rem;
+  }
+  .phil__body p + p { margin-top: 1.4rem; }
+
+  .phil__aside {
+    position: relative;
+    padding-left: clamp(1.75rem, 3vw, 2.75rem);
+    border-left: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 2.75rem;
+  }
+  .pullquote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(1.5rem, 2.4vw, 2rem);
+    line-height: 1.4;
+    color: var(--ivory);
+  }
+  .pullquote::before {
+    content: "“";
+    display: block;
+    font-size: 3.2rem;
+    line-height: 0.6;
+    color: var(--gold);
+    margin-bottom: 1.1rem;
+    font-style: normal;
+  }
+  .pullquote footer {
+    margin-top: 1.6rem;
+    font-family: var(--sans);
+    font-style: normal;
+    font-size: 0.6875rem;
+    letter-spacing: 0.38em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .phil__portrait {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+  }
+  .phil__portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(1) brightness(0.68) sepia(0.18);
+    transition: transform 1.4s var(--ease), filter 1.4s var(--ease);
+  }
+  .phil__portrait:hover img {
+    transform: scale(1.045);
+    filter: grayscale(0.75) brightness(0.75) sepia(0.12);
+  }
+  .phil__portrait figcaption {
+    position: absolute;
+    left: 1.25rem;
+    bottom: 1.1rem;
+    font-size: 0.625rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--ivory-dim);
+  }
+
+  /* ============ OFFERINGS ============ */
+  .offerings { display: flex; flex-direction: column; }
+  .offering {
+    display: grid;
+    grid-template-columns: minmax(4.5rem, 8rem) minmax(0, 1.15fr) minmax(0, 1.6fr) auto;
+    gap: clamp(1.25rem, 3vw, 3rem);
+    align-items: baseline;
+    padding: clamp(2.25rem, 4vw, 3.25rem) 0;
+    border-top: 1px solid var(--line-soft);
+    position: relative;
+    transition: background 0.6s ease;
+  }
+  .offering:last-child { border-bottom: 1px solid var(--line-soft); }
+  .offering::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: -1px;
+    width: 100%;
+    height: 1px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.8s var(--ease);
+  }
+  .offering:hover::before { transform: scaleX(1); }
+  .offering__no {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(1.3rem, 2vw, 1.7rem);
+    color: var(--gold-dim);
+    transition: color 0.5s ease;
+  }
+  .offering:hover .offering__no { color: var(--gold-bright); }
+  .offering__name {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+    line-height: 1.15;
+    color: var(--ivory);
+    transition: transform 0.7s var(--ease);
+  }
+  .offering:hover .offering__name { transform: translateX(0.5rem); }
+  .offering__desc {
+    color: var(--ivory-dim);
+    font-size: 0.875rem;
+    max-width: 32rem;
+  }
+  .offering__meta {
+    font-size: 0.625rem;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: var(--ivory-faint);
+    white-space: nowrap;
+    justify-self: end;
+    transition: color 0.5s ease;
+  }
+  .offering:hover .offering__meta { color: var(--gold); }
+
+  /* ============ INTERLUDE IMAGE ============ */
+  .interlude {
+    position: relative;
+    height: clamp(20rem, 55vh, 32rem);
+    overflow: hidden;
+  }
+  .interlude img {
+    width: 100%;
+    height: 118%;
+    object-fit: cover;
+    object-position: center 40%;
+    filter: grayscale(1) brightness(0.5) sepia(0.2);
+    will-change: transform;
+  }
+  .interlude__caption {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+    background: rgba(12, 11, 9, 0.35);
+  }
+  .interlude__caption p {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(1.6rem, 3.6vw, 2.9rem);
+    line-height: 1.3;
+    color: var(--ivory);
+    max-width: 24ch;
+  }
+
+  /* ============ METHOD ============ */
+  .method {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(2rem, 3.5vw, 3.5rem);
+  }
+  .method__step {
+    border-top: 1px solid var(--line);
+    padding-top: 1.75rem;
+    position: relative;
+  }
+  .method__step::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 2rem;
+    height: 1px;
+    background: var(--gold-bright);
+    transition: width 0.7s var(--ease);
+  }
+  .method__step:hover::before { width: 100%; }
+  .method__no {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    display: block;
+    margin-bottom: 1.4rem;
+  }
+  .method__name {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 1.55rem;
+    color: var(--ivory);
+    margin-bottom: 0.9rem;
+  }
+  .method__desc {
+    font-size: 0.875rem;
+    color: var(--ivory-dim);
+  }
+
+  /* ============ PROOF ============ */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1.5rem, 3vw, 3rem);
+    margin-bottom: clamp(4rem, 8vw, 6.5rem);
+  }
+  .stat {
+    border-left: 1px solid var(--line);
+    padding-left: clamp(1.25rem, 2.5vw, 2rem);
+  }
+  .stat__value {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(2.6rem, 5.5vw, 4.4rem);
+    line-height: 1;
+    color: var(--ivory);
+  }
+  .stat__value sup {
+    font-size: 0.45em;
+    color: var(--gold);
+    font-style: italic;
+    vertical-align: 0.75em;
+    margin-left: 0.1em;
+  }
+  .stat__label {
+    margin-top: 0.9rem;
+    font-size: 0.625rem;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: var(--ivory-faint);
+  }
+
+  .quotes {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1px;
+    background: var(--line-soft);
+    border: 1px solid var(--line-soft);
+  }
+  .quote {
+    background: var(--ink-2);
+    padding: clamp(2rem, 3.5vw, 3rem);
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+    transition: background 0.6s ease;
+  }
+  .quote:hover { background: var(--surface); }
+  .quote__mark {
+    font-family: var(--serif);
+    font-size: 2.6rem;
+    line-height: 0.5;
+    color: var(--gold);
+  }
+  .quote__text {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1.22rem;
+    line-height: 1.55;
+    color: var(--ivory);
+    flex: 1;
+  }
+  .quote__attr {
+    font-size: 0.6875rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ivory-faint);
+  }
+  .quote__attr strong {
+    display: block;
+    font-weight: 400;
+    color: var(--gold);
+    margin-bottom: 0.3rem;
+  }
+
+  /* ============ FINAL CTA ============ */
+  .final {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    text-align: center;
+    padding: clamp(7rem, 15vw, 12rem) var(--pad-x);
+  }
+  .final__media { position: absolute; inset: 0; z-index: -2; }
+  .final__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(1) brightness(0.3) sepia(0.25);
+  }
+  .final::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: radial-gradient(ellipse at center, rgba(12,11,9,0.42) 0%, rgba(12,11,9,0.9) 100%);
+  }
+  .final__inner {
+    max-width: 46rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.25rem;
+  }
+  .final__title {
+    font-size: clamp(2.6rem, 6vw, 4.8rem);
+  }
+  .final__note {
+    color: var(--ivory-dim);
+    font-size: 0.9375rem;
+    max-width: 30rem;
+  }
+  .final__mail {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--ivory-dim);
+    border-bottom: 1px solid transparent;
+    transition: color 0.4s ease, border-color 0.4s ease;
+  }
+  .final__mail:hover { color: var(--gold-bright); border-color: var(--gold-dim); }
+
+  /* ============ FOOTER ============ */
+  .footer {
+    border-top: 1px solid var(--line-soft);
+    padding: clamp(3rem, 6vw, 4.5rem) var(--pad-x) 2.5rem;
+  }
+  .footer__grid {
+    max-width: 78rem;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+  }
+  .footer__monogram {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 2rem;
+    letter-spacing: 0.18em;
+    color: var(--gold);
+  }
+  .footer__tag {
+    margin-top: 0.6rem;
+    font-size: 0.625rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--ivory-faint);
+  }
+  .footer__col h3 {
+    font-size: 0.625rem;
+    font-weight: 400;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.2rem;
+  }
+  .footer__col li + li { margin-top: 0.55rem; }
+  .footer__col a, .footer__col span {
+    font-size: 0.8125rem;
+    color: var(--ivory-dim);
+    transition: color 0.4s ease;
+  }
+  .footer__col a:hover { color: var(--gold-bright); }
+  .footer__base {
+    max-width: 78rem;
+    margin: 3.5rem auto 0;
+    padding-top: 1.6rem;
+    border-top: 1px solid var(--line-soft);
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    font-size: 0.625rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ivory-faint);
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 960px) {
+    .phil { grid-template-columns: 1fr; }
+    .phil__aside { border-left: none; padding-left: 0; }
+    .pullquote { border-left: 1px solid var(--line); padding-left: 1.75rem; }
+    .method { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 3rem; }
+    .quotes { grid-template-columns: 1fr; }
+    .offering {
+      grid-template-columns: minmax(3rem, 4rem) minmax(0, 1fr);
+      row-gap: 0.9rem;
+    }
+    .offering__desc { grid-column: 2; }
+    .offering__meta { grid-column: 2; justify-self: start; }
+    .hero__scroll { display: none; }
+  }
+
+  @media (max-width: 720px) {
+    .nav__toggle { display: flex; }
+    .nav__links {
+      position: fixed;
+      inset: 0;
+      z-index: 110;
+      flex-direction: column;
+      justify-content: center;
+      gap: 2.5rem;
+      background: rgba(12, 11, 9, 0.97);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.5s var(--ease), visibility 0.5s;
+    }
+    .nav__links.is-open { opacity: 1; visibility: visible; }
+    .nav__link { font-size: 0.875rem; }
+    .nav__links .btn--nav { margin-top: 1rem; }
+    .nav.is-menu-open { background: transparent; border-bottom-color: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  }
+
+  @media (max-width: 520px) {
+    .stats { grid-template-columns: 1fr; gap: 2.25rem; }
+    .method { grid-template-columns: 1fr; }
+    .hero__foot { flex-direction: column; align-items: flex-start; }
+    .section-head { flex-direction: column; gap: 0.9rem; }
+    .btn { padding: 0.95rem 1.7rem; letter-spacing: 0.26em; }
+    .nav__brand { letter-spacing: 0.34em; font-size: 0.75rem; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="nav">
+    <a class="nav__brand" href="#top" aria-label="Max Sandell — home">MAX<span>&nbsp;·&nbsp;</span>SANDELL</a>
+    <nav class="nav__links" id="navLinks" aria-label="Primary">
+      <a class="nav__link" href="#philosophy">Philosophy</a>
+      <a class="nav__link" href="#offerings">Coaching</a>
+      <a class="nav__link" href="#method">The Method</a>
+      <a class="btn btn--nav" href="#consultation">Request consultation</a>
+    </nav>
+    <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle menu">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <main id="top">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <div class="hero__media">
+        <img src="https://images.unsplash.com/photo-1605296867304-46d5465a13f1?q=80&w=2000&auto=format&fit=crop"
+             alt="A loaded barbell resting on a dark gym floor, lit by a single low light" fetchpriority="high">
+      </div>
+      <div class="hero__inner">
+        <div class="hero__eyebrow reveal is-in">
+          <hr class="rule">
+          <span class="label">Private Performance Coach · Stockholm</span>
+        </div>
+        <h1 class="hero__title display">
+          <span class="line"><span>Strength,</span></span>
+          <span class="line"><span><em>refined.</em></span></span>
+        </h1>
+        <div class="hero__foot">
+          <p class="hero__lede reveal is-in" style="--d:.5s">
+            Bespoke one-to-one coaching for those who treat their body
+            the way they treat everything else that matters — with
+            standards, patience, and no appetite for shortcuts.
+          </p>
+          <div class="hero__cta reveal is-in" style="--d:.7s">
+            <a class="btn" href="#consultation">Request consultation <span class="btn-arrow" aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </div>
+      <span class="hero__scroll" aria-hidden="true">Scroll</span>
+    </section>
+
+    <!-- ============ PHILOSOPHY ============ -->
+    <section class="section" id="philosophy">
+      <div class="shell">
+        <div class="section-head reveal">
+          <span class="numeral">I.</span>
+          <span class="label">Philosophy</span>
+        </div>
+        <div class="phil">
+          <div class="phil__body reveal">
+            <h2 class="phil__title display">The quiet discipline of <em>doing less,</em> better.</h2>
+            <p>
+              Most training fails not from lack of effort, but from noise —
+              borrowed programs, borrowed goals, and a pace set by someone
+              else's life. My work begins by removing what does not belong
+              to you.
+            </p>
+            <p>
+              What remains is deliberately simple: a handful of movements
+              executed with precision, loads that rise on evidence rather
+              than enthusiasm, and recovery treated as seriously as the
+              work itself. Progress kept this way does not need to be
+              defended. It compounds.
+            </p>
+            <p>
+              I coach a small number of clients at a time, in private
+              facilities across Stockholm and remotely for those abroad.
+              Every program is written for one person only — you.
+            </p>
+          </div>
+          <aside class="phil__aside">
+            <blockquote class="pullquote reveal" style="--d:.15s">
+              Excellence is not an event. It is a standard, kept daily,
+              in private.
+              <footer>— Max Sandell</footer>
+            </blockquote>
+            <figure class="phil__portrait reveal" style="--d:.3s">
+              <img src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?q=80&w=1200&auto=format&fit=crop"
+                   alt="An athlete calmly wrapping his wrists in a dimly lit training room" loading="lazy">
+              <figcaption>Stockholm · Private studio</figcaption>
+            </figure>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ OFFERINGS ============ -->
+    <section class="section section--tinted" id="offerings">
+      <div class="shell">
+        <div class="section-head reveal">
+          <span class="numeral">II.</span>
+          <span class="label">Coaching</span>
+        </div>
+        <div class="offerings">
+          <article class="offering reveal">
+            <span class="offering__no">i.</span>
+            <h3 class="offering__name">Private 1:1 Coaching</h3>
+            <p class="offering__desc">
+              Two to four sessions weekly in a private Stockholm facility.
+              Full programming, nutrition architecture, and quarterly
+              performance reviews. The complete engagement.
+            </p>
+            <span class="offering__meta">By application</span>
+          </article>
+          <article class="offering reveal" style="--d:.1s">
+            <span class="offering__no">ii.</span>
+            <h3 class="offering__name">Executive Performance</h3>
+            <p class="offering__desc">
+              Built around a demanding calendar — early sessions, travel
+              protocols, energy and sleep management. Strength as an asset
+              for the work you actually do.
+            </p>
+            <span class="offering__meta">Limited seats</span>
+          </article>
+          <article class="offering reveal" style="--d:.2s">
+            <span class="offering__no">iii.</span>
+            <h3 class="offering__name">Online Mentorship</h3>
+            <p class="offering__desc">
+              For the disciplined remote client. Individually written
+              programming, weekly video review of every working set, and a
+              direct line — not an app subscription.
+            </p>
+            <span class="offering__meta">Worldwide</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ INTERLUDE ============ -->
+    <section class="interlude" aria-label="Training in progress">
+      <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?q=80&w=2000&auto=format&fit=crop"
+           alt="A man in training attire sprinting up a concrete staircase in low light" loading="lazy" data-parallax>
+      <div class="interlude__caption reveal">
+        <p>The work is private. The results are not.</p>
+      </div>
+    </section>
+
+    <!-- ============ METHOD ============ -->
+    <section class="section" id="method">
+      <div class="shell">
+        <div class="section-head reveal">
+          <span class="numeral">III.</span>
+          <span class="label">The Method</span>
+        </div>
+        <div class="method">
+          <div class="method__step reveal">
+            <span class="method__no">No. 01</span>
+            <h3 class="method__name">Assessment</h3>
+            <p class="method__desc">
+              A two-hour private consultation: movement screening, health
+              history, and an honest conversation about what you want your
+              body to be capable of.
+            </p>
+          </div>
+          <div class="method__step reveal" style="--d:.1s">
+            <span class="method__no">No. 02</span>
+            <h3 class="method__name">Architecture</h3>
+            <p class="method__desc">
+              Your program is written from a blank page — training,
+              nutrition, and recovery designed around your physiology and
+              your calendar, not a template.
+            </p>
+          </div>
+          <div class="method__step reveal" style="--d:.2s">
+            <span class="method__no">No. 03</span>
+            <h3 class="method__name">Execution</h3>
+            <p class="method__desc">
+              Coached sessions where every repetition is observed and
+              refined. Load rises only when the data — not the mood —
+              says it should.
+            </p>
+          </div>
+          <div class="method__step reveal" style="--d:.3s">
+            <span class="method__no">No. 04</span>
+            <h3 class="method__name">Refinement</h3>
+            <p class="method__desc">
+              Quarterly reviews measured against your original brief. The
+              program evolves; the standard does not.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROOF ============ -->
+    <section class="section section--tinted" id="results">
+      <div class="shell">
+        <div class="section-head reveal">
+          <span class="numeral">IV.</span>
+          <span class="label">Results</span>
+        </div>
+        <div class="stats">
+          <div class="stat reveal">
+            <div class="stat__value" data-count="12">12<sup>yrs</sup></div>
+            <div class="stat__label">Coaching privately</div>
+          </div>
+          <div class="stat reveal" style="--d:.12s">
+            <div class="stat__value">300<sup>+</sup></div>
+            <div class="stat__label">Clients coached</div>
+          </div>
+          <div class="stat reveal" style="--d:.24s">
+            <div class="stat__value">94<sup>%</sup></div>
+            <div class="stat__label">Retained beyond year one</div>
+          </div>
+        </div>
+        <div class="quotes">
+          <blockquote class="quote reveal">
+            <span class="quote__mark" aria-hidden="true">“</span>
+            <p class="quote__text">
+              Max rebuilt how I train the way a good architect rebuilds a
+              house — quietly, structurally, and permanently. Three years
+              in, I'm stronger at forty-six than I was at thirty.
+            </p>
+            <footer class="quote__attr"><strong>Fredrik L.</strong> CEO, Private Equity</footer>
+          </blockquote>
+          <blockquote class="quote reveal" style="--d:.12s">
+            <span class="quote__mark" aria-hidden="true">“</span>
+            <p class="quote__text">
+              I had trained for a decade before Max. Within six months I
+              understood I had never actually been coached. The difference
+              is not effort — it is precision.
+            </p>
+            <footer class="quote__attr"><strong>Sofia A.</strong> Surgeon, Karolinska</footer>
+          </blockquote>
+          <blockquote class="quote reveal" style="--d:.24s">
+            <span class="quote__mark" aria-hidden="true">“</span>
+            <p class="quote__text">
+              The mentorship works because nothing is generic. Every set is
+              watched, every week is adjusted. It feels less like a service
+              and more like a standard you're held to.
+            </p>
+            <footer class="quote__attr"><strong>Jonas E.</strong> Founder, remote client</footer>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FINAL CTA ============ -->
+    <section class="final" id="consultation">
+      <div class="final__media">
+        <img src="https://images.unsplash.com/photo-1550345332-09e3ac987658?q=80&w=2000&auto=format&fit=crop"
+             alt="A lone runner moving through darkness, lit from one side" loading="lazy">
+      </div>
+      <div class="final__inner">
+        <span class="label reveal">Consultations · Autumn 2026</span>
+        <h2 class="final__title display reveal" style="--d:.1s">A limited number of private clients, <em>accepted each season.</em></h2>
+        <p class="final__note reveal" style="--d:.2s">
+          Engagements begin with a private consultation in Stockholm or by
+          video. If the fit is right, we begin. If it is not, I will tell
+          you — and point you somewhere better.
+        </p>
+        <div class="reveal" style="--d:.3s">
+          <a class="btn" href="mailto:hello@maxsandell.com">Request consultation <span class="btn-arrow" aria-hidden="true">→</span></a>
+        </div>
+        <a class="final__mail reveal" style="--d:.4s" href="mailto:hello@maxsandell.com">hello@maxsandell.com</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__monogram">MS</div>
+        <p class="footer__tag">Private Performance Coach</p>
+      </div>
+      <div class="footer__col">
+        <h3>Explore</h3>
+        <ul>
+          <li><a href="#philosophy">Philosophy</a></li>
+          <li><a href="#offerings">Coaching</a></li>
+          <li><a href="#method">The Method</a></li>
+          <li><a href="#results">Results</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h3>Contact</h3>
+        <ul>
+          <li><a href="mailto:hello@maxsandell.com">hello@maxsandell.com</a></li>
+          <li><span>Stockholm, Sweden</span></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h3>Elsewhere</h3>
+        <ul>
+          <li><a href="#" rel="noopener">Instagram</a></li>
+          <li><a href="#" rel="noopener">LinkedIn</a></li>
+          <li><a href="#" rel="noopener">Booking</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__base">
+      <span>© 2026 Max Sandell</span>
+      <span>Stockholm · By appointment only</span>
+    </div>
+  </footer>
+
+<script>
+(function () {
+  "use strict";
+
+  var nav = document.getElementById("nav");
+  var toggle = document.getElementById("navToggle");
+  var links = document.getElementById("navLinks");
+
+  /* --- Nav scroll state --- */
+  var onScroll = function () {
+    nav.classList.toggle("is-scrolled", window.scrollY > 40);
+  };
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  /* --- Mobile menu --- */
+  var closeMenu = function () {
+    links.classList.remove("is-open");
+    nav.classList.remove("is-menu-open");
+    toggle.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+  };
+  toggle.addEventListener("click", function () {
+    var open = links.classList.toggle("is-open");
+    nav.classList.toggle("is-menu-open", open);
+    toggle.setAttribute("aria-expanded", String(open));
+    document.body.style.overflow = open ? "hidden" : "";
+  });
+  links.addEventListener("click", function (e) {
+    if (e.target.closest("a")) closeMenu();
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") closeMenu();
+  });
+
+  /* --- Scroll reveals --- */
+  var revealEls = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-in");
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
+    revealEls.forEach(function (el) { io.observe(el); });
+  } else {
+    revealEls.forEach(function (el) { el.classList.add("is-in"); });
+  }
+
+  /* --- Gentle parallax on the interlude image --- */
+  var pImg = document.querySelector("[data-parallax]");
+  if (pImg && window.matchMedia("(prefers-reduced-motion: no-preference)").matches) {
+    var ticking = false;
+    var parallax = function () {
+      var rect = pImg.parentElement.getBoundingClientRect();
+      var vh = window.innerHeight;
+      if (rect.bottom > 0 && rect.top < vh) {
+        var progress = (rect.top + rect.height / 2 - vh / 2) / (vh / 2 + rect.height / 2);
+        pImg.style.transform = "translateY(" + (progress * -7).toFixed(2) + "%)";
+      }
+      ticking = false;
+    };
+    window.addEventListener("scroll", function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(parallax); }
+    }, { passive: true });
+    parallax();
+  }
+})();
+</script>
+</body>
+</html>

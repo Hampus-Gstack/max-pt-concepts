@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Max Sandell — Performance Coaching</title>
+<meta name="description" content="Max Sandell — performance coach, Stockholm. 1:1 coaching, small group training and online programming for people who want results, not routines. Built, not born.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+  /* ============ TOKENS / RESET ============ */
+  :root{
+    --ink:#111111;
+    --ink-soft:#1a1a1a;
+    --bone:#f2efe9;
+    --bone-dim:#d8d4cb;
+    --ember:#ff3b1f;
+    --ember-deep:#d92b12;
+    --line:2px solid var(--ink);
+    --line-bone:2px solid var(--bone);
+    --display:'Anton', Impact, 'Arial Narrow', sans-serif;
+    --body:'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --gutter:clamp(1.25rem, 4vw, 4rem);
+    --nav-h:72px;
+  }
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-h) + 8px);}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;}
+  }
+  body{
+    background:var(--ink);
+    color:var(--bone);
+    font-family:var(--body);
+    font-size:1rem;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{display:block;max-width:100%;}
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+  button{font:inherit;background:none;border:none;cursor:pointer;color:inherit;}
+
+  ::selection{background:var(--ember);color:var(--ink);}
+
+  a:focus-visible,button:focus-visible{
+    outline:3px solid var(--ember);
+    outline-offset:3px;
+  }
+
+  /* ============ UTILITIES ============ */
+  .clip{overflow:hidden;} /* wrapper for bleeding / ghost text */
+  .kicker{
+    font-family:var(--body);
+    font-weight:700;
+    font-size:.72rem;
+    letter-spacing:.32em;
+    text-transform:uppercase;
+    display:inline-flex;
+    align-items:center;
+    gap:.75rem;
+  }
+  .kicker::before{
+    content:"";
+    width:2.25rem;height:2px;
+    background:var(--ember);
+    flex:none;
+  }
+  .display{
+    font-family:var(--display);
+    font-weight:400;
+    text-transform:uppercase;
+    line-height:.88;
+    letter-spacing:.01em;
+  }
+
+  /* scroll-reveal slam */
+  .slam{
+    opacity:0;
+    transform:translateY(60px);
+    transition:opacity .55s cubic-bezier(.16,1,.3,1), transform .55s cubic-bezier(.16,1,.3,1);
+  }
+  .slam.in{opacity:1;transform:translateY(0);}
+  .slam-d1{transition-delay:.08s;}
+  .slam-d2{transition-delay:.16s;}
+  .slam-d3{transition-delay:.24s;}
+  @media (prefers-reduced-motion: reduce){
+    .slam{opacity:1;transform:none;}
+  }
+
+  /* hard-edged buttons */
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:.7rem;
+    font-family:var(--body);
+    font-weight:800;
+    font-size:.82rem;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    padding:1.05rem 2rem;
+    border:var(--line-bone);
+    background:var(--bone);
+    color:var(--ink);
+    transition:background .18s ease, color .18s ease, border-color .18s ease;
+    white-space:nowrap;
+  }
+  .btn .arr{transition:transform .18s ease;}
+  .btn:hover{background:var(--ember);border-color:var(--ember);color:var(--ink);}
+  .btn:hover .arr{transform:translateX(6px);}
+  .btn--ember{background:var(--ember);border-color:var(--ember);color:var(--ink);}
+  .btn--ember:hover{background:var(--bone);border-color:var(--bone);}
+  .btn--ghost{background:transparent;color:var(--bone);}
+  .btn--ghost:hover{background:var(--bone);border-color:var(--bone);color:var(--ink);}
+  .btn--ink{background:var(--ink);border-color:var(--ink);color:var(--bone);}
+  .btn--ink:hover{background:var(--ember);border-color:var(--ember);color:var(--ink);}
+
+  /* duotone image treatment */
+  .frame{
+    position:relative;
+    overflow:hidden;
+    background:var(--ink-soft);
+  }
+  .frame img{
+    width:100%;height:100%;
+    object-fit:cover;
+    filter:grayscale(1) contrast(1.12) brightness(.92);
+    transition:filter .45s ease, transform .6s cubic-bezier(.16,1,.3,1);
+  }
+  .frame::after{
+    content:"";
+    position:absolute;inset:0;
+    background:var(--ember);
+    mix-blend-mode:multiply;
+    opacity:0;
+    transition:opacity .45s ease;
+    pointer-events:none;
+  }
+  .frame:hover img{filter:grayscale(1) contrast(1.2) brightness(1.02);transform:scale(1.045);}
+  .frame:hover::after{opacity:.55;}
+
+  /* ============ NAV ============ */
+  .nav{
+    position:fixed;
+    top:0;left:0;right:0;
+    z-index:100;
+    height:var(--nav-h);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:1rem;
+    padding:0 var(--gutter);
+    background:rgba(17,17,17,.92);
+    -webkit-backdrop-filter:blur(10px);
+    backdrop-filter:blur(10px);
+    border-bottom:var(--line-bone);
+  }
+  .wordmark{
+    font-family:var(--display);
+    font-size:1.5rem;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    line-height:1;
+    display:flex;
+    align-items:center;
+    gap:.55rem;
+  }
+  .wordmark .dot{
+    width:.62rem;height:.62rem;
+    background:var(--ember);
+    flex:none;
+  }
+  .nav-links{
+    display:flex;
+    align-items:center;
+    gap:2.2rem;
+  }
+  .nav-links a:not(.btn){
+    font-weight:700;
+    font-size:.74rem;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    position:relative;
+    padding:.35rem 0;
+  }
+  .nav-links a:not(.btn)::after{
+    content:"";
+    position:absolute;
+    left:0;bottom:0;
+    width:100%;height:3px;
+    background:var(--ember);
+    transform:scaleX(0);
+    transform-origin:left;
+    transition:transform .22s ease;
+  }
+  .nav-links a:not(.btn):hover::after{transform:scaleX(1);}
+  .nav .btn{padding:.75rem 1.5rem;font-size:.72rem;}
+  .nav-toggle{
+    display:none;
+    flex-direction:column;
+    gap:6px;
+    padding:.6rem;
+    border:var(--line-bone);
+  }
+  .nav-toggle span{
+    display:block;
+    width:24px;height:2px;
+    background:var(--bone);
+    transition:transform .22s ease, opacity .22s ease;
+  }
+  .nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(8px) rotate(45deg);}
+  .nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0;}
+  .nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-8px) rotate(-45deg);}
+
+  @media (max-width: 860px){
+    .nav-toggle{display:flex;}
+    .nav-links{
+      position:fixed;
+      top:var(--nav-h);
+      left:0;right:0;
+      background:var(--ink);
+      border-bottom:var(--line-bone);
+      flex-direction:column;
+      align-items:stretch;
+      gap:0;
+      padding:0;
+      transform:translateY(-110%);
+      transition:transform .3s cubic-bezier(.16,1,.3,1);
+      z-index:-1;
+    }
+    .nav-links.open{transform:translateY(0);}
+    .nav-links a:not(.btn){
+      padding:1.15rem var(--gutter);
+      border-top:1px solid rgba(242,239,233,.14);
+      font-size:.85rem;
+    }
+    .nav-links a:not(.btn)::after{display:none;}
+    .nav-links a:not(.btn):hover{background:var(--ember);color:var(--ink);}
+    .nav-links .btn{margin:1.1rem var(--gutter) 1.4rem;justify-content:center;}
+  }
+
+  /* ============ HERO ============ */
+  .hero{
+    position:relative;
+    min-height:100svh;
+    padding:calc(var(--nav-h) + clamp(2rem,6vh,4.5rem)) 0 0;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    overflow:hidden;
+  }
+  .hero-media{
+    position:absolute;
+    inset:0;
+    z-index:0;
+  }
+  .hero-media img{
+    width:100%;height:100%;
+    object-fit:cover;
+    object-position:center 22%;
+    filter:grayscale(1) contrast(1.15) brightness(.5);
+  }
+  .hero-media::after{
+    content:"";
+    position:absolute;inset:0;
+    background:linear-gradient(to top, rgba(17,17,17,.96) 8%, rgba(17,17,17,.45) 55%, rgba(17,17,17,.65) 100%);
+  }
+  .hero-inner{
+    position:relative;
+    z-index:1;
+    padding:0 var(--gutter) clamp(2.5rem,6vh,5rem);
+    width:100%;
+  }
+  .hero-kicker{
+    color:var(--bone);
+    margin-bottom:clamp(1rem,2.5vh,2rem);
+  }
+  .hero-title{
+    font-size:clamp(4.2rem, 14vw, 13.5rem);
+    line-height:.84;
+    margin-left:-.04em; /* optical bleed toward edge */
+    margin-bottom:clamp(1.5rem,3.5vh,2.75rem);
+  }
+  .hero-title .row{display:block;}
+  .hero-title .row--not{
+    color:transparent;
+    -webkit-text-stroke:2px var(--bone);
+    padding-left:clamp(2rem, 12vw, 14rem);
+  }
+  .hero-title .row--born{color:var(--ember);}
+  .hero-foot{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:1.5rem 3rem;
+    border-top:var(--line-bone);
+    padding-top:1.5rem;
+  }
+  .hero-manifesto{
+    max-width:34ch;
+    font-weight:500;
+    font-size:clamp(.95rem, 1.4vw, 1.1rem);
+    line-height:1.5;
+  }
+  .hero-manifesto strong{color:var(--ember);font-weight:800;}
+  .hero-ctas{display:flex;flex-wrap:wrap;gap:.9rem;}
+  .hero-meta{
+    font-size:.7rem;
+    font-weight:700;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    color:var(--bone-dim);
+  }
+
+  /* ============ MARQUEE ============ */
+  .ticker{
+    background:var(--ember);
+    color:var(--ink);
+    border-top:var(--line);
+    border-bottom:var(--line);
+    overflow:hidden;
+    padding:.85rem 0;
+    transform:rotate(-1.2deg) scale(1.02);
+    position:relative;
+    z-index:2;
+    margin:-1px 0;
+  }
+  .ticker-track{
+    display:flex;
+    width:max-content;
+    animation:ticker 22s linear infinite;
+  }
+  .ticker:hover .ticker-track{animation-play-state:paused;}
+  .ticker-chunk{
+    display:flex;
+    align-items:center;
+    flex:none;
+  }
+  .ticker-chunk span{
+    font-family:var(--display);
+    font-size:clamp(1.3rem, 2.6vw, 2rem);
+    text-transform:uppercase;
+    letter-spacing:.04em;
+    white-space:nowrap;
+    padding:0 1.4rem;
+  }
+  .ticker-chunk i{
+    font-style:normal;
+    font-size:clamp(.9rem, 1.6vw, 1.2rem);
+    line-height:1;
+  }
+  @keyframes ticker{
+    from{transform:translateX(0);}
+    to{transform:translateX(-50%);}
+  }
+
+  /* ============ SECTION SHELL ============ */
+  section{position:relative;}
+  .sec-pad{padding:clamp(4.5rem, 10vw, 8.5rem) var(--gutter);}
+
+  .ghost-band{
+    position:absolute;
+    top:clamp(.5rem, 2vw, 1.5rem);
+    left:0;right:0;
+    overflow:hidden;
+    pointer-events:none;
+    user-select:none;
+  }
+  .ghost-band span{
+    display:block;
+    font-family:var(--display);
+    font-size:clamp(5rem, 18vw, 16rem);
+    line-height:1;
+    text-transform:uppercase;
+    white-space:nowrap;
+    color:transparent;
+    -webkit-text-stroke:1.5px rgba(242,239,233,.14);
+    transform:translateX(-2%);
+  }
+  .on-bone .ghost-band span{-webkit-text-stroke:1.5px rgba(17,17,17,.1);}
+
+  /* ============ THE STANDARD ============ */
+  .standard{
+    background:var(--ink);
+  }
+  .standard-head{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:1.25rem 3rem;
+    margin-bottom:clamp(2.5rem,6vw,4.5rem);
+    position:relative;
+    z-index:1;
+  }
+  .sec-title{
+    font-size:clamp(3rem, 8vw, 7rem);
+  }
+  .sec-title .accent{color:var(--ember);}
+  .standard-list{
+    counter-reset:std;
+    border-top:var(--line-bone);
+    position:relative;
+    z-index:1;
+  }
+  .standard-item{
+    counter-increment:std;
+    display:grid;
+    grid-template-columns:minmax(4.5rem, 8rem) 1fr;
+    gap:1rem 2rem;
+    align-items:baseline;
+    padding:clamp(1.6rem,3.5vw,2.6rem) 0;
+    border-bottom:var(--line-bone);
+    transition:background .18s ease, color .18s ease;
+  }
+  .standard-item::before{
+    content:counter(std, decimal-leading-zero);
+    font-family:var(--display);
+    font-size:clamp(1.6rem, 3.5vw, 2.6rem);
+    color:var(--ember);
+    line-height:1;
+    padding-left:.35rem;
+    transition:color .18s ease;
+  }
+  .standard-item h3{
+    font-family:var(--display);
+    font-weight:400;
+    text-transform:uppercase;
+    font-size:clamp(1.5rem, 3.6vw, 2.7rem);
+    line-height:1;
+    margin-bottom:.55rem;
+  }
+  .standard-item p{
+    max-width:58ch;
+    color:var(--bone-dim);
+    font-size:.98rem;
+    transition:color .18s ease;
+  }
+  .standard-item:hover{
+    background:var(--bone);
+    color:var(--ink);
+  }
+  .standard-item:hover p{color:#3a382f;}
+  .standard-item:hover::before{color:var(--ember-deep);}
+  @media (max-width:560px){
+    .standard-item{grid-template-columns:1fr;gap:.5rem;}
+  }
+
+  /* ============ PROGRAMS ============ */
+  .programs{
+    background:var(--bone);
+    color:var(--ink);
+    clip-path:polygon(0 clamp(1.5rem,4vw,4rem), 100% 0, 100% calc(100% - clamp(1.5rem,4vw,4rem)), 0 100%);
+    margin-top:calc(-1 * clamp(1.5rem,4vw,4rem));
+    padding-top:clamp(6rem, 13vw, 11rem);
+    padding-bottom:clamp(6.5rem, 14vw, 12rem);
+  }
+  .programs .kicker::before{background:var(--ember-deep);}
+  .prog-head{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:1.25rem 3rem;
+    margin-bottom:clamp(2.5rem,6vw,4rem);
+    position:relative;
+    z-index:1;
+  }
+  .prog-head p{max-width:40ch;color:#3a382f;font-weight:500;}
+  .prog-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    border:var(--line);
+    position:relative;
+    z-index:1;
+  }
+  .prog-card{
+    display:flex;
+    flex-direction:column;
+    padding:clamp(1.75rem,3vw,2.75rem);
+    min-height:clamp(24rem, 40vw, 30rem);
+    border-right:var(--line);
+    background:var(--bone);
+    color:var(--ink);
+    transition:background .2s ease, color .2s ease;
+    position:relative;
+  }
+  .prog-card:last-child{border-right:none;}
+  .prog-index{
+    font-family:var(--display);
+    font-size:clamp(4rem, 8vw, 6.5rem);
+    line-height:.9;
+    color:transparent;
+    -webkit-text-stroke:2px var(--ink);
+    margin-bottom:auto;
+    transition:color .2s ease, -webkit-text-stroke-color .2s ease;
+  }
+  .prog-card h3{
+    font-family:var(--display);
+    font-weight:400;
+    text-transform:uppercase;
+    font-size:clamp(1.7rem, 2.6vw, 2.3rem);
+    line-height:.95;
+    margin:2.5rem 0 .9rem;
+  }
+  .prog-card > p{
+    color:#3a382f;
+    font-size:.95rem;
+    margin-bottom:1.4rem;
+    transition:color .2s ease;
+  }
+  .prog-card ul{
+    margin-bottom:1.8rem;
+  }
+  .prog-card li{
+    font-size:.82rem;
+    font-weight:700;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    padding:.55rem 0;
+    border-top:1px solid rgba(17,17,17,.25);
+    display:flex;
+    align-items:center;
+    gap:.6rem;
+    transition:border-color .2s ease;
+  }
+  .prog-card li::before{
+    content:"";
+    width:.5rem;height:.5rem;
+    background:var(--ember);
+    flex:none;
+  }
+  .prog-cta{
+    font-weight:800;
+    font-size:.78rem;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    display:inline-flex;
+    align-items:center;
+    gap:.6rem;
+    align-self:flex-start;
+    border-bottom:3px solid var(--ember);
+    padding-bottom:.35rem;
+  }
+  .prog-cta .arr{transition:transform .18s ease;}
+  .prog-card:hover{background:var(--ink);color:var(--bone);}
+  .prog-card:hover .prog-index{color:var(--ember);-webkit-text-stroke-color:var(--ember);}
+  .prog-card:hover > p{color:var(--bone-dim);}
+  .prog-card:hover li{border-top-color:rgba(242,239,233,.28);}
+  .prog-card:hover .prog-cta .arr{transform:translateX(6px);}
+  .prog-tag{
+    position:absolute;
+    top:0;right:0;
+    background:var(--ember);
+    color:var(--ink);
+    font-size:.62rem;
+    font-weight:800;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    padding:.45rem .8rem;
+  }
+  @media (max-width:900px){
+    .prog-grid{grid-template-columns:1fr;}
+    .prog-card{border-right:none;border-bottom:var(--line);min-height:0;}
+    .prog-card:last-child{border-bottom:none;}
+    .prog-index{margin-bottom:0;}
+    .prog-card h3{margin-top:1.4rem;}
+  }
+
+  /* ============ RESULTS ============ */
+  .results{background:var(--ink);}
+  .results-head{margin-bottom:clamp(2.5rem,6vw,4.5rem);position:relative;z-index:1;}
+  .stat-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    border:var(--line-bone);
+    margin-bottom:clamp(3rem,7vw,5.5rem);
+    position:relative;
+    z-index:1;
+  }
+  .stat{
+    padding:clamp(1.6rem,3vw,2.6rem) clamp(1.2rem,2vw,2rem);
+    border-right:var(--line-bone);
+    transition:background .2s ease, color .2s ease;
+  }
+  .stat:last-child{border-right:none;}
+  .stat b{
+    display:block;
+    font-family:var(--display);
+    font-weight:400;
+    font-size:clamp(2.6rem, 5.5vw, 4.6rem);
+    line-height:1;
+    color:var(--ember);
+    margin-bottom:.6rem;
+    transition:color .2s ease;
+  }
+  .stat span{
+    font-size:.7rem;
+    font-weight:700;
+    letter-spacing:.24em;
+    text-transform:uppercase;
+    color:var(--bone-dim);
+    transition:color .2s ease;
+  }
+  .stat:hover{background:var(--ember);color:var(--ink);}
+  .stat:hover b{color:var(--ink);}
+  .stat:hover span{color:var(--ink);}
+  @media (max-width:900px){
+    .stat-grid{grid-template-columns:1fr 1fr;}
+    .stat:nth-child(2){border-right:none;}
+    .stat:nth-child(1),.stat:nth-child(2){border-bottom:var(--line-bone);}
+  }
+  @media (max-width:420px){
+    .stat b{font-size:2.3rem;}
+  }
+
+  .quote-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:0;
+    border:var(--line-bone);
+    position:relative;
+    z-index:1;
+  }
+  .quote{
+    padding:clamp(1.75rem,3vw,2.5rem);
+    border-right:var(--line-bone);
+    display:flex;
+    flex-direction:column;
+    gap:1.5rem;
+    transition:background .2s ease, color .2s ease;
+  }
+  .quote:last-child{border-right:none;}
+  .quote .mark{
+    font-family:var(--display);
+    font-size:3rem;
+    line-height:.6;
+    color:var(--ember);
+    transition:color .2s ease;
+  }
+  .quote blockquote{
+    font-weight:600;
+    font-size:clamp(1.02rem, 1.4vw, 1.18rem);
+    line-height:1.45;
+    flex:1;
+  }
+  .quote figcaption{
+    font-size:.72rem;
+    font-weight:700;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--bone-dim);
+    border-top:1px solid rgba(242,239,233,.2);
+    padding-top:1rem;
+    transition:color .2s ease, border-color .2s ease;
+  }
+  .quote:hover{background:var(--bone);color:var(--ink);}
+  .quote:hover .mark{color:var(--ember-deep);}
+  .quote:hover figcaption{color:#3a382f;border-top-color:rgba(17,17,17,.3);}
+  @media (max-width:900px){
+    .quote-grid{grid-template-columns:1fr;}
+    .quote{border-right:none;border-bottom:var(--line-bone);}
+    .quote:last-child{border-bottom:none;}
+  }
+
+  /* ============ GALLERY ============ */
+  .gallery{
+    background:var(--ink);
+    padding-bottom:clamp(4.5rem, 10vw, 8.5rem);
+  }
+  .gallery-head{
+    padding:0 var(--gutter);
+    display:flex;
+    flex-wrap:wrap;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:1rem 3rem;
+    margin-bottom:clamp(1.75rem, 4vw, 3rem);
+  }
+  .gallery-strip{
+    display:grid;
+    grid-template-columns:1.35fr 1fr .85fr 1.15fr;
+    gap:0;
+    border-top:var(--line-bone);
+    border-bottom:var(--line-bone);
+  }
+  .gallery-strip .frame{
+    aspect-ratio:3/4;
+    border-right:var(--line-bone);
+  }
+  .gallery-strip .frame:last-child{border-right:none;}
+  .frame-tag{
+    position:absolute;
+    left:0;bottom:0;
+    z-index:2;
+    background:var(--ink);
+    color:var(--bone);
+    font-size:.62rem;
+    font-weight:800;
+    letter-spacing:.24em;
+    text-transform:uppercase;
+    padding:.55rem .9rem;
+    border-top:var(--line-bone);
+    border-right:var(--line-bone);
+  }
+  @media (max-width:760px){
+    .gallery-strip{grid-template-columns:1fr 1fr;}
+    .gallery-strip .frame{aspect-ratio:1/1;}
+    .gallery-strip .frame:nth-child(2){border-right:none;}
+    .gallery-strip .frame:nth-child(1),
+    .gallery-strip .frame:nth-child(2){border-bottom:var(--line-bone);}
+  }
+
+  /* ============ FINAL CTA ============ */
+  .final{
+    background:var(--ember);
+    color:var(--ink);
+    clip-path:polygon(0 0, 100% clamp(1.5rem,4vw,4rem), 100% 100%, 0 100%);
+    padding-top:clamp(6rem, 13vw, 10rem);
+    padding-bottom:clamp(4.5rem, 10vw, 8rem);
+    text-align:left;
+  }
+  .final .clip{margin:0 calc(-1 * var(--gutter));padding:0 var(--gutter);}
+  .final-title{
+    font-size:clamp(3.4rem, 13vw, 12.5rem);
+    line-height:.85;
+    margin-left:-.04em;
+    margin-bottom:clamp(2rem, 4vw, 3rem);
+  }
+  .final-title .hollow{
+    display:block;
+    color:transparent;
+    -webkit-text-stroke:2px var(--ink);
+  }
+  .final-row{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:space-between;
+    gap:1.5rem 3rem;
+    border-top:var(--line);
+    padding-top:2rem;
+  }
+  .final-row p{
+    max-width:38ch;
+    font-weight:600;
+  }
+  .final-row .email{
+    font-weight:800;
+    border-bottom:3px solid var(--ink);
+    transition:opacity .18s ease;
+  }
+  .final-row .email:hover{opacity:.6;}
+  .final .btn--ink:hover{background:var(--bone);border-color:var(--bone);color:var(--ink);}
+
+  /* ============ FOOTER ============ */
+  footer{
+    background:var(--ink);
+    padding:clamp(2.5rem,5vw,4rem) var(--gutter) 2rem;
+  }
+  .foot-top{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:2rem 3rem;
+    padding-bottom:2.5rem;
+    border-bottom:1px solid rgba(242,239,233,.18);
+  }
+  .foot-brand .wordmark{font-size:2rem;margin-bottom:.9rem;}
+  .foot-brand p{color:var(--bone-dim);font-size:.85rem;max-width:30ch;}
+  .foot-cols{display:flex;gap:clamp(2rem,6vw,5rem);flex-wrap:wrap;}
+  .foot-col h4{
+    font-size:.68rem;
+    font-weight:800;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    color:var(--ember);
+    margin-bottom:1rem;
+  }
+  .foot-col a{
+    display:block;
+    font-size:.85rem;
+    font-weight:600;
+    color:var(--bone-dim);
+    padding:.3rem 0;
+    transition:color .15s ease, transform .15s ease;
+  }
+  .foot-col a:hover{color:var(--ember);transform:translateX(4px);}
+  .foot-bottom{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    gap:.75rem 2rem;
+    padding-top:1.5rem;
+    font-size:.68rem;
+    font-weight:700;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:rgba(242,239,233,.45);
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav">
+  <a class="wordmark" href="#top" aria-label="Max Sandell — home"><span class="dot" aria-hidden="true"></span>MAX&nbsp;SNDL</a>
+  <nav class="nav-links" id="navLinks" aria-label="Primary">
+    <a href="#standard">The Standard</a>
+    <a href="#programs">Programs</a>
+    <a href="#results">Results</a>
+    <a href="#gallery">Training</a>
+    <a class="btn btn--ember" href="#apply">Apply Now</a>
+  </nav>
+  <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="hero-media" aria-hidden="true">
+      <img src="https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?q=80&w=2000&auto=format&fit=crop" alt="" fetchpriority="high">
+    </div>
+    <div class="hero-inner">
+      <p class="kicker hero-kicker slam in">Max Sandell — Performance Coach / Stockholm</p>
+      <div class="clip">
+        <h1 class="hero-title display slam in">
+          <span class="row">Built</span>
+          <span class="row row--not">Not</span>
+          <span class="row row--born">Born</span>
+        </h1>
+      </div>
+      <div class="hero-foot slam in slam-d1">
+        <p class="hero-manifesto">Ten years coaching athletes, founders and stubborn beginners in Stockholm. No hacks. No maintenance mode. <strong>Just work that compounds.</strong></p>
+        <div class="hero-ctas">
+          <a class="btn btn--ember" href="#apply">Start Training <span class="arr" aria-hidden="true">→</span></a>
+          <a class="btn btn--ghost" href="#programs">See Programs</a>
+        </div>
+        <p class="hero-meta">EST. 2016 · STHLM · 59.3293° N</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MARQUEE ============ -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <div class="ticker-chunk">
+        <span>No Shortcuts</span><i>◆</i><span>Train</span><i>◆</i><span>Recover</span><i>◆</i><span>Repeat</span><i>◆</i>
+        <span>No Excuses</span><i>◆</i><span>Lift</span><i>◆</i><span>Eat</span><i>◆</i><span>Sleep</span><i>◆</i>
+      </div>
+      <div class="ticker-chunk">
+        <span>No Shortcuts</span><i>◆</i><span>Train</span><i>◆</i><span>Recover</span><i>◆</i><span>Repeat</span><i>◆</i>
+        <span>No Excuses</span><i>◆</i><span>Lift</span><i>◆</i><span>Eat</span><i>◆</i><span>Sleep</span><i>◆</i>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ THE STANDARD ============ -->
+  <section class="standard sec-pad" id="standard">
+    <div class="ghost-band" aria-hidden="true"><span>The Standard</span></div>
+    <div class="standard-head">
+      <div>
+        <p class="kicker slam">Manifesto</p>
+        <h2 class="sec-title display slam slam-d1">The <span class="accent">Standard</span></h2>
+      </div>
+      <p class="slam slam-d2" style="max-width:36ch;color:var(--bone-dim);font-weight:500;">Four rules. Non-negotiable. If they sound harsh, this isn't for you — and that's fine.</p>
+    </div>
+    <ol class="standard-list">
+      <li class="standard-item slam">
+        <div>
+          <h3>Show up. Every session.</h3>
+          <p>Consistency beats intensity, talent and every supplement you've ever bought. Miss a session and we reschedule it — we never delete it.</p>
+        </div>
+      </li>
+      <li class="standard-item slam">
+        <div>
+          <h3>Track everything. Guess nothing.</h3>
+          <p>Every lift, every meal window, every night of sleep is data. We don't argue with feelings — we read the log and adjust.</p>
+        </div>
+      </li>
+      <li class="standard-item slam">
+        <div>
+          <h3>Recovery is training.</h3>
+          <p>The work only counts if you absorb it. Sleep, food and deloads are programmed with the same precision as your heaviest week.</p>
+        </div>
+      </li>
+      <li class="standard-item slam">
+        <div>
+          <h3>Earn the next block.</h3>
+          <p>Progression is unlocked, not scheduled. You move on when the standard is met — under load, on camera, no rounding up.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ============ PROGRAMS ============ -->
+  <section class="programs sec-pad on-bone" id="programs">
+    <div class="ghost-band" aria-hidden="true"><span>Programs</span></div>
+    <div class="prog-head">
+      <div>
+        <p class="kicker slam">Choose your lane</p>
+        <h2 class="sec-title display slam slam-d1">Programs</h2>
+      </div>
+      <p class="slam slam-d2">Three ways in. Same standard, same system — different levels of proximity to me.</p>
+    </div>
+    <div class="prog-grid">
+      <article class="prog-card slam">
+        <span class="prog-tag">4 spots / year</span>
+        <span class="prog-index" aria-hidden="true">01</span>
+        <h3>1:1 Coaching</h3>
+        <p>Full immersion. In-person sessions in Stockholm, total programming, nutrition and recovery — built around your life, audited weekly.</p>
+        <ul>
+          <li>3–5 sessions / week, in person</li>
+          <li>Custom program &amp; nutrition</li>
+          <li>Direct line, 7 days a week</li>
+        </ul>
+        <a class="prog-cta" href="#apply">Apply for 1:1 <span class="arr" aria-hidden="true">→</span></a>
+      </article>
+      <article class="prog-card slam slam-d1">
+        <span class="prog-index" aria-hidden="true">02</span>
+        <h3>Small Group</h3>
+        <p>Max six people per crew. Coached like individuals, pushed like a team. The energy of a squad with the precision of a private session.</p>
+        <ul>
+          <li>Max 6 athletes per group</li>
+          <li>3 coached sessions / week</li>
+          <li>Individual progress tracking</li>
+        </ul>
+        <a class="prog-cta" href="#apply">Join a crew <span class="arr" aria-hidden="true">→</span></a>
+      </article>
+      <article class="prog-card slam slam-d2">
+        <span class="prog-index" aria-hidden="true">03</span>
+        <h3>Online Programming</h3>
+        <p>My system, your gym, anywhere on earth. Programmed in blocks, reviewed on video, adjusted every single week. Distance is not an excuse.</p>
+        <ul>
+          <li>Weekly video form review</li>
+          <li>Block programming, updated weekly</li>
+          <li>Check-in call every month</li>
+        </ul>
+        <a class="prog-cta" href="#apply">Train remote <span class="arr" aria-hidden="true">→</span></a>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ RESULTS ============ -->
+  <section class="results sec-pad" id="results">
+    <div class="ghost-band" aria-hidden="true"><span>Proof</span></div>
+    <div class="results-head">
+      <p class="kicker slam">Receipts</p>
+      <h2 class="sec-title display slam slam-d1">Numbers Don't <span class="accent">Flatter</span></h2>
+    </div>
+    <div class="stat-grid">
+      <div class="stat slam"><b>10+</b><span>Years coaching</span></div>
+      <div class="stat slam slam-d1"><b>400+</b><span>Athletes built</span></div>
+      <div class="stat slam slam-d2"><b>92%</b><span>Still training at 12 months</span></div>
+      <div class="stat slam slam-d3"><b>0</b><span>Shortcuts sold</span></div>
+    </div>
+    <div class="quote-grid">
+      <figure class="quote slam">
+        <span class="mark" aria-hidden="true">“</span>
+        <blockquote>Two years of boutique gyms got me nothing. Six months with Max got me a 140&nbsp;kg deadlift and my knees back. He doesn't motivate you — he removes your excuses.</blockquote>
+        <figcaption>Erik L. — Founder, 41</figcaption>
+      </figure>
+      <figure class="quote slam slam-d1">
+        <span class="mark" aria-hidden="true">“</span>
+        <blockquote>I came in wanting to "tone up." Max threw that phrase in the bin in week one. Eighteen months later I compete. That's the difference.</blockquote>
+        <figcaption>Sara M. — Powerlifter, 29</figcaption>
+      </figure>
+      <figure class="quote slam slam-d2">
+        <span class="mark" aria-hidden="true">“</span>
+        <blockquote>Remote programming from another country and it's still the most accountable I've ever been. He watches every rep like he's in the room.</blockquote>
+        <figcaption>Jonas K. — Online athlete, 35</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============ GALLERY ============ -->
+  <section class="gallery" id="gallery">
+    <div class="gallery-head">
+      <div>
+        <p class="kicker slam">Inside the work</p>
+        <h2 class="sec-title display slam slam-d1" style="font-size:clamp(2.4rem,6vw,5rem);">Training Floor</h2>
+      </div>
+      <p class="hero-meta slam slam-d2">STHLM · 06:00–21:00 · MON–SAT</p>
+    </div>
+    <div class="gallery-strip">
+      <figure class="frame slam">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200&auto=format&fit=crop" alt="Athlete pressing dumbbells overhead on a bench">
+        <figcaption class="frame-tag">Press</figcaption>
+      </figure>
+      <figure class="frame slam slam-d1">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?q=80&w=1200&auto=format&fit=crop" alt="Lifter under a loaded barbell in a squat">
+        <figcaption class="frame-tag">Squat</figcaption>
+      </figure>
+      <figure class="frame slam slam-d2">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1546483875-ad9014c88eba?q=80&w=1200&auto=format&fit=crop" alt="Athlete driving battle ropes in a conditioning set">
+        <figcaption class="frame-tag">Condition</figcaption>
+      </figure>
+      <figure class="frame slam slam-d3">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1599058917212-d750089bc07e?q=80&w=1200&auto=format&fit=crop" alt="Coach guiding an athlete through a training session">
+        <figcaption class="frame-tag">Coach</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============ FINAL CTA ============ -->
+  <section class="final sec-pad" id="apply">
+    <div class="clip">
+      <h2 class="final-title display slam">
+        <span class="hollow">Ready</span>
+        When You Are
+      </h2>
+    </div>
+    <div class="final-row slam slam-d1">
+      <p>Applications open for the autumn block. Tell me where you are, where you're going, and how hard you're willing to work.</p>
+      <div class="hero-ctas">
+        <a class="btn btn--ink" href="mailto:hello@maxsandell.com">Apply via Email <span class="arr" aria-hidden="true">→</span></a>
+      </div>
+      <a class="email" href="mailto:hello@maxsandell.com">hello@maxsandell.com</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="foot-top">
+    <div class="foot-brand">
+      <p class="wordmark"><span class="dot" aria-hidden="true"></span>MAX&nbsp;SNDL</p>
+      <p>Performance coaching out of Stockholm. Strength, conditioning and the discipline to keep both.</p>
+    </div>
+    <div class="foot-cols">
+      <div class="foot-col">
+        <h4>Train</h4>
+        <a href="#programs">1:1 Coaching</a>
+        <a href="#programs">Small Group</a>
+        <a href="#programs">Online Programming</a>
+      </div>
+      <div class="foot-col">
+        <h4>Explore</h4>
+        <a href="#standard">The Standard</a>
+        <a href="#results">Results</a>
+        <a href="#gallery">Training Floor</a>
+      </div>
+      <div class="foot-col">
+        <h4>Contact</h4>
+        <a href="mailto:hello@maxsandell.com">hello@maxsandell.com</a>
+        <a href="#">Instagram</a>
+        <a href="#">YouTube</a>
+      </div>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 Max Sandell Performance AB</span>
+    <span>Stockholm, Sweden</span>
+    <span>Built, not born.</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* Mobile nav */
+  var toggle = document.getElementById('navToggle');
+  var links = document.getElementById('navLinks');
+  toggle.addEventListener('click', function(){
+    var open = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  links.addEventListener('click', function(e){
+    if (e.target.closest('a')) {
+      links.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && links.classList.contains('open')) {
+      links.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.focus();
+    }
+  });
+
+  /* Scroll-reveal slams */
+  var slams = document.querySelectorAll('.slam:not(.in)');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    slams.forEach(function(el){ io.observe(el); });
+  } else {
+    slams.forEach(function(el){ el.classList.add('in'); });
+  }
+})();
+</script>
+
+</body>
+</html>

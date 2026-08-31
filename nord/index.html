@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Max Sandell — Personal Trainer, Stockholm</title>
+<meta name="description" content="Max Sandell is a personal trainer and coach in Stockholm. Quiet, methodical strength coaching built on movement quality, consistency and measured progress. Book an intro call.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   NORD — Max Sandell
+   Scandinavian minimalism. Paper, ink, spruce.
+   ============================================================ */
+:root{
+  --paper:#f7f5f1;
+  --paper-deep:#efece6;
+  --ink:#1a1916;
+  --ink-soft:#55524b;
+  --ink-faint:#8a867d;
+  --spruce:#1f3d2b;
+  --spruce-deep:#16301f;
+  --line:rgba(26,25,22,.14);
+  --line-soft:rgba(26,25,22,.08);
+  --sans:"Hanken Grotesk",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  --serif:"Instrument Serif",Georgia,"Times New Roman",serif;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --gutter:clamp(1.25rem,5vw,4.5rem);
+  --measure:34rem;
+}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-weight:400;
+  font-size:1.0625rem;
+  line-height:1.65;
+  letter-spacing:.005em;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+::selection{background:var(--spruce);color:var(--paper)}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;background:none;border:none;color:inherit}
+
+:focus-visible{
+  outline:2px solid var(--spruce);
+  outline-offset:3px;
+  border-radius:2px;
+}
+
+/* ---------- primitives ---------- */
+.wrap{max-width:78rem;margin-inline:auto;padding-inline:var(--gutter)}
+
+.micro{
+  font-size:.6875rem;
+  font-weight:600;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+}
+.micro--spruce{color:var(--spruce)}
+
+.rule{border:0;border-top:1px solid var(--line);margin:0}
+
+em.accent{
+  font-family:var(--serif);
+  font-style:italic;
+  font-weight:400;
+  letter-spacing:0;
+  /* serif runs a touch small next to grotesk at same size */
+  font-size:1.06em;
+  line-height:1;
+  color:var(--spruce);
+}
+
+/* underline-reveal links */
+.u-link{
+  position:relative;
+  padding-bottom:2px;
+}
+.u-link::after{
+  content:"";
+  position:absolute;
+  left:0;bottom:0;
+  width:100%;height:1px;
+  background:currentColor;
+  transform:scaleX(0);
+  transform-origin:right center;
+  transition:transform .45s var(--ease);
+}
+.u-link:hover::after,
+.u-link:focus-visible::after{
+  transform:scaleX(1);
+  transform-origin:left center;
+}
+
+/* pill button */
+.pill{
+  display:inline-flex;
+  align-items:center;
+  gap:.6rem;
+  background:var(--spruce);
+  color:var(--paper);
+  font-size:.8125rem;
+  font-weight:600;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  padding:.72rem 1.5rem;
+  border-radius:99px;
+  transition:background-color .3s var(--ease),transform .3s var(--ease);
+}
+.pill:hover{background:var(--spruce-deep);transform:translateY(-1px)}
+.pill:active{transform:translateY(0)}
+.pill .dot{
+  width:5px;height:5px;border-radius:50%;
+  background:currentColor;opacity:.85;
+  flex:none;
+}
+.pill--lg{padding:.95rem 2.1rem;font-size:.875rem}
+.pill--ghost{
+  background:transparent;
+  color:var(--ink);
+  box-shadow:inset 0 0 0 1px var(--line);
+}
+.pill--ghost:hover{background:var(--paper-deep)}
+
+/* scroll reveal */
+.rv{
+  opacity:0;
+  transform:translateY(26px);
+  transition:opacity .9s var(--ease),transform .9s var(--ease);
+  transition-delay:var(--d,0ms);
+}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .rv{opacity:1;transform:none}
+}
+
+/* ---------- scroll progress ---------- */
+.progress{
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:2px;
+  z-index:60;
+  pointer-events:none;
+}
+.progress span{
+  display:block;
+  height:100%;
+  background:var(--spruce);
+  transform-origin:left center;
+  transform:scaleX(0);
+}
+
+/* ---------- nav ---------- */
+.nav{
+  position:fixed;
+  top:0;left:0;right:0;
+  z-index:50;
+  background:rgba(247,245,241,.86);
+  -webkit-backdrop-filter:blur(12px);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid transparent;
+  transition:border-color .4s var(--ease);
+}
+.nav.scrolled{border-bottom-color:var(--line-soft)}
+.nav__inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1.5rem;
+  height:4.5rem;
+}
+.wordmark{
+  font-size:.9375rem;
+  font-weight:600;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.wordmark span{color:var(--spruce)}
+.nav__links{
+  display:flex;
+  align-items:center;
+  gap:2.25rem;
+  list-style:none;
+}
+.nav__links a{
+  font-size:.8125rem;
+  font-weight:500;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+  transition:color .3s var(--ease);
+}
+.nav__links a:hover{color:var(--ink)}
+@media (max-width:760px){
+  .nav__links li:not(.nav__cta){display:none}
+  .nav__inner{height:4rem}
+}
+
+/* ---------- hero ---------- */
+.hero{
+  padding-top:clamp(8.5rem,16vh,12rem);
+  padding-bottom:clamp(4rem,9vw,8rem);
+  position:relative;
+}
+.hero__grid{
+  display:grid;
+  grid-template-columns:minmax(0,7fr) minmax(0,5fr);
+  gap:clamp(2rem,6vw,6rem);
+  align-items:end;
+}
+.hero__label{
+  display:flex;
+  align-items:center;
+  gap:1rem;
+  margin-bottom:clamp(1.75rem,4vw,3rem);
+}
+.hero__label::after{
+  content:"";
+  height:1px;width:3.5rem;
+  background:var(--line);
+}
+.hero h1{
+  font-weight:400;
+  font-size:clamp(2.7rem,7.2vw,5.4rem);
+  line-height:1.04;
+  letter-spacing:-.025em;
+  max-width:14ch;
+}
+.hero h1 em.accent{font-size:1.04em}
+.hero__sub{
+  margin-top:clamp(1.75rem,3.5vw,2.75rem);
+  max-width:26rem;
+  color:var(--ink-soft);
+  font-size:1.0625rem;
+  line-height:1.7;
+}
+.hero__actions{
+  margin-top:clamp(2rem,4vw,3rem);
+  display:flex;
+  align-items:center;
+  gap:1.75rem;
+  flex-wrap:wrap;
+}
+.hero__alt{
+  font-size:.8125rem;
+  font-weight:500;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+}
+/* asymmetric photo: pushed down out of the grid line */
+.hero__media{
+  position:relative;
+  align-self:stretch;
+}
+.hero__frame{
+  position:relative;
+  aspect-ratio:4/5;
+  overflow:hidden;
+  transform:translateY(clamp(1.5rem,4vw,3.5rem));
+}
+.hero__frame img{
+  width:100%;height:100%;
+  object-fit:cover;
+  transform:scale(1.06);
+  transition:transform 1.4s var(--ease);
+}
+.hero__frame:hover img{transform:scale(1.015)}
+.hero__caption{
+  position:absolute;
+  left:0;
+  bottom:calc(clamp(1.5rem,4vw,3.5rem) * -1 - 2rem);
+  display:flex;
+  align-items:baseline;
+  gap:.75rem;
+  white-space:nowrap;
+}
+.hero__caption .n{
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:1.05rem;
+  color:var(--spruce);
+}
+.hero__meta{
+  margin-top:clamp(3.5rem,7vw,5.5rem);
+  padding-top:1.5rem;
+  border-top:1px solid var(--line);
+  display:flex;
+  gap:clamp(1.5rem,5vw,4rem);
+  flex-wrap:wrap;
+}
+.hero__meta div{display:flex;flex-direction:column;gap:.3rem}
+.hero__meta .k{font-size:.6875rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-faint)}
+.hero__meta .v{font-size:.9375rem;font-weight:500}
+@media (max-width:860px){
+  .hero__grid{grid-template-columns:1fr}
+  .hero__frame{aspect-ratio:3/2;transform:none;margin-top:1rem}
+  .hero__caption{position:static;margin-top:.9rem}
+  .hero h1{max-width:none}
+}
+
+/* page-load intro */
+@keyframes rise{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:none}
+}
+.intro{opacity:0;animation:rise 1s var(--ease) forwards;animation-delay:var(--d,0ms)}
+@media (prefers-reduced-motion:reduce){.intro{opacity:1;animation:none}}
+
+/* ---------- section scaffold ---------- */
+.section{padding-block:clamp(4.5rem,10vw,8.5rem)}
+.section--tint{background:var(--paper-deep)}
+.section__head{
+  display:grid;
+  grid-template-columns:minmax(0,4fr) minmax(0,8fr);
+  gap:clamp(1.5rem,4vw,4rem);
+  margin-bottom:clamp(3rem,6vw,5rem);
+}
+.section__head h2{
+  font-weight:400;
+  font-size:clamp(1.9rem,3.8vw,2.9rem);
+  line-height:1.12;
+  letter-spacing:-.02em;
+  max-width:18ch;
+}
+.section__head .micro{padding-top:.55em}
+.section__lede{
+  margin-top:1.25rem;
+  color:var(--ink-soft);
+  max-width:var(--measure);
+}
+@media (max-width:760px){
+  .section__head{grid-template-columns:1fr;gap:1rem}
+  .section__head .micro{padding-top:0}
+}
+
+/* ---------- philosophy ---------- */
+.principles{
+  border-top:1px solid var(--line);
+}
+.principle{
+  display:grid;
+  grid-template-columns:minmax(0,2fr) minmax(0,4fr) minmax(0,6fr);
+  gap:clamp(1.25rem,4vw,4rem);
+  padding-block:clamp(2rem,4.5vw,3.25rem);
+  border-bottom:1px solid var(--line);
+}
+.principle__num{
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:clamp(1.5rem,2.6vw,2rem);
+  color:var(--spruce);
+  line-height:1;
+  padding-top:.2rem;
+}
+.principle__title{
+  font-weight:500;
+  font-size:clamp(1.2rem,2vw,1.45rem);
+  letter-spacing:-.01em;
+  line-height:1.3;
+}
+.principle__body{
+  color:var(--ink-soft);
+  max-width:var(--measure);
+  font-size:1rem;
+}
+@media (max-width:760px){
+  .principle{grid-template-columns:1fr;gap:.6rem;padding-block:1.9rem}
+  .principle__num{font-size:1.35rem}
+}
+
+/* band image between sections */
+.band{
+  position:relative;
+  height:clamp(16rem,42vw,30rem);
+  overflow:hidden;
+}
+.band img{
+  width:100%;height:120%;
+  object-fit:cover;
+  will-change:transform;
+}
+.band figcaption{
+  position:absolute;
+  left:var(--gutter);
+  bottom:1.25rem;
+  font-size:.6875rem;
+  font-weight:600;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:rgba(247,245,241,.92);
+}
+
+/* ---------- services ---------- */
+.services{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  border-top:1px solid var(--line);
+  border-left:1px solid var(--line);
+}
+.service{
+  border-right:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  padding:clamp(1.75rem,3.2vw,2.75rem);
+  display:flex;
+  flex-direction:column;
+  gap:1.4rem;
+  min-height:24rem;
+  background:transparent;
+  transition:background-color .45s var(--ease);
+}
+.service:hover{background:rgba(31,61,43,.035)}
+.service__top{display:flex;justify-content:space-between;align-items:baseline;gap:1rem}
+.service h3{
+  font-weight:500;
+  font-size:1.35rem;
+  letter-spacing:-.01em;
+  line-height:1.25;
+}
+.service h3 em.accent{font-size:1.05em}
+.service p{color:var(--ink-soft);font-size:.98rem;max-width:30ch}
+.service ul{
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:.55rem;
+  margin-top:auto;
+}
+.service li{
+  font-size:.875rem;
+  color:var(--ink-soft);
+  display:flex;
+  gap:.7rem;
+  align-items:baseline;
+}
+.service li::before{
+  content:"";
+  width:.85rem;
+  height:1px;
+  background:var(--spruce);
+  flex:none;
+  transform:translateY(-.28em);
+}
+.service__price{
+  padding-top:1.4rem;
+  border-top:1px solid var(--line-soft);
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:1rem;
+}
+.service__price .amount{
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:1.5rem;
+  color:var(--spruce);
+  white-space:nowrap;
+}
+.service__price .per{font-size:.8125rem;color:var(--ink-faint)}
+.service__link{
+  font-size:.8125rem;
+  font-weight:600;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--spruce);
+}
+@media (max-width:960px){
+  .services{grid-template-columns:1fr}
+  .service{min-height:0}
+}
+
+/* ---------- about ---------- */
+.about{
+  display:grid;
+  grid-template-columns:minmax(0,5fr) minmax(0,6fr);
+  gap:clamp(2.5rem,7vw,7rem);
+  align-items:start;
+}
+.about__media{
+  position:relative;
+}
+.about__frame{
+  aspect-ratio:4/5;
+  overflow:hidden;
+  /* offset off the grid, Kinfolk-style */
+  margin-left:clamp(0rem,3vw,2.5rem);
+}
+.about__frame img{width:100%;height:100%;object-fit:cover}
+.about__stamp{
+  position:absolute;
+  left:0;
+  bottom:clamp(1.5rem,4vw,3rem);
+  background:var(--paper);
+  padding:1.1rem 1.4rem 1.1rem 0;
+  max-width:15rem;
+}
+.about__stamp .n{
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:1.35rem;
+  color:var(--spruce);
+  line-height:1.2;
+}
+.about__stamp .r{
+  margin-top:.3rem;
+  font-size:.6875rem;
+  font-weight:600;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+}
+.about__body h2{
+  font-weight:400;
+  font-size:clamp(1.9rem,3.6vw,2.8rem);
+  line-height:1.14;
+  letter-spacing:-.02em;
+  margin-top:1.1rem;
+  max-width:18ch;
+}
+.about__body>p{
+  margin-top:1.4rem;
+  color:var(--ink-soft);
+  max-width:var(--measure);
+}
+.creds{
+  margin-top:clamp(2rem,4vw,3rem);
+  list-style:none;
+  border-top:1px solid var(--line);
+}
+.creds li{
+  display:flex;
+  justify-content:space-between;
+  gap:1.5rem;
+  align-items:baseline;
+  padding-block:.85rem;
+  border-bottom:1px solid var(--line);
+  font-size:.9375rem;
+}
+.creds .what{font-weight:500}
+.creds .where{color:var(--ink-faint);font-size:.8125rem;letter-spacing:.06em;text-transform:uppercase;text-align:right;white-space:nowrap}
+@media (max-width:860px){
+  .about{grid-template-columns:1fr}
+  .about__frame{margin-left:0;aspect-ratio:1/1}
+  .creds .where{white-space:normal}
+}
+
+/* ---------- testimonials ---------- */
+.quotes{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(2.5rem,5vw,4.5rem);
+}
+.quote{
+  display:flex;
+  flex-direction:column;
+  gap:1.5rem;
+}
+.quote__mark{
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:3rem;
+  line-height:.6;
+  color:var(--spruce);
+  user-select:none;
+}
+.quote blockquote{
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:clamp(1.25rem,1.9vw,1.5rem);
+  line-height:1.45;
+  letter-spacing:.002em;
+}
+.quote figcaption{
+  margin-top:auto;
+  padding-top:1.25rem;
+  border-top:1px solid var(--line);
+  display:flex;
+  flex-direction:column;
+  gap:.15rem;
+}
+.quote .who{font-size:.9375rem;font-weight:600}
+.quote .what{font-size:.8125rem;color:var(--ink-faint);letter-spacing:.04em}
+@media (max-width:860px){
+  .quotes{grid-template-columns:1fr;gap:3rem}
+  .quote figcaption{margin-top:0}
+}
+
+/* ---------- FAQ ---------- */
+.faq-grid{
+  display:grid;
+  grid-template-columns:minmax(0,4fr) minmax(0,8fr);
+  gap:clamp(1.5rem,4vw,4rem);
+}
+.faq-grid__intro h2{
+  font-weight:400;
+  font-size:clamp(1.9rem,3.6vw,2.8rem);
+  line-height:1.14;
+  letter-spacing:-.02em;
+  margin-top:1.1rem;
+}
+.faq-grid__intro p{
+  margin-top:1.25rem;
+  color:var(--ink-soft);
+  max-width:24rem;
+}
+.faq{border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{
+  list-style:none;
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  gap:1.5rem;
+  padding-block:1.4rem;
+  cursor:pointer;
+  font-weight:500;
+  font-size:1.0625rem;
+  letter-spacing:-.005em;
+  transition:color .3s var(--ease);
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:hover{color:var(--spruce)}
+.faq summary .marker{
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:1.35rem;
+  line-height:1;
+  color:var(--spruce);
+  flex:none;
+  transition:transform .4s var(--ease);
+  transform-origin:center;
+}
+.faq details[open] summary .marker{transform:rotate(45deg)}
+.faq .answer{
+  padding-bottom:1.6rem;
+  color:var(--ink-soft);
+  max-width:var(--measure);
+  font-size:1rem;
+}
+@media (max-width:760px){
+  .faq-grid{grid-template-columns:1fr}
+}
+
+/* ---------- final CTA ---------- */
+.cta{
+  background:var(--spruce);
+  color:var(--paper);
+  padding-block:clamp(5rem,11vw,9rem);
+  position:relative;
+  overflow:hidden;
+}
+.cta::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(60rem 30rem at 85% 120%,rgba(247,245,241,.07),transparent 60%),
+    radial-gradient(40rem 24rem at 10% -20%,rgba(247,245,241,.05),transparent 55%);
+  pointer-events:none;
+}
+.cta .micro{color:rgba(247,245,241,.55)}
+.cta h2{
+  font-weight:400;
+  font-size:clamp(2.3rem,5.5vw,4.2rem);
+  line-height:1.08;
+  letter-spacing:-.02em;
+  margin-top:1.4rem;
+  max-width:16ch;
+}
+.cta h2 em.accent{color:#a8c3ae}
+.cta p{
+  margin-top:1.6rem;
+  max-width:28rem;
+  color:rgba(247,245,241,.72);
+}
+.cta__actions{
+  margin-top:clamp(2.25rem,4.5vw,3.25rem);
+  display:flex;
+  align-items:center;
+  gap:1.75rem;
+  flex-wrap:wrap;
+}
+.cta .pill{background:var(--paper);color:var(--spruce)}
+.cta .pill:hover{background:#fff}
+.cta__mail{
+  font-size:.9375rem;
+  letter-spacing:.02em;
+  color:rgba(247,245,241,.85);
+}
+
+/* ---------- footer ---------- */
+.footer{
+  background:var(--spruce-deep);
+  color:rgba(247,245,241,.65);
+  padding-block:2.25rem;
+  font-size:.8125rem;
+}
+.footer__inner{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:1.25rem;
+  flex-wrap:wrap;
+}
+.footer .wordmark{color:var(--paper);font-size:.8125rem}
+.footer .wordmark span{color:#8fb096}
+.footer nav{display:flex;gap:1.75rem;flex-wrap:wrap}
+.footer a{transition:color .3s var(--ease)}
+.footer a:hover{color:var(--paper)}
+</style>
+</head>
+<body>
+
+<!-- scroll progress -->
+<div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+<!-- ===================== NAV ===================== -->
+<header class="nav" id="nav">
+  <div class="wrap nav__inner">
+    <a href="#top" class="wordmark">Max Sandell<span>.</span></a>
+    <nav aria-label="Primary">
+      <ul class="nav__links">
+        <li><a class="u-link" href="#philosophy">Philosophy</a></li>
+        <li><a class="u-link" href="#coaching">Coaching</a></li>
+        <li><a class="u-link" href="#about">About</a></li>
+        <li><a class="u-link" href="#faq">FAQ</a></li>
+        <li class="nav__cta"><a class="pill" href="#contact"><span class="dot"></span>Book intro call</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero__grid">
+      <div>
+        <p class="micro micro--spruce hero__label intro" style="--d:60ms">Personal trainer &amp; coach — Stockholm</p>
+        <h1 class="intro" style="--d:140ms">Train <em class="accent">quieter.</em><br>Get stronger for&nbsp;longer.</h1>
+        <p class="hero__sub intro" style="--d:260ms">One-to-one coaching built on movement quality, patient progression and numbers that don't lie. No noise, no burnout programs — just work that compounds.</p>
+        <div class="hero__actions intro" style="--d:380ms">
+          <a class="pill pill--lg" href="#contact"><span class="dot"></span>Book intro call</a>
+          <a class="u-link hero__alt" href="#coaching">See coaching options</a>
+        </div>
+      </div>
+      <div class="hero__media intro" style="--d:300ms">
+        <figure class="hero__frame">
+          <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&amp;w=1600&amp;auto=format&amp;fit=crop" alt="Calm, well-lit gym interior with rows of racks and natural light" width="1600" height="2000">
+        </figure>
+        <p class="hero__caption"><span class="micro">Studio</span> <span class="n">Östermalm, Stockholm</span></p>
+      </div>
+    </div>
+    <div class="hero__meta intro" style="--d:480ms">
+      <div><span class="k">Practice</span><span class="v">Est. 2014 — 11 years coaching</span></div>
+      <div><span class="k">Clients</span><span class="v">Max 14 at a time, by design</span></div>
+      <div><span class="k">Method</span><span class="v">Strength-first, data-informed</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PHILOSOPHY ===================== -->
+<section class="section" id="philosophy">
+  <div class="wrap">
+    <div class="section__head rv">
+      <p class="micro">Philosophy</p>
+      <div>
+        <h2>Three principles. <em class="accent">Nothing</em> else.</h2>
+        <p class="section__lede">Most training fails from complexity, not effort. Everything I program traces back to three ideas — and if a session doesn't serve one of them, it gets cut.</p>
+      </div>
+    </div>
+
+    <div class="principles">
+      <article class="principle rv" style="--d:0ms">
+        <span class="principle__num" aria-hidden="true">01</span>
+        <h3 class="principle__title">Movement quality</h3>
+        <p class="principle__body">Position before load, always. We earn the right to go heavy by owning each pattern first — squat, hinge, press, pull, carry. It's slower for two weeks and faster for ten years.</p>
+      </article>
+      <article class="principle rv" style="--d:80ms">
+        <span class="principle__num" aria-hidden="true">02</span>
+        <h3 class="principle__title">Consistency over intensity</h3>
+        <p class="principle__body">The best program is the one you're still on in March. I build training around your actual week — travel, kids, deadlines — so the default outcome is showing up, not starting over.</p>
+      </article>
+      <article class="principle rv" style="--d:160ms">
+        <span class="principle__num" aria-hidden="true">03</span>
+        <h3 class="principle__title">Measured progress</h3>
+        <p class="principle__body">Every lift, session and check-in is logged. We review the trend line together each month — so progress is something you can point to, not something you have to feel on a good day.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- band image -->
+<figure class="band">
+  <img id="bandImg" src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&amp;w=2000&amp;auto=format&amp;fit=crop" alt="Athlete mid-swing during focused kettlebell training" loading="lazy" width="2000" height="1333">
+  <figcaption>The daily practice — 06:40, Stockholm</figcaption>
+</figure>
+
+<!-- ===================== SERVICES ===================== -->
+<section class="section section--tint" id="coaching">
+  <div class="wrap">
+    <div class="section__head rv">
+      <p class="micro">Coaching</p>
+      <div>
+        <h2>Three ways to <em class="accent">work</em> together</h2>
+        <p class="section__lede">Every engagement starts with the same intro call and movement assessment. From there, we choose the format that fits your season of life.</p>
+      </div>
+    </div>
+
+    <div class="services">
+      <article class="service rv" style="--d:0ms">
+        <div>
+          <p class="micro micro--spruce">Format A</p>
+          <h3 style="margin-top:.8rem">One-to-one <em class="accent">personal</em> training</h3>
+        </div>
+        <p>Fully coached sessions in the studio. Technique, load and recovery managed live — you just arrive and work.</p>
+        <ul>
+          <li>60-minute private sessions</li>
+          <li>Full movement assessment</li>
+          <li>Session-by-session logging</li>
+        </ul>
+        <div class="service__price">
+          <span><span class="amount">from 1 200 kr</span> <span class="per">/ session</span></span>
+          <a class="u-link service__link" href="#contact">Enquire</a>
+        </div>
+      </article>
+
+      <article class="service rv" style="--d:90ms">
+        <div>
+          <p class="micro micro--spruce">Format B</p>
+          <h3 style="margin-top:.8rem">Hybrid <em class="accent">coaching</em></h3>
+        </div>
+        <p>One coached session per week, plus a personal program for your remaining days. The best ratio of guidance to independence.</p>
+        <ul>
+          <li>Weekly in-person session</li>
+          <li>Individual 4-week programs</li>
+          <li>Message support, 48h reply</li>
+        </ul>
+        <div class="service__price">
+          <span><span class="amount">from 4 900 kr</span> <span class="per">/ month</span></span>
+          <a class="u-link service__link" href="#contact">Enquire</a>
+        </div>
+      </article>
+
+      <article class="service rv" style="--d:180ms">
+        <div>
+          <p class="micro micro--spruce">Format C</p>
+          <h3 style="margin-top:.8rem">Online <em class="accent">programming</em></h3>
+        </div>
+        <p>Remote coaching for the self-sufficient. Your program, video technique reviews and a monthly call — wherever you train.</p>
+        <ul>
+          <li>Individual programming</li>
+          <li>Video form reviews</li>
+          <li>Monthly review call</li>
+        </ul>
+        <div class="service__price">
+          <span><span class="amount">from 2 400 kr</span> <span class="per">/ month</span></span>
+          <a class="u-link service__link" href="#contact">Enquire</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ABOUT ===================== -->
+<section class="section" id="about">
+  <div class="wrap">
+    <div class="about">
+      <div class="about__media rv">
+        <figure class="about__frame">
+          <img src="https://images.unsplash.com/photo-1593079831268-3381b0db4a77?q=80&amp;w=1400&amp;auto=format&amp;fit=crop" alt="Max coaching a training session on the gym floor" loading="lazy" width="1400" height="1750">
+        </figure>
+        <div class="about__stamp">
+          <p class="n">Max Sandell</p>
+          <p class="r">Coach &amp; founder</p>
+        </div>
+      </div>
+      <div class="about__body rv" style="--d:120ms">
+        <p class="micro">About</p>
+        <h2>Eleven years of doing the <em class="accent">unglamorous</em> work well</h2>
+        <p>I started coaching in 2014, after a decade of competitive middle-distance running taught me the hard version of every lesson I now teach the easy way. Since then I've logged over 12,000 coached sessions with executives, new parents, returning athletes and people who simply decided it was time.</p>
+        <p>My promise is narrow on purpose: I will not entertain you, shout at you, or change your program every time the industry finds a new toy. I will make you measurably stronger, more mobile and harder to injure — and show you the numbers as we go.</p>
+        <ul class="creds">
+          <li><span class="what">M.Sc. Sport Science</span><span class="where">GIH Stockholm</span></li>
+          <li><span class="what">Licensed Personal Trainer</span><span class="where">EuropeActive / EREPS L4</span></li>
+          <li><span class="what">Strength &amp; Conditioning Coach</span><span class="where">NSCA-CSCS</span></li>
+          <li><span class="what">Kettlebell Instructor, Level 2</span><span class="where">StrongFirst</span></li>
+          <li><span class="what">Former national-level 1500&nbsp;m</span><span class="where">2006 – 2013</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- band image -->
+<figure class="band">
+  <img id="bandImg2" src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?q=80&amp;w=2000&amp;auto=format&amp;fit=crop" alt="Runner training outdoors on an open road in soft morning light" loading="lazy" width="2000" height="1333">
+  <figcaption>Field work — Djurgården loop</figcaption>
+</figure>
+
+<!-- ===================== TESTIMONIALS ===================== -->
+<section class="section" id="words">
+  <div class="wrap">
+    <div class="section__head rv">
+      <p class="micro">Client words</p>
+      <div>
+        <h2>Said <em class="accent">quietly,</em> meant fully</h2>
+      </div>
+    </div>
+
+    <div class="quotes">
+      <figure class="quote rv" style="--d:0ms">
+        <span class="quote__mark" aria-hidden="true">”</span>
+        <blockquote>Two years in, my deadlift is up 60 kilos and my back pain is a memory. Max never rushed a single week of it.</blockquote>
+        <figcaption>
+          <span class="who">Johanna E.</span>
+          <span class="what">CFO — client since 2023</span>
+        </figcaption>
+      </figure>
+      <figure class="quote rv" style="--d:120ms">
+        <span class="quote__mark" aria-hidden="true">”</span>
+        <blockquote>I've had trainers who performed and trainers who coached. Max is the second kind. Every session has a reason you can ask about.</blockquote>
+        <figcaption>
+          <span class="who">Daniel R.</span>
+          <span class="what">Surgeon — hybrid coaching</span>
+        </figcaption>
+      </figure>
+      <figure class="quote rv" style="--d:240ms">
+        <span class="quote__mark" aria-hidden="true">”</span>
+        <blockquote>The monthly reviews changed everything. Seeing the trend line made consistency feel like winning, not sacrifice.</blockquote>
+        <figcaption>
+          <span class="who">Sara L.</span>
+          <span class="what">Returning athlete — online</span>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<hr class="rule wrap" style="border:0;border-top:1px solid var(--line)">
+
+<!-- ===================== FAQ ===================== -->
+<section class="section" id="faq">
+  <div class="wrap">
+    <div class="faq-grid">
+      <div class="faq-grid__intro rv">
+        <p class="micro">FAQ</p>
+        <h2>Fair <em class="accent">questions</em></h2>
+        <p>Anything else — ask on the intro call. It's twenty minutes and costs nothing.</p>
+      </div>
+      <div class="faq rv" style="--d:120ms">
+        <details>
+          <summary>Do I need training experience to start?<span class="marker" aria-hidden="true">+</span></summary>
+          <p class="answer">No. About half my clients start as complete beginners. The first four weeks are built around learning positions at light loads, so inexperience is an advantage — there's nothing to unlearn.</p>
+        </details>
+        <details>
+          <summary>Where do sessions take place?<span class="marker" aria-hidden="true">+</span></summary>
+          <p class="answer">In-person sessions run from a private studio in Östermalm, Stockholm, weekdays 06:00–19:00. Online clients train wherever they are — I program around the equipment you actually have.</p>
+        </details>
+        <details>
+          <summary>How long until I see results?<span class="marker" aria-hidden="true">+</span></summary>
+          <p class="answer">Strength numbers typically move within 3–4 weeks; visible change usually follows between weeks 8 and 12. I'll never promise a date — but you'll see the trend on paper long before you see it in the mirror, which is exactly why we log everything.</p>
+        </details>
+        <details>
+          <summary>What does the intro call involve?<span class="marker" aria-hidden="true">+</span></summary>
+          <p class="answer">Twenty minutes, no obligation. We talk through your history, your week and your goal. If I think I can help, I'll say how and recommend a format. If I can't, I'll point you to someone who can.</p>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CTA ===================== -->
+<section class="cta" id="contact">
+  <div class="wrap">
+    <p class="micro rv">Begin</p>
+    <h2 class="rv" style="--d:80ms">Strong is a <em class="accent">practice.</em> Start yours.</h2>
+    <p class="rv" style="--d:160ms">Two coaching places open this autumn. The intro call is free, honest and twenty minutes — the rest is up to you.</p>
+    <div class="cta__actions rv" style="--d:240ms">
+      <a class="pill pill--lg" href="mailto:hello@maxsandell.com"><span class="dot"></span>Book intro call</a>
+      <a class="u-link cta__mail" href="mailto:hello@maxsandell.com">hello@maxsandell.com</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="wrap footer__inner">
+    <span class="wordmark">Max Sandell<span>.</span></span>
+    <nav aria-label="Footer">
+      <a class="u-link" href="#philosophy">Philosophy</a>
+      <a class="u-link" href="#coaching">Coaching</a>
+      <a class="u-link" href="#">Instagram</a>
+      <a class="u-link" href="mailto:hello@maxsandell.com">Email</a>
+    </nav>
+    <span>© 2026 Max Sandell — Stockholm, Sweden</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ----- scroll progress line ----- */
+  var bar = document.getElementById("progressBar");
+  var nav = document.getElementById("nav");
+  var ticking = false;
+
+  function onScroll(){
+    if(ticking) return;
+    ticking = true;
+    requestAnimationFrame(function(){
+      var doc = document.documentElement;
+      var max = doc.scrollHeight - window.innerHeight;
+      var p = max > 0 ? (window.scrollY / max) : 0;
+      bar.style.transform = "scaleX(" + Math.min(Math.max(p,0),1) + ")";
+      nav.classList.toggle("scrolled", window.scrollY > 12);
+      parallax();
+      ticking = false;
+    });
+  }
+  window.addEventListener("scroll", onScroll, {passive:true});
+
+  /* ----- gentle parallax on band images ----- */
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var bands = [].slice.call(document.querySelectorAll(".band img"));
+  function parallax(){
+    if(reduceMotion) return;
+    var vh = window.innerHeight;
+    bands.forEach(function(img){
+      var r = img.parentElement.getBoundingClientRect();
+      if(r.bottom < 0 || r.top > vh) return;
+      var t = (r.top + r.height/2 - vh/2) / vh;  /* -~1 .. ~1 */
+      img.style.transform = "translateY(" + (t * -8).toFixed(2) + "%)";
+    });
+  }
+
+  /* ----- scroll reveals ----- */
+  var revealables = [].slice.call(document.querySelectorAll(".rv"));
+  if("IntersectionObserver" in window && !reduceMotion){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          e.target.classList.add("in");
+          io.unobserve(e.target);
+        }
+      });
+    },{threshold:.12, rootMargin:"0px 0px -6% 0px"});
+    revealables.forEach(function(el){ io.observe(el); });
+  }else{
+    revealables.forEach(function(el){ el.classList.add("in"); });
+  }
+
+  /* ----- smooth-scroll offset for fixed nav ----- */
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener("click", function(ev){
+      var id = a.getAttribute("href");
+      if(id.length < 2) return;
+      var target = document.querySelector(id);
+      if(!target) return;
+      ev.preventDefault();
+      var y = target.getBoundingClientRect().top + window.scrollY - 64;
+      window.scrollTo({top:y, behavior: reduceMotion ? "auto" : "smooth"});
+      if(history.pushState) history.pushState(null, "", id);
+    });
+  });
+
+  /* ----- FAQ: close siblings for a calmer accordion ----- */
+  var faqs = [].slice.call(document.querySelectorAll(".faq details"));
+  faqs.forEach(function(d){
+    d.addEventListener("toggle", function(){
+      if(d.open){
+        faqs.forEach(function(o){ if(o !== d) o.open = false; });
+      }
+    });
+  });
+
+  /* initial paint */
+  onScroll();
+})();
+</script>
+</body>
+</html>
