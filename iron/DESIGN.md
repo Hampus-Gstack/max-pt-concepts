@@ -1,4 +1,4 @@
-# IRON — design system (Max Sandell, concept VI, power edition)
+# IRON — design system (Max, concept VI, power edition)
 
 Replaces "Haven". Same client (women 40+), positioning now built on the present — calm, private, one client at a time, strength for the next thirty years — completely different feel: **power, not softness**. Think a Nike Women campaign shot by a fashion photographer, or a premium watch brand that happens to sell strength. Never girly, never bro-gym, never pink, never cream-and-rose. Her power, treated seriously.
 

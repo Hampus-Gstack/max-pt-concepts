@@ -1,4 +1,4 @@
-# Max Sandell — Content System (v2, simplified)
+# Max — Content System (v2, simplified)
 *Cursus Capital · 5 Sep 2026 · source for /iron/content/*
 
 One line: **7 formats. One film block a week. We do the rest.**
