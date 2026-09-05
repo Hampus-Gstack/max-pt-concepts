@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Max Sandell — Start here</title>
+<meta name="description" content="Start here: book a free 20-minute intro call with Max Sandell, strength coach for women 40+ in Stockholm. A private Östermalm studio, a 12-week online program, duo coaching — and a free guide to the five lifts every woman over 40 should own.">
+<meta name="theme-color" content="#f6f1ea">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Mulish:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Cormorant:ital,wght@1,500;1,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ivory:#f6f1ea;
+    --ivory-deep:#efe8dd;
+    --porcelain:#faf7f2;
+    --ink:#221c18;
+    --ink-soft:#4c423a;
+    --ink-faint:#7a6e63;
+    --espresso:#241d18;
+    --espresso-2:#2d251f;
+    --clay:#b0685a;
+    --clay-deep:#95544a;
+    --clay-wash:#eeddd6;
+    --sand:#cbb9a2;
+    --sage:#8e9484;
+    --hairline:rgba(34,28,24,.16);
+    --hairline-light:rgba(246,241,234,.22);
+    --shadow:0 24px 60px -28px rgba(34,28,24,.28);
+    --radius-arch:200px;
+    --ease:cubic-bezier(.22,.61,.21,1);
+    --font-display:'Marcellus',Georgia,serif;
+    --font-body:'Mulish',-apple-system,'Helvetica Neue',sans-serif;
+    --font-accent:'Cormorant',Georgia,serif;
+  }
+
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  html,body{overflow-x:clip}
+  body{
+    font-family:var(--font-body);
+    background:var(--ivory);
+    color:var(--ink);
+    font-size:1rem;
+    line-height:1.65;
+    font-weight:400;
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    -webkit-tap-highlight-color:transparent;
+  }
+  ::selection{background:var(--clay);color:var(--ivory)}
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  ul{list-style:none}
+  button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
+  input{font:inherit;color:inherit}
+  [hidden]{display:none !important}
+
+  :focus-visible{
+    outline:2px solid var(--clay);
+    outline-offset:3px;
+    border-radius:2px;
+  }
+
+  /* ————— warm ground ————— */
+  .bg{
+    position:fixed;inset:0;z-index:-1;pointer-events:none;
+    background:
+      radial-gradient(640px 480px at 88% -6%,rgba(238,221,214,.95),transparent 64%),
+      radial-gradient(560px 540px at -12% 104%,rgba(229,226,212,.9),transparent 62%),
+      var(--ivory);
+  }
+  .bg::after{
+    content:"";position:absolute;inset:0;opacity:.34;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .2 0 0 0 0 .15 0 0 0 0 .12 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size:180px 180px;
+  }
+
+  /* ————— column ————— */
+  .page{
+    width:min(520px,calc(100% - 2.5rem));
+    margin-inline:auto;
+    padding:2.3rem 0 2.4rem;
+  }
+  @media(min-width:720px){
+    .page{
+      width:min(600px,calc(100% - 4rem));
+      margin:4.5rem auto 5rem;
+      padding:3.4rem 2.75rem 2.6rem;
+      background:rgba(250,247,242,.68);
+      border:1px solid var(--hairline);
+      border-radius:34px;
+      box-shadow:var(--shadow);
+    }
+  }
+
+  /* ————— utilities ————— */
+  .micro{
+    font-size:.68rem;
+    letter-spacing:.24em;
+    text-transform:uppercase;
+    font-weight:600;
+    color:var(--clay);
+  }
+  .micro--ink{color:var(--ink-faint)}
+  .micro-rule{display:inline-flex;align-items:center;gap:.9rem}
+  .micro-rule::before{content:"";width:34px;height:1px;background:var(--clay);flex:none}
+  .micro--center{display:flex;align-items:center;justify-content:center;gap:.9rem}
+  .micro--center::before,.micro--center::after{content:"";width:26px;height:1px;background:var(--clay);flex:none;opacity:.75}
+
+  h1,h2,h3,h4{font-family:var(--font-display);font-weight:400;line-height:1.14;letter-spacing:.01em}
+  h2,.q,.result h3{text-wrap:balance}
+
+  .u-link{position:relative;padding-bottom:2px}
+  .u-link::after{
+    content:"";position:absolute;left:0;bottom:0;width:100%;height:1px;
+    background:currentColor;transform:scaleX(0);transform-origin:right;
+    transition:transform .45s var(--ease);
+  }
+  .u-link:hover::after,.u-link:focus-visible::after{transform:scaleX(1);transform-origin:left}
+
+  /* reveal on scroll */
+  .rv{opacity:0;transform:translateY(22px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+  .rv.in{opacity:1;transform:none}
+  .rv-d1{transition-delay:.08s}
+  .rv-d2{transition-delay:.16s}
+  .rv-d3{transition-delay:.24s}
+  .rv-d4{transition-delay:.32s}
+
+  /* buttons */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:.65rem;
+    font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;
+    padding:1.05rem 1.9rem;border-radius:999px;text-align:center;
+    -webkit-user-select:none;user-select:none;
+    transition:background .35s var(--ease),color .35s var(--ease),transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s var(--ease);
+  }
+  .btn svg{flex:none;transition:transform .35s var(--ease)}
+  .btn--clay{background:var(--clay);color:var(--porcelain);box-shadow:0 14px 30px -14px rgba(176,104,90,.55)}
+  .btn--ghost{border:1px solid var(--hairline);color:var(--ink)}
+  .btn--block{display:flex;width:100%;padding-inline:1.2rem;font-size:clamp(.66rem,2.7vw,.78rem);letter-spacing:.14em;white-space:normal;line-height:1.3}
+  .btn--lg{padding-block:1.2rem;font-size:clamp(.68rem,2.7vw,.8rem)}
+  .btn:active{transform:translateY(0) scale(.985);transition-duration:.12s}
+  .btn--clay:active{background:var(--clay-deep)}
+  .btn--ghost:active{background:var(--ivory-deep)}
+  @media(hover:hover){
+    .btn:hover svg{transform:translateX(4px)}
+    .btn--clay:hover{background:var(--clay-deep);transform:translateY(-2px)}
+    .btn--ghost:hover{border-color:var(--ink);transform:translateY(-2px)}
+  }
+
+  .link-btn{
+    display:inline-flex;align-items:center;gap:.45rem;
+    font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;
+    color:var(--ink-faint);padding:.3rem 0;
+    transition:color .3s var(--ease);
+  }
+  .link-btn svg{flex:none;transition:transform .3s var(--ease)}
+  .link-btn:active{color:var(--ink)}
+  @media(hover:hover){
+    .link-btn:hover{color:var(--ink)}
+    .link-btn:hover svg{transform:translateX(-3px)}
+  }
+
+  /* ————— header ————— */
+  .head{text-align:center}
+  .head__top{margin-bottom:1.7rem}
+  .avatar-frame{
+    display:inline-block;padding:7px;
+    border:1px solid var(--hairline);
+    border-radius:var(--radius-arch) var(--radius-arch) 30px 30px;
+    background:var(--porcelain);
+    box-shadow:var(--shadow);
+  }
+  .avatar{
+    width:clamp(126px,34vw,150px);aspect-ratio:4/5;
+    border-radius:var(--radius-arch) var(--radius-arch) 22px 22px;
+    overflow:hidden;position:relative;
+    background:var(--ivory-deep);
+    isolation:isolate;
+  }
+  .avatar img{
+    width:100%;height:100%;object-fit:cover;object-position:100% 50%;
+    transform:scale(1.5);transform-origin:51% 42%;
+    filter:saturate(.45) sepia(.2) contrast(1.06) brightness(.94);
+  }
+  .avatar::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(176,104,90,.24) 0%,rgba(176,104,90,.1) 45%,rgba(36,29,24,.5) 100%);
+    mix-blend-mode:multiply;
+  }
+  .head h1{font-size:1.95rem;margin:1.3rem 0 .3rem;letter-spacing:.025em}
+  .head__tag{color:var(--ink-soft);font-size:clamp(.86rem,4vw,.97rem)}
+  .trust{
+    display:flex;flex-wrap:wrap;justify-content:center;gap:.3rem .55rem;margin-top:.8rem;
+    font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--ink-faint);
+    white-space:nowrap;
+  }
+  .trust li{display:inline-flex;align-items:center;gap:.55rem}
+  .trust li+li::before{content:"";width:3px;height:3px;border-radius:50%;background:var(--sand)}
+  @media(max-width:389px){
+    .trust{gap:.25rem .9rem}
+    .trust li+li::before{display:none}
+  }
+  .creed{
+    font-family:var(--font-accent);font-style:italic;font-weight:500;
+    font-size:clamp(1.02rem,5vw,1.24rem);line-height:1.38;color:var(--ink-soft);
+    margin:1.45rem auto 0;
+  }
+  .creed em{color:var(--clay);font-style:italic}
+
+  /* ————— primary action ————— */
+  .cta{margin-top:1.9rem}
+  .cta__note{text-align:center;font-size:.8rem;color:var(--ink-faint);margin-top:.85rem;letter-spacing:.02em}
+  .cta__alt{margin-top:.85rem;font-size:clamp(.62rem,2.5vw,.7rem);padding-block:.95rem}
+
+  /* ————— sections ————— */
+  .sec{margin-top:2.9rem;padding-top:2.5rem;border-top:1px solid var(--hairline)}
+  .sec__head{text-align:center;margin-bottom:1.5rem}
+  .sec__head h2{font-size:1.55rem;margin:.85rem 0 .5rem}
+  .sec__lede{color:var(--ink-soft);font-size:.93rem;max-width:34ch;margin-inline:auto}
+
+  /* ————— router ————— */
+  .router{
+    background:var(--porcelain);
+    border:1px solid var(--hairline);
+    border-radius:24px;
+    padding:1.35rem 1.2rem 1.25rem;
+    box-shadow:0 18px 44px -32px rgba(34,28,24,.35);
+  }
+  .router__bar{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.15rem}
+  .dots{display:flex;gap:.4rem;align-items:center}
+  .dots span{
+    width:7px;height:7px;border-radius:999px;background:var(--hairline);
+    transition:background .45s var(--ease),width .45s var(--ease);
+  }
+  .dots span.done{background:var(--sand)}
+  .dots span.now{background:var(--clay);width:22px}
+
+  .stage{position:relative;overflow:hidden;transition:height .45s var(--ease)}
+  .stage.is-out{pointer-events:none}
+  .panel{transition:opacity .26s var(--ease),transform .4s var(--ease)}
+  .stage.is-out .panel{opacity:0}
+  .stage[data-dir="fwd"].is-out .panel{transform:translateX(-14px)}
+  .stage[data-dir="back"].is-out .panel{transform:translateX(14px)}
+  .stage.is-in .panel{opacity:0;transition:none}
+  .stage[data-dir="fwd"].is-in .panel{transform:translateX(14px)}
+  .stage[data-dir="back"].is-in .panel{transform:translateX(-14px)}
+
+  .q{font-size:1.3rem;margin-bottom:.95rem}
+  .q:focus{outline:none}
+  .opts{display:grid;gap:.55rem}
+  .opt{
+    display:flex;align-items:center;justify-content:space-between;gap:.9rem;
+    width:100%;text-align:left;
+    padding:.9rem 1rem .9rem 1.05rem;
+    border:1px solid var(--hairline);border-radius:16px;
+    background:var(--ivory);
+    transition:border-color .3s var(--ease),background .3s var(--ease),transform .25s var(--ease);
+  }
+  .opt>span{min-width:0;flex:1}
+  .opt__t{display:block;font-weight:600;font-size:.95rem;color:var(--ink);line-height:1.35}
+  .opt__s{display:block;font-size:.78rem;color:var(--ink-faint);margin-top:.12rem;font-weight:400}
+  .opt svg{flex:none;color:var(--clay);transition:transform .3s var(--ease)}
+  .opt:active{transform:scale(.985);background:var(--clay-wash)}
+  .opt.is-picked{border-color:var(--clay);background:var(--clay-wash)}
+  @media(hover:hover){
+    .opt:hover{border-color:var(--ink-soft);background:#fff}
+    .opt:hover svg{transform:translateX(3px)}
+  }
+  .router__foot{
+    display:flex;justify-content:space-between;align-items:center;gap:1rem;
+    margin-top:1.05rem;min-height:1.6rem;
+  }
+  .router__hint{font-size:.74rem;color:var(--ink-faint);letter-spacing:.02em}
+
+  .result__crumbs{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:1.05rem}
+  .result__crumbs li{
+    display:inline-flex;align-items:center;gap:.45rem;
+    font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--ink-soft);
+    border:1px solid var(--hairline);border-radius:999px;padding:.32rem .7rem;background:var(--ivory);
+  }
+  .result__crumbs svg{color:var(--clay)}
+  .result h3{font-size:1.5rem;margin:.45rem 0 .3rem}
+  .result h3:focus{outline:none}
+  .result__kicker{font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:var(--ink-faint);margin-bottom:.8rem}
+  .result__why{color:var(--ink-soft);font-size:.95rem}
+  .result__price{
+    margin:1rem 0 1.15rem;padding-top:.9rem;border-top:1px solid var(--hairline);
+    display:flex;align-items:baseline;gap:.5rem;flex-wrap:wrap;
+  }
+  .result__price em{font-style:normal;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);font-weight:700}
+  .result__price strong{font-family:var(--font-display);font-weight:400;font-size:1.35rem;line-height:1}
+  .result__price span{font-size:.8rem;color:var(--ink-faint)}
+  .result__alt{text-align:center;margin-top:.8rem;font-size:.8rem;color:var(--ink-faint)}
+  .result__alt a{color:var(--clay-deep);font-weight:600}
+  .result .router__foot{margin-top:1.1rem;padding-top:.9rem;border-top:1px solid var(--hairline)}
+
+  /* ————— offers ————— */
+  .offers{display:grid;gap:.7rem}
+  .card{
+    position:relative;
+    display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:.9rem;
+    width:100%;text-align:left;
+    background:var(--porcelain);
+    border:1px solid var(--hairline);
+    border-radius:20px;
+    padding:1.1rem 1.05rem 1.1rem 1.25rem;
+    transition:transform .4s var(--ease),box-shadow .4s var(--ease),border-color .4s var(--ease);
+  }
+  .card>span:first-child{min-width:0}
+  .card:active{transform:translateY(0) scale(.99);transition-duration:.12s}
+  .card--feature{background:linear-gradient(165deg,#fdfaf5,var(--clay-wash));border-color:rgba(176,104,90,.4)}
+  .card__label{display:block;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:var(--clay);margin-bottom:.3rem}
+  .card__title{display:block;font-family:var(--font-display);font-size:1.18rem;line-height:1.2;letter-spacing:.01em;color:var(--ink)}
+  .card__promise{display:block;font-size:.85rem;color:var(--ink-soft);margin-top:.3rem;line-height:1.5}
+  .card__price{display:block;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--ink-faint);margin-top:.55rem}
+  .card__price strong{color:var(--ink);font-weight:700}
+  .card__go{
+    width:38px;height:38px;border-radius:50%;
+    border:1px solid var(--hairline);
+    display:grid;place-items:center;color:var(--clay);
+    transition:background .35s var(--ease),color .35s var(--ease),border-color .35s var(--ease),transform .4s var(--ease);
+  }
+  .card--feature .card__go{background:var(--clay);color:var(--porcelain);border-color:var(--clay)}
+  @media(hover:hover){
+    .card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:rgba(34,28,24,.3)}
+    .card:hover .card__go{background:var(--clay);color:var(--porcelain);border-color:var(--clay)}
+    .card--feature:hover{border-color:rgba(176,104,90,.6)}
+    .card--feature:hover .card__go{background:var(--clay-deep);border-color:var(--clay-deep)}
+  }
+
+  /* guide (expands inline) */
+  .guide{
+    background:var(--porcelain);
+    border:1px solid var(--hairline);
+    border-radius:20px;
+    transition:border-color .4s var(--ease),box-shadow .4s var(--ease);
+  }
+  .guide .card{border:none;background:transparent;border-radius:20px}
+  .guide .card:active{transform:none}
+  .guide.is-open{border-color:rgba(34,28,24,.3)}
+  .guide.is-open .card__go{transform:rotate(180deg);background:var(--clay);color:var(--porcelain);border-color:var(--clay)}
+  @media(hover:hover){
+    .guide:hover{border-color:rgba(34,28,24,.3);box-shadow:var(--shadow)}
+    .guide .card:hover{transform:none;box-shadow:none}
+  }
+  .guide__panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s var(--ease)}
+  .guide__panel>div{min-height:0;overflow:hidden;visibility:hidden;transition:visibility 0s .5s}
+  .guide.is-open .guide__panel{grid-template-rows:1fr}
+  .guide.is-open .guide__panel>div{visibility:visible;transition-delay:0s}
+  .guide__inner{margin:0 1.05rem 0 1.25rem;padding:1.05rem 0 1.3rem;border-top:1px solid var(--hairline)}
+
+  .field label{display:block;font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--ink-faint);margin-bottom:.55rem}
+  .field__row{display:flex;gap:.5rem}
+  .field input{
+    flex:1;min-width:0;width:100%;
+    padding:.8rem 1.05rem;
+    border:1px solid var(--hairline);border-radius:999px;
+    background:var(--ivory);color:var(--ink);
+    font-size:16px;
+    -webkit-appearance:none;appearance:none;
+    transition:border-color .3s var(--ease),box-shadow .3s var(--ease);
+  }
+  .field input::placeholder{color:var(--ink-faint);opacity:.75}
+  .field input:focus{outline:none;border-color:var(--clay);box-shadow:0 0 0 3px rgba(176,104,90,.18)}
+  .field input[aria-invalid="true"]{border-color:var(--clay-deep)}
+  .field .btn{padding:.8rem 1.15rem;font-size:.66rem;letter-spacing:.14em;white-space:nowrap}
+  .field__err{font-size:.8rem;color:var(--clay-deep);margin-top:.5rem;min-height:1.2em}
+  .field__fine{font-size:.76rem;color:var(--ink-faint);margin-top:.35rem;line-height:1.5}
+  @media(max-width:430px){
+    .field__row{flex-direction:column}
+    .field .btn{width:100%;white-space:normal}
+  }
+  .done{display:flex;gap:.9rem;align-items:flex-start}
+  .done__ico{
+    flex:none;width:36px;height:36px;border-radius:50%;
+    background:var(--clay);color:var(--porcelain);
+    display:grid;place-items:center;
+    animation:pop .6s var(--ease);
+  }
+  @keyframes pop{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}
+  .done h4{font-size:1.2rem;margin-bottom:.25rem}
+  .done h4:focus{outline:none}
+  .done p{font-size:.86rem;color:var(--ink-soft);line-height:1.5}
+  .done p strong{color:var(--ink);font-weight:600;word-break:break-word}
+  .done p+p{margin-top:.5rem}
+
+  /* ————— proof ————— */
+  .voices{display:grid}
+  .voice{border-top:1px solid var(--hairline);padding:1.1rem 0}
+  .voice:last-child{border-bottom:1px solid var(--hairline)}
+  .voice blockquote{
+    font-family:var(--font-accent);font-style:italic;font-weight:500;
+    font-size:1.2rem;line-height:1.38;color:var(--ink);
+  }
+  .voice figcaption{margin-top:.5rem;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--ink-faint)}
+  .voice figcaption strong{color:var(--clay)}
+
+  /* ————— long version + footer ————— */
+  .long{text-align:center}
+  .long h2{font-size:1.45rem;margin-bottom:.5rem}
+  .long p{color:var(--ink-soft);font-size:.92rem;max-width:34ch;margin:0 auto 1.3rem}
+  .long .btn{font-size:.72rem;padding:.95rem 1.5rem}
+  .foot{
+    margin-top:2.6rem;padding-top:1.5rem;border-top:1px solid var(--hairline);
+    text-align:center;font-size:.76rem;color:var(--ink-faint);letter-spacing:.03em;line-height:1.6;
+  }
+  .foot a{color:var(--clay-deep);font-weight:600}
+  .foot p+p{margin-top:.35rem}
+  .foot .note{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--sand);margin-top:1rem}
+
+  @media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .rv{opacity:1;transform:none;transition:none}
+    *,*::before,*::after{animation-duration:.01ms !important;transition-duration:.01ms !important}
+  }
+</style>
+</head>
+<body>
+
+<div class="bg" aria-hidden="true"></div>
+
+<div class="page">
+<main>
+
+  <!-- ————————— HEADER ————————— -->
+  <header class="head">
+    <p class="micro micro--center head__top rv in">Start here</p>
+    <div class="avatar-frame rv in rv-d1">
+      <div class="avatar">
+        <img src="https://images.unsplash.com/photo-1601422407692-ec4eeec1d9b3?q=80&w=800&auto=format&fit=crop" alt="Max Sandell, strength coach, in his studio" width="800" height="640" fetchpriority="high">
+      </div>
+    </div>
+    <h1 class="rv in rv-d1">Max Sandell</h1>
+    <p class="head__tag rv in rv-d2">Strength coaching for women 40+ · Stockholm</p>
+    <ul class="trust rv in rv-d2" aria-label="Credentials">
+      <li>Licensed PT</li>
+      <li>140+ women coached</li>
+      <li>Private studio</li>
+    </ul>
+    <p class="creed rv in rv-d3">He spent his career protecting people.<br><em>Now he protects your strength.</em></p>
+  </header>
+
+  <!-- ————————— THE ONE ACTION ————————— -->
+  <section class="cta rv in rv-d3" aria-label="Book a free intro call">
+    <a class="btn btn--clay btn--block btn--lg" href="#">
+      Book a free 20-min intro call
+      <svg width="16" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M1 6h13M10 1.5 14.5 6 10 10.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <p class="cta__note">No commitment. No judgment. He’s easy to talk to.</p>
+    <a class="btn btn--ghost btn--block cta__alt" href="#">
+      Or message on WhatsApp
+      <svg width="8" height="13" viewBox="0 0 8 13" fill="none" aria-hidden="true"><path d="M1.5 1.5l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </section>
+
+  <!-- ————————— FIND YOUR PATH ————————— -->
+  <section class="sec rv" id="path" aria-labelledby="path-title">
+    <div class="sec__head">
+      <p class="micro micro--center">Find your path</p>
+      <h2 id="path-title">Not sure where to begin?</h2>
+      <p class="sec__lede">Two quick questions, one honest recommendation.</p>
+    </div>
+    <div class="router" id="router">
+      <div class="router__bar">
+        <span class="micro micro--ink" id="router-step" aria-live="polite">Step 1 of 3</span>
+        <div class="dots" id="dots" aria-hidden="true"><span class="now"></span><span></span><span></span></div>
+      </div>
+      <div class="stage" id="stage" data-dir="fwd">
+        <div class="panel" id="panel">
+          <h3 class="q" id="q-title" tabindex="-1">Where are you today?</h3>
+          <div class="opts" role="group" aria-labelledby="q-title">
+            <button type="button" class="opt" data-opt="years"><span><span class="opt__t">I haven’t trained in years</span><span class="opt__s">Or ever. Both are fine.</span></span><svg width="8" height="13" viewBox="0 0 8 13" fill="none" aria-hidden="true"><path d="M1.5 1.5l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <button type="button" class="opt" data-opt="stuck"><span><span class="opt__t">I train, but I’m stuck</span><span class="opt__s">Same weights, same routine, no progress.</span></span><svg width="8" height="13" viewBox="0 0 8 13" fill="none" aria-hidden="true"><path d="M1.5 1.5l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <button type="button" class="opt" data-opt="back"><span><span class="opt__t">I’m coming back from an injury or a hard year</span><span class="opt__s">Carefully, at your pace.</span></span><svg width="8" height="13" viewBox="0 0 8 13" fill="none" aria-hidden="true"><path d="M1.5 1.5l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+          <div class="router__foot"><span class="router__hint">Nothing is saved, nothing is sent.</span></div>
+        </div>
+      </div>
+    </div>
+    <noscript><p class="cta__note" style="margin-top:1rem">The path finder needs JavaScript. Book the free call above and Max will point you to the right place.</p></noscript>
+  </section>
+
+  <!-- ————————— OFFERS ————————— -->
+  <section class="sec rv" id="offers" aria-labelledby="offers-title">
+    <div class="sec__head">
+      <p class="micro micro--center">Or go direct</p>
+      <h2 id="offers-title">Ways to work with Max.</h2>
+    </div>
+    <ul class="offers">
+      <li class="rv">
+        <a class="card card--feature" id="offer-call" href="#">
+          <span>
+            <span class="card__label">Start here · Free</span>
+            <span class="card__title">Book a free 20-min intro call</span>
+            <span class="card__promise">You talk, Max listens. If it’s not a fit, he’ll say so kindly.</span>
+            <span class="card__price"><strong>Free</strong> · 20 minutes · No commitment</span>
+          </span>
+          <span class="card__go" aria-hidden="true"><svg width="15" height="11" viewBox="0 0 16 12" fill="none"><path d="M1 6h13M10 1.5 14.5 6 10 10.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a>
+      </li>
+      <li class="rv rv-d1">
+        <a class="card" id="offer-online" href="#">
+          <span>
+            <span class="card__label">Online · 12 weeks</span>
+            <span class="card__title">Stronger After 40</span>
+            <span class="card__promise">A progressive 12-week program with Max’s coaching in your pocket — a home and a gym version of every week.</span>
+            <span class="card__price">From <strong>1&#8239;450 kr</strong> / month</span>
+          </span>
+          <span class="card__go" aria-hidden="true"><svg width="15" height="11" viewBox="0 0 16 12" fill="none"><path d="M1 6h13M10 1.5 14.5 6 10 10.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a>
+      </li>
+      <li class="rv rv-d2">
+        <a class="card" id="offer-private" href="#">
+          <span>
+            <span class="card__label">In person · Östermalm studio</span>
+            <span class="card__title">Private 1:1 coaching</span>
+            <span class="card__promise">One hour that’s entirely yours, behind a closed door. No audience, no rush.</span>
+            <span class="card__price">From <strong>4&#8239;900 kr</strong> / month</span>
+          </span>
+          <span class="card__go" aria-hidden="true"><svg width="15" height="11" viewBox="0 0 16 12" fill="none"><path d="M1 6h13M10 1.5 14.5 6 10 10.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a>
+      </li>
+      <li class="rv rv-d3">
+        <a class="card" id="offer-duo" href="#">
+          <span>
+            <span class="card__label">In person · Two of you</span>
+            <span class="card__title">Duo coaching</span>
+            <span class="card__promise">Train with a friend or your sister. Two individual programs, one shared, private hour.</span>
+            <span class="card__price">From <strong>2&#8239;950 kr</strong> / person</span>
+          </span>
+          <span class="card__go" aria-hidden="true"><svg width="15" height="11" viewBox="0 0 16 12" fill="none"><path d="M1 6h13M10 1.5 14.5 6 10 10.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a>
+      </li>
+      <li class="rv rv-d4">
+        <div class="guide" id="guide">
+          <button class="card" type="button" id="guide-toggle" aria-expanded="false" aria-controls="guide-panel">
+            <span>
+              <span class="card__label">Free guide · PDF</span>
+              <span class="card__title">The 5 lifts every woman over 40 should own</span>
+              <span class="card__promise">Why each one matters after 40, how to start safely, and what “strong enough” really means.</span>
+              <span class="card__price"><strong>Free</strong> · Sent by email</span>
+            </span>
+            <span class="card__go" aria-hidden="true"><svg width="13" height="8" viewBox="0 0 13 8" fill="none"><path d="M1.5 1.5l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </button>
+          <div class="guide__panel" id="guide-panel">
+            <div>
+              <div class="guide__inner">
+                <form class="field" id="guide-form" novalidate>
+                  <label for="guide-email">Where should Max send it?</label>
+                  <div class="field__row">
+                    <input id="guide-email" type="email" name="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" placeholder="you@example.com" required>
+                    <button class="btn btn--clay" type="submit">Send the guide</button>
+                  </div>
+                  <p class="field__err" id="guide-err" aria-live="polite"></p>
+                  <p class="field__fine">One email with the guide. No drip sequence, no follow-ups you didn’t ask for.</p>
+                </form>
+                <div class="done" id="guide-done" hidden>
+                  <span class="done__ico" aria-hidden="true"><svg width="15" height="12" viewBox="0 0 15 12" fill="none"><path d="M1.5 6.5 5.5 10.5 13.5 1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                  <div>
+                    <h4 id="guide-done-title" tabindex="-1">Check your inbox.</h4>
+                    <p>The guide is on its way to <strong id="guide-sent-to"></strong>. If it isn’t there in a few minutes, have a look in Promotions or Spam.</p>
+                    <p><button type="button" class="link-btn" id="guide-again"><svg width="8" height="13" viewBox="0 0 8 13" fill="none" aria-hidden="true"><path d="M6.5 1.5l-5 5 5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Wrong address? Try again</button></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ————————— PROOF ————————— -->
+  <section class="sec rv" aria-labelledby="voices-title">
+    <div class="sec__head" style="margin-bottom:1.1rem">
+      <p class="micro micro--center" id="voices-title">In their words</p>
+    </div>
+    <div class="voices">
+      <figure class="voice">
+        <blockquote>“I walked in nervous. I walked out feeling like I belonged there.”</blockquote>
+        <figcaption><strong>Karin, 52</strong> · Private 1:1</figcaption>
+      </figure>
+      <figure class="voice">
+        <blockquote>“The calmest person I’ve ever trained with. My back has never been this quiet.”</blockquote>
+        <figcaption><strong>Margareta, 61</strong> · Duo coaching, with her sister</figcaption>
+      </figure>
+      <figure class="voice">
+        <blockquote>“The first program in my life about becoming more, not less.”</blockquote>
+        <figcaption><strong>Cecilia, 44</strong> · Stronger After 40</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ————————— LONG VERSION ————————— -->
+  <section class="sec long rv" aria-labelledby="long-title">
+    <h2 id="long-title">Prefer the long version?</h2>
+    <p>Who Max is, how the studio works, and honest answers to the questions everyone asks first.</p>
+    <a class="btn btn--ghost" href="../">
+      Read the full site
+      <svg width="16" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M1 6h13M10 1.5 14.5 6 10 10.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <p><a class="u-link" href="mailto:hello@maxsandell.com">hello@maxsandell.com</a></p>
+  <p>© 2026 Max Sandell Coaching · Östermalm, Stockholm</p>
+  <p class="note">Concept draft · links are placeholders</p>
+</footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var reduce = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+
+  /* ————— reveal on scroll ————— */
+  var revealEls = document.querySelectorAll(".rv:not(.in)");
+  if("IntersectionObserver" in window && !reduce){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); }
+      });
+    },{threshold:.1,rootMargin:"0px 0px -6% 0px"});
+    revealEls.forEach(function(el){ io.observe(el); });
+  }else{
+    revealEls.forEach(function(el){ el.classList.add("in"); });
+  }
+
+  /* ————— icons ————— */
+  var CHEV  = '<svg width="8" height="13" viewBox="0 0 8 13" fill="none" aria-hidden="true"><path d="M1.5 1.5l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var BACK  = '<svg width="8" height="13" viewBox="0 0 8 13" fill="none" aria-hidden="true"><path d="M6.5 1.5l-5 5 5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var ARROW = '<svg width="16" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M1 6h13M10 1.5 14.5 6 10 10.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var CHECK = '<svg width="10" height="8" viewBox="0 0 15 12" fill="none" aria-hidden="true"><path d="M1.5 6.5 5.5 10.5 13.5 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+  /* ————— the router (funnel logic) ————— */
+  var QUESTIONS = [
+    { q:"Where are you today?", opts:[
+      { id:"years", t:"I haven’t trained in years", s:"Or ever. Both are fine.", c:"Haven’t trained in years" },
+      { id:"stuck", t:"I train, but I’m stuck", s:"Same weights, same routine, no progress.", c:"Training, but stuck" },
+      { id:"back",  t:"I’m coming back from an injury or a hard year", s:"Carefully, at your pace.", c:"Coming back" }
+    ]},
+    { q:"How would you like to train?", opts:[
+      { id:"studio", t:"In person, in Stockholm", s:"Private studio in Östermalm.", c:"In person" },
+      { id:"friend", t:"With a friend", s:"A sister, a colleague, a neighbour.", c:"With a friend" },
+      { id:"remote", t:"Remotely", s:"From anywhere, with Max in your pocket.", c:"Remotely" }
+    ]}
+  ];
+
+  var OFFERS = {
+    call:    { label:"Free · 20 minutes", title:"Start with the intro call", price:null, note:"Free · no commitment", cta:"Book the free call", href:"#", alt:null },
+    online:  { label:"Online · 12 weeks", title:"Stronger After 40", price:"1 450 kr", per:"/ month", cta:"Start the program", href:"#", alt:"Not sure yet? <a href=\"#\">Book the free call first</a>" },
+    private: { label:"In person · Östermalm studio", title:"Private 1:1 coaching", price:"4 900 kr", per:"/ month", cta:"Book a free intro call", href:"#", alt:null },
+    duo:     { label:"In person · Two of you", title:"Duo coaching", price:"2 950 kr", per:"/ person", cta:"Book a free intro call", href:"#", alt:null }
+  };
+
+  var ROUTES = {
+    "years|studio": { offer:"private", why:"Starting again deserves a closed door and a coach whose whole hour is yours. Max begins with a gentle movement assessment and builds from what your body already does well." },
+    "years|friend": { offer:"duo",     why:"The first step back is lighter when you don’t take it alone. You share the hour and the nerves — Max still writes a separate program for each of you." },
+    "years|remote": { offer:"online",  why:"Twelve weeks built from the ground up, with a home version of every session — so you can begin where you feel safest, with Max checking in on video." },
+    "stuck|studio": { offer:"private", why:"Plateaus are usually technique and programming, not effort. An hour with Max’s eyes on your lifts fixes both faster than anything you can do alone." },
+    "stuck|friend": { offer:"duo",     why:"A training partner keeps you honest, and Max’s programming gives you both something new to chase. Individual plans, one shared hour." },
+    "stuck|remote": { offer:"online",  why:"A structured twelve-week progression with video check-ins — enough coaching to break the plateau, without rearranging your week around a studio." },
+    "back|studio":  { offer:"private", why:"Coming back carefully means someone watching every rep. The movement assessment finds what your body tolerates today, and the program protects what needs protecting." },
+    "back|friend":  { offer:"duo",     why:"You can still train together — Max just starts each of you with a private movement assessment, so the shared hour is built around what your body needs right now." },
+    "back|remote":  { offer:"call",    why:"An injury or a hard year deserves a conversation before a program. Max will tell you honestly whether the online program fits, or whether something more hands-on is wiser." }
+  };
+
+  var state = { step:0, a:[null,null] };
+  var busy = false;
+  var stage  = document.getElementById("stage");
+  var panel  = document.getElementById("panel");
+  var stepEl = document.getElementById("router-step");
+  var dots   = document.getElementById("dots").children;
+
+  function optById(i,id){
+    var list = QUESTIONS[i].opts;
+    for(var k=0;k<list.length;k++){ if(list[k].id===id) return list[k]; }
+    return null;
+  }
+
+  function questionHTML(i){
+    var Q = QUESTIONS[i], html = "";
+    html += '<h3 class="q" id="q-title" tabindex="-1">'+Q.q+'</h3>';
+    html += '<div class="opts" role="group" aria-labelledby="q-title">';
+    Q.opts.forEach(function(o){
+      var picked = state.a[i]===o.id ? " is-picked" : "";
+      html += '<button type="button" class="opt'+picked+'" data-opt="'+o.id+'">'
+            +   '<span><span class="opt__t">'+o.t+'</span><span class="opt__s">'+o.s+'</span></span>'+CHEV
+            + '</button>';
+    });
+    html += '</div>';
+    html += '<div class="router__foot">'
+          + (i>0 ? '<button type="button" class="link-btn" data-back>'+BACK+'Back</button>'
+                 : '<span class="router__hint">Nothing is saved, nothing is sent.</span>')
+          + '</div>';
+    return html;
+  }
+
+  function resultHTML(){
+    var r = ROUTES[state.a[0]+"|"+state.a[1]] || ROUTES["back|remote"];
+    var o = OFFERS[r.offer];
+    var c0 = optById(0,state.a[0]), c1 = optById(1,state.a[1]);
+    var html = '<div class="result">';
+    html += '<ul class="result__crumbs" aria-label="Your answers">'
+          +   '<li>'+CHECK+(c0?c0.c:"")+'</li>'
+          +   '<li>'+CHECK+(c1?c1.c:"")+'</li>'
+          + '</ul>';
+    html += '<p class="micro">Your path</p>';
+    html += '<h3 id="q-title" tabindex="-1">'+o.title+'</h3>';
+    html += '<p class="result__kicker">'+o.label+'</p>';
+    html += '<p class="result__why">'+r.why+'</p>';
+    html += '<p class="result__price">'
+          + (o.price ? '<em>From</em><strong>'+o.price+'</strong><span>'+o.per+'</span>' : '<em>'+o.note+'</em>')
+          + '</p>';
+    html += '<a class="btn btn--clay btn--block" href="'+o.href+'">'+o.cta+ARROW+'</a>';
+    if(o.alt) html += '<p class="result__alt">'+o.alt+'</p>';
+    html += '<div class="router__foot">'
+          +   '<button type="button" class="link-btn" data-back>'+BACK+'Back</button>'
+          +   '<button type="button" class="link-btn" data-reset>Start over</button>'
+          + '</div>';
+    html += '</div>';
+    return html;
+  }
+
+  function updateBar(){
+    stepEl.textContent = state.step < 2 ? "Step "+(state.step+1)+" of 3" : "Your recommendation";
+    for(var i=0;i<dots.length;i++){
+      dots[i].className = i<state.step ? "done" : (i===state.step ? "now" : "");
+    }
+  }
+
+  function focusTitle(){
+    var t = document.getElementById("q-title");
+    if(!t) return;
+    try{ t.focus({preventScroll:true}); }catch(e){ t.focus(); }
+  }
+
+  function render(){
+    panel.innerHTML = state.step < 2 ? questionHTML(state.step) : resultHTML();
+    updateBar();
+  }
+
+  function go(nextStep, dir){
+    if(busy) return;
+    busy = true;
+    if(reduce){
+      state.step = nextStep; render(); focusTitle(); busy = false; return;
+    }
+    var h0 = stage.offsetHeight;
+    stage.style.height = h0+"px";
+    stage.setAttribute("data-dir", dir);
+    stage.classList.add("is-out");
+    setTimeout(function(){
+      state.step = nextStep;
+      render();
+      stage.classList.remove("is-out");
+      stage.classList.add("is-in");
+      void stage.offsetHeight;               /* commit the entry position */
+      stage.style.height = panel.offsetHeight+"px";
+      stage.classList.remove("is-in");
+      setTimeout(function(){
+        stage.style.height = "";
+        busy = false;
+        focusTitle();
+      }, 470);
+    }, 240);
+  }
+
+  panel.addEventListener("click", function(e){
+    var opt = e.target.closest("[data-opt]");
+    if(opt){
+      if(busy || state.step > 1) return;
+      state.a[state.step] = opt.getAttribute("data-opt");
+      if(state.step === 0) state.a[1] = null;
+      opt.classList.add("is-picked");
+      go(state.step+1, "fwd");
+      return;
+    }
+    if(e.target.closest("[data-back]")){ go(state.step-1, "back"); return; }
+    if(e.target.closest("[data-reset]")){ state.a = [null,null]; go(0, "back"); }
+  });
+
+  render(); /* mirror the static markup so state and DOM agree */
+
+  /* ————— free guide: inline email capture (front-end only) ————— */
+  var guide  = document.getElementById("guide");
+  var toggle = document.getElementById("guide-toggle");
+  var form   = document.getElementById("guide-form");
+  var input  = document.getElementById("guide-email");
+  var err    = document.getElementById("guide-err");
+  var done   = document.getElementById("guide-done");
+  var sentTo = document.getElementById("guide-sent-to");
+  var again  = document.getElementById("guide-again");
+
+  toggle.addEventListener("click", function(e){
+    var open = !guide.classList.contains("is-open");
+    guide.classList.toggle("is-open", open);
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    /* only pull focus into the field for keyboard users (e.detail === 0); on touch, let them tap */
+    if(open && e.detail === 0 && !form.hidden){
+      setTimeout(function(){ input.focus(); }, reduce ? 0 : 420);
+    }
+  });
+
+  var EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var v = input.value.trim();
+    if(!EMAIL.test(v)){
+      err.textContent = v ? "That doesn’t look like a complete email address." : "Add your email and Max will send the guide.";
+      input.setAttribute("aria-invalid","true");
+      input.focus();
+      return;
+    }
+    err.textContent = "";
+    input.removeAttribute("aria-invalid");
+    sentTo.textContent = v;
+    form.hidden = true;
+    done.hidden = false;
+    var t = document.getElementById("guide-done-title");
+    try{ t.focus({preventScroll:true}); }catch(x){ t.focus(); }
+  });
+
+  input.addEventListener("input", function(){
+    if(err.textContent){ err.textContent = ""; input.removeAttribute("aria-invalid"); }
+  });
+
+  again.addEventListener("click", function(){
+    done.hidden = true;
+    form.hidden = false;
+    input.value = "";
+    input.focus();
+  });
+})();
+</script>
+</body>
+</html>
