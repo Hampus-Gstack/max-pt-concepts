@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Max Sandell — Content System</title>
+<meta name="description" content="7 formats. One film block a week. Cursus does the rest. Content system prepared for Max Sandell by Cursus Capital.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#111113;--bg-2:#18181b;--bg-3:#222226;
+  --line:rgba(236,230,218,.14);--line-strong:rgba(236,230,218,.32);
+  --bone:#ece6da;--bone-2:#b9b2a6;--bone-3:#7f796f;
+  --ox:#8e2733;--ox-hi:#b23a48;
+  --light-bg:#e9e3d7;--light-ink:#141416;--light-line:rgba(20,20,22,.14);
+  --f1:#8e2733;--f2:#9c4b2c;--f3:#a8802e;--f4:#77716a;--f5:#4a6a86;--f6:#66743f;--f7:#6e4168;
+  --f1-t:rgba(142,39,51,.26);--f2-t:rgba(156,75,44,.24);--f3-t:rgba(168,128,46,.2);--f4-t:rgba(119,113,106,.22);--f5-t:rgba(74,106,134,.28);--f6-t:rgba(102,116,63,.28);--f7-t:rgba(110,65,104,.3);
+  --display:'Big Shoulders Display',Impact,'Arial Narrow',sans-serif;
+  --sans:'Instrument Sans',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
+  --gutter:24px;
+}
+@media (min-width:720px){:root{--gutter:40px}}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+html,body{overflow-x:clip}
+body{background:var(--bg);color:var(--bone);font:400 16px/1.6 var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+::selection{background:var(--ox);color:var(--bone)}
+a{color:inherit}
+:focus-visible{outline:1px solid var(--bone);outline-offset:3px}
+svg{display:block}
+p{margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding:0 var(--gutter)}
+.micro{font:600 11px/1.3 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--bone-3)}
+.micro.ox{color:var(--ox-hi)}
+.bar{display:block;width:48px;height:3px;background:var(--ox);margin-top:14px}
+.chip{display:inline-flex;align-items:center;gap:6px;height:26px;border:1px solid var(--line-strong);padding:0 10px;font:600 10.5px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--bone-2);white-space:nowrap}
+.chip.ox{border-color:var(--ox);background:var(--ox);color:var(--bone)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.icn{width:24px;height:24px;flex:none;stroke:var(--bone-2);fill:none;stroke-width:1.5;stroke-linecap:square;stroke-linejoin:miter}
+
+/* top bar */
+.topbar{position:sticky;top:0;z-index:20;background:rgba(17,17,19,.88);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between;height:52px;gap:16px}
+.topbar .brand{font:600 11px/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--bone);text-decoration:none;white-space:nowrap}
+.topbar nav{display:flex;gap:22px}
+.topbar nav a{text-decoration:none;font:600 11px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--bone-3);display:inline-flex;align-items:baseline;gap:7px;transition:color .18s}
+.topbar nav a:hover{color:var(--bone)}
+.topbar nav a b{font:700 15px/1 var(--display);color:var(--bone-2);letter-spacing:0}
+@media (max-width:719px){.topbar nav a span{display:none}.topbar nav{gap:18px}.topbar .brand{font-size:10px;letter-spacing:.18em}}
+
+/* hero */
+.hero{padding:clamp(56px,8vw,112px) 0 clamp(56px,7vw,96px);border-bottom:1px solid var(--line-strong)}
+.hero-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.hero h1{font-family:var(--display);font-weight:800;text-transform:uppercase;letter-spacing:-.01em;line-height:.92;font-size:clamp(56px,9.4vw,136px);margin-top:28px}
+.hero h1 span{display:block;text-wrap:balance}
+.hero .runs{margin-top:clamp(40px,5vw,72px);padding-top:28px;border-top:1px solid var(--line)}
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:0 24px;margin-top:26px}
+.step{position:relative}
+.step::before{content:"";position:absolute;left:0;right:-24px;top:48px;height:1px;background:var(--line-strong)}
+.step:last-child::before{right:auto;width:7px}
+.node{display:block;width:12px;height:12px;border:1px solid var(--bone);background:var(--bg);margin:16px 0 18px;position:relative;z-index:1}
+.node.fill{background:var(--ox);border-color:var(--ox)}
+.step h3{font:700 clamp(24px,2.5vw,34px)/.95 var(--display);text-transform:uppercase;letter-spacing:-.01em}
+.step p{margin-top:10px;font-size:14px;line-height:1.55;color:var(--bone-2);max-width:26ch}
+.step .who{margin-top:16px}
+.legend{display:flex;gap:12px 32px;flex-wrap:wrap;margin-top:36px;padding-top:22px;border-top:1px solid var(--line);font:500 14px/1.4 var(--sans);color:var(--bone-2)}
+.legend span{display:inline-flex;align-items:center;gap:10px}
+.sw{display:inline-block;width:10px;height:10px;border:1px solid var(--bone);flex:none}
+.sw.fill{background:var(--ox);border-color:var(--ox)}
+@media (max-width:719px){
+  .flow{grid-template-columns:1fr;gap:0}
+  .step{padding-left:32px;padding-bottom:30px}
+  .step::before{left:5.5px;right:auto;width:1px;top:0;bottom:0;height:auto}
+  .step:last-child::before{bottom:auto;height:14px}
+  .step .node{position:absolute;left:0;top:7px;margin:0}
+  .step .chip{margin-bottom:12px}
+}
+
+/* parts */
+.part{padding:clamp(72px,10vw,160px) 0}
+.part-head{display:grid;grid-template-columns:auto 1fr;gap:20px 40px;align-items:end;padding-bottom:36px;border-bottom:1px solid var(--line-strong);margin-bottom:clamp(40px,5vw,64px)}
+.part-num{font:700 clamp(72px,9vw,128px)/.82 var(--display);color:var(--bone-3);opacity:.55;letter-spacing:-.02em}
+.part-title{font:800 clamp(40px,6vw,88px)/.92 var(--display);text-transform:uppercase;letter-spacing:-.01em;margin-top:16px}
+.part-intro{grid-column:1/-1;max-width:62ch;color:var(--bone-2);font-size:17px}
+.part-intro b{color:var(--bone);font-weight:600}
+@media (max-width:719px){.part-head{grid-template-columns:1fr;gap:12px}}
+
+/* format cards */
+.fmts{border-bottom:1px solid var(--line-strong)}
+.fmt{border-top:1px solid var(--line-strong);padding:clamp(28px,4vw,48px) clamp(18px,3vw,40px)}
+.fmt:nth-child(odd){background:var(--bg-2)}
+.fmt:nth-child(even){background:var(--bg-3)}
+.fmt-head{display:grid;grid-template-columns:auto 1fr auto;gap:10px 28px;align-items:end;padding-bottom:26px;border-bottom:1px solid var(--line)}
+.fmt-num{font:800 clamp(64px,8vw,112px)/.8 var(--display);letter-spacing:-.02em;display:flex;align-items:flex-end;gap:14px}
+.fmt-num i{display:block;width:14px;height:14px;background:var(--fc);margin-bottom:5px}
+.fmt-name{font:700 clamp(28px,3.4vw,44px)/.95 var(--display);text-transform:uppercase;letter-spacing:-.01em}
+.fmt-head .chips{margin-top:12px}
+.fmt-len{text-align:right;font:700 clamp(28px,3vw,40px)/1 var(--display);color:var(--bone-2);letter-spacing:-.01em}
+.fmt-len small{display:block;font:600 10.5px/1.4 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--bone-3);margin-top:8px;max-width:22ch;margin-left:auto}
+@media (max-width:719px){.fmt-head{grid-template-columns:1fr}.fmt-len{text-align:left}.fmt-len small{margin-left:0}}
+
+.blk{display:grid;grid-template-columns:150px 1fr;gap:16px 32px;padding:30px 0;border-bottom:1px solid var(--line)}
+.blk:last-child{border-bottom:0;padding-bottom:6px}
+.blk-l .micro{display:block}
+.blk-l .sub{display:block;margin-top:8px;font-size:12.5px;line-height:1.45;color:var(--bone-3)}
+@media (max-width:899px){.blk{grid-template-columns:1fr;gap:16px;padding:26px 0}}
+
+/* example */
+.ex{display:grid;grid-template-columns:1fr 1fr;gap:24px 40px}
+.ex-creator{margin-top:10px;font:600 18px/1.3 var(--sans);color:var(--bone)}
+.ex-creator small{display:block;font:400 14px/1.4 var(--sans);color:var(--bone-3);margin-top:2px}
+.ex-title{margin-top:8px;font:italic 400 16px/1.5 var(--sans);color:var(--bone-2)}
+.ig{display:inline-flex;align-items:center;gap:10px;margin-top:18px;border:1px solid var(--line-strong);padding:0 16px;height:44px;font:600 12px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;text-decoration:none;color:var(--bone);transition:border-color .18s,background .18s}
+.ig:hover{border-color:var(--bone)}
+.ig svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.5}
+.ig svg.arr{width:12px;height:12px;stroke-linecap:square;margin-left:2px}
+.stat{display:flex;flex-wrap:wrap}
+.stat span{padding-right:26px}
+.stat span + span{padding-left:26px;border-left:1px solid var(--line-strong)}
+.stat b{display:block;font:700 clamp(40px,4.6vw,60px)/.9 var(--display);letter-spacing:-.01em;color:var(--bone)}
+.stat small{display:block;margin-top:8px;font:600 11px/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--bone-3)}
+.ex-desc{margin-top:18px;font-size:15px;line-height:1.55;color:var(--bone-2);max-width:42ch}
+@media (max-width:719px){.ex{grid-template-columns:1fr;gap:22px}}
+
+/* deconstruction */
+.decon{display:flex;gap:3px}
+.seg{--seg:var(--bone-2);flex:var(--s) 1 0;min-width:120px;display:flex;flex-direction:column}
+.seg.hook{min-width:190px}
+.seg.cta{min-width:150px}
+@media (max-width:1099px){.seg{min-width:96px}.seg.hook{min-width:150px}.seg.cta{min-width:120px}}
+.seg-bar{height:14px;background:var(--seg);display:flex;gap:3px;flex:none}
+.seg-bar i{flex:1;background:var(--seg)}
+.seg-bar.ticks{background:transparent}
+.seg.hook{--seg:var(--ox)}
+.seg.b1{--seg:#b9b2a6}
+.seg.b2{--seg:rgba(185,178,166,.6)}
+.seg.b3{--seg:rgba(185,178,166,.38)}
+.seg.cta{--seg:transparent}
+.seg.cta .seg-bar{border:1px solid var(--bone-2)}
+.seg-txt{padding:14px 14px 0 0}
+.seg-t{font:600 11px/1 var(--sans);letter-spacing:.14em;color:var(--bone-3);white-space:nowrap}
+.seg-n{margin-top:7px;font:700 22px/1 var(--display);text-transform:uppercase}
+.seg.hook .seg-n{color:var(--ox-hi)}
+.seg-c{margin-top:8px;font-size:14px;line-height:1.5;color:var(--bone-2)}
+@media (max-width:719px){
+  .decon{flex-direction:column;gap:0}
+  .seg,.seg.hook,.seg.cta{flex:none;flex-direction:row;min-width:0;gap:16px;padding-bottom:20px}
+  .mech{flex-direction:column;align-items:flex-start;gap:0}
+  .mech i{width:1px;height:14px;margin-left:18px}
+  .seg-bar{width:14px;height:auto;align-self:stretch;flex-direction:column}
+  .seg-txt{padding:0}
+}
+
+/* shots */
+.shots{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:3px}
+.shot{background:var(--bg);border:1px solid var(--line);padding:16px 16px 14px;display:flex;gap:14px;align-items:flex-start}
+.shot b{display:block;font:700 26px/1 var(--display);letter-spacing:0;white-space:nowrap}
+.shot b small{font:700 15px/1 var(--display);color:var(--bone-2);margin-right:3px}
+.shot span{display:block;margin-top:6px;font-size:13px;line-height:1.45;color:var(--bone-2)}
+@media (max-width:719px){.shots{grid-template-columns:repeat(2,1fr)}.shot{padding:12px;gap:10px;flex-direction:column}}
+
+/* hooks, banks, guard */
+.hook{padding:0 0 18px;margin-bottom:18px;border-bottom:1px solid var(--line)}
+.hook:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0}
+.hook-q{font:600 clamp(24px,3.2vw,36px)/1.02 var(--display);text-transform:uppercase;letter-spacing:-.005em;max-width:28ch;padding-left:.6em;text-indent:-.6em}
+.hook-q::before{content:"\201C";color:var(--ox-hi);margin-right:.06em}
+.bank{display:flex;flex-wrap:wrap;gap:6px}
+.bank span{border:1px solid var(--line-strong);padding:8px 12px;font:500 13px/1.35 var(--sans);color:var(--bone-2)}
+.bank span b{font:700 14px/1 var(--display);color:var(--bone-3);margin-right:8px}
+.guard{font-size:14px;color:var(--bone-3);line-height:1.5}
+.guard b{color:var(--bone-2);font-weight:600}
+.mech{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px}
+.mech span,.mech a{border:1px solid var(--line-strong);padding:0 12px;height:36px;display:inline-flex;align-items:center;font:600 11px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--bone);text-decoration:none;white-space:nowrap;transition:border-color .18s}
+.mech a:hover{border-color:var(--bone)}
+.mech i{width:20px;height:1px;background:var(--line-strong);flex:none}
+
+/* light section */
+.light{background:var(--light-bg);color:var(--light-ink);--bone:#141416;--bone-2:rgba(20,20,22,.72);--bone-3:rgba(20,20,22,.52);--line:rgba(20,20,22,.14);--line-strong:rgba(20,20,22,.36);--bg:#fbf9f4;--bg-2:#f4f0e8;--bg-3:#fbf9f4}
+.light ::selection{background:var(--ox);color:#ece6da}
+
+/* call sheet */
+.sheet{border:1px solid var(--line-strong);background:var(--bg-2)}
+.sheet-top{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--line-strong)}
+.sheet-top div{padding:22px 24px;border-right:1px solid var(--line)}
+.sheet-top div:last-child{border-right:0}
+.sheet-top b{display:block;margin-top:10px;font:700 clamp(26px,3.2vw,42px)/.95 var(--display);text-transform:uppercase;letter-spacing:-.01em}
+.sheet-kit{display:flex;flex-wrap:wrap;gap:12px 36px;padding:18px 24px;font-size:14px;color:var(--bone-2)}
+.sheet-kit span b{font:600 11px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--bone-3);margin-right:10px}
+@media (max-width:719px){.sheet-top{grid-template-columns:1fr 1fr}.sheet-top div{border-bottom:1px solid var(--line);padding:16px 18px}.sheet-top div:nth-child(2n){border-right:0}.sheet-top div:nth-child(n+3){border-bottom:0}.sheet-kit{padding:16px 18px;gap:10px 24px}}
+
+/* timeline */
+.tl{margin-top:clamp(40px,5vw,64px)}
+.tl-row{display:grid;grid-template-columns:120px 1fr;gap:0 32px;position:relative;padding-bottom:40px}
+.tl-row::before{content:"";position:absolute;left:5px;top:0;bottom:0;width:1px;background:var(--line-strong)}
+.tl-row:last-child::before{bottom:auto;height:14px}
+.tl-time{position:relative;padding-left:26px;font:700 28px/1 var(--display);letter-spacing:0}
+.tl-time::before{content:"";position:absolute;left:0;top:8px;width:11px;height:11px;background:var(--bone)}
+.piece-h{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:6px 0 14px}
+.piece-h b{font:700 clamp(22px,2.4vw,30px)/1 var(--display);text-transform:uppercase;letter-spacing:-.01em}
+.fsw{display:inline-block;width:12px;height:12px;background:var(--fc);flex:none}
+.srow{display:grid;grid-template-columns:24px 200px 1fr 1fr;gap:16px 20px;align-items:start;padding:14px 0;border-top:1px solid var(--line)}
+.srow:last-child{border-bottom:1px solid var(--line)}
+.srow .icn{margin-top:2px}
+.dur{display:flex;align-items:center;gap:10px}
+.dur .bars{flex:1;display:flex;flex-direction:column;gap:2px}
+.dur .bars i{display:block;height:5px;background:var(--bone);width:var(--w)}
+.dur b{font:700 20px/1 var(--display);white-space:nowrap;min-width:52px;text-align:right}
+.srow .fr{font-size:14px;line-height:1.5;color:var(--bone-2)}
+.srow .fr b{display:block;font-weight:600;color:var(--bone)}
+.srow .nt{font-size:14px;line-height:1.5;color:var(--bone-2)}
+@media (max-width:899px){.srow{grid-template-columns:24px 1fr;gap:10px 14px}.srow .fr,.srow .nt{grid-column:2}.dur{max-width:320px}}
+@media (max-width:719px){
+  .tl-row{grid-template-columns:1fr;padding-left:26px;gap:0}
+  .tl-time{padding-left:0;margin-bottom:10px}
+  .tl-time::before{left:-26px}
+}
+.broll{display:grid;grid-template-columns:repeat(10,1fr);gap:3px;margin-bottom:12px}
+.broll div{border:1px solid var(--line);background:var(--bg);padding:10px 8px 9px;display:flex;flex-direction:column;gap:8px}
+.broll .icn{width:20px;height:20px}
+.broll b{font:700 16px/1 var(--display);white-space:nowrap}
+.broll small{font:600 10px/1 var(--sans);letter-spacing:.16em;color:var(--bone-3)}
+@media (max-width:719px){.broll{grid-template-columns:repeat(5,1fr)}}
+.totals{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line-strong);margin-top:clamp(32px,4vw,48px);background:var(--bg-2)}
+.totals div{padding:26px 24px;border-right:1px solid var(--line)}
+.totals div:last-child{border-right:0}
+.totals b{display:block;font:700 clamp(48px,6vw,84px)/.9 var(--display);letter-spacing:-.01em}
+.totals small{display:block;margin-top:10px;font:600 11px/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--bone-3)}
+.notes{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:3px}
+.notes div{border:1px solid var(--line);padding:18px 24px;font-size:14px;line-height:1.55;color:var(--bone-2);background:var(--bg-2)}
+.notes .micro{display:block;margin-bottom:8px}
+.notes code{font:500 13px/1 ui-monospace,SFMono-Regular,Menlo,monospace;background:rgba(20,20,22,.07);padding:3px 6px}
+@media (max-width:719px){.totals{grid-template-columns:1fr}.totals div{border-right:0;border-bottom:1px solid var(--line);padding:20px 18px}.totals div:last-child{border-bottom:0}.notes{grid-template-columns:1fr}.notes div{padding:16px 18px}}
+
+/* calendar */
+.cal-legend{display:flex;flex-wrap:wrap;gap:10px 22px;margin-bottom:24px}
+.cal-legend span{display:inline-flex;align-items:center;gap:8px;font:600 11px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--bone-2)}
+.cal-legend b{font:700 14px/1 var(--display);color:var(--bone)}
+.cal-tabs{display:none;gap:3px;margin-bottom:14px}
+.cal-tabs button{flex:1;height:40px;border:1px solid var(--line-strong);background:transparent;color:var(--bone-2);font:700 16px/1 var(--display);letter-spacing:.02em;cursor:pointer;transition:background .18s,color .18s}
+.cal-tabs button[aria-pressed="true"]{background:var(--bone);color:var(--bg);border-color:var(--bone)}
+.cal-wrap{overflow-x:auto}
+.cal{display:grid;grid-template-columns:136px repeat(6,1fr);gap:3px;min-width:760px}
+.cal .hd{padding:0 0 12px;border-bottom:1px solid var(--line-strong)}
+.cal .hd b{display:block;font:700 18px/1 var(--display);text-transform:uppercase}
+.cal .hd small{display:block;margin-top:7px;font:600 10.5px/1 var(--sans);letter-spacing:.18em;color:var(--bone-3)}
+.cal .wk{display:contents}
+.cal .wl{padding:16px 12px 16px 0}
+.cal .wl b{display:block;font:700 28px/1 var(--display)}
+.cal .wl small{display:block;margin-top:6px;font:500 12px/1.3 var(--sans);color:var(--bone-3)}
+.cell{background:var(--tint);border-top:3px solid var(--fc);padding:14px 12px 16px;min-height:104px}
+.cell .dl{display:none}
+.cell b{display:block;font:700 26px/1 var(--display);color:var(--bone)}
+.cell p{margin-top:8px;font-size:13px;line-height:1.4;color:var(--bone-2)}
+.cal-note{margin-top:18px;font-size:14px;color:var(--bone-3)}
+@media (max-width:719px){
+  .cal-tabs{display:flex}
+  .cal{display:block;min-width:0}
+  .cal .hd{display:none}
+  .cal .wk{display:block;margin-bottom:22px}
+  .js .cal .wk:not(.is-active){display:none}
+  .cal .wl{padding:0 0 12px;border-bottom:1px solid var(--line-strong);margin-bottom:3px}
+  .cell{display:grid;grid-template-columns:76px 1fr;gap:12px;align-items:start;min-height:0;border-top:0;border-left:3px solid var(--fc);margin-bottom:3px;padding:12px 12px 14px}
+  .cell .dl{display:block;font:600 10.5px/1.5 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--bone-3)}
+  .cell .dl em{display:block;font-style:normal;color:var(--bone-2)}
+  .cell b{font-size:24px}
+  .cell p{margin-top:5px}
+}
+.metrics{display:grid;grid-template-columns:2.2fr 1.5fr 1.2fr 1fr 1fr;margin-top:clamp(48px,6vw,80px);border-top:1px solid var(--line-strong);border-bottom:1px solid var(--line-strong)}
+.metrics div{padding:26px 24px 26px 0;border-right:1px solid var(--line);margin-right:24px;display:flex;flex-direction:column;justify-content:flex-end}
+.metrics div:last-child{border-right:0;margin-right:0}
+.metrics small{display:block;font:700 13px/1 var(--display);color:var(--bone-3);margin-bottom:10px}
+.metrics b{display:block;font-family:var(--display);font-weight:700;text-transform:uppercase;line-height:.9;letter-spacing:-.01em}
+.metrics .m1 b{font-size:clamp(44px,6.4vw,88px);color:var(--bone)}
+.metrics .m2 b{font-size:clamp(32px,4.2vw,56px);color:var(--bone)}
+.metrics .m3 b{font-size:clamp(28px,3.4vw,44px);color:var(--bone-2)}
+.metrics .m4 b{font-size:clamp(24px,2.8vw,36px);color:var(--bone-2)}
+.metrics .m5 b{font-size:clamp(22px,2.4vw,30px);color:var(--bone-3)}
+.metrics-l{margin-top:28px}
+@media (max-width:719px){.metrics{grid-template-columns:1fr}.metrics div{border-right:0;margin-right:0;border-bottom:1px solid var(--line);padding:18px 0}.metrics div:last-child{border-bottom:0}}
+
+/* footer */
+footer{border-top:1px solid var(--line-strong);padding:40px 0 64px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px 24px;flex-wrap:wrap;font-size:13px;color:var(--bone-3);line-height:1.6}
+footer nav{display:flex;gap:24px}
+footer a{color:var(--bone-2);text-decoration:none;font:600 11px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;transition:color .18s}
+footer a:hover{color:var(--bone)}
+
+/* motion */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease-out,transform .6s ease-out}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}}
+
+/* print */
+@media print{
+  :root{--bg:#fff;--bg-2:#fff;--bg-3:#f3f1ec;--bone:#111;--bone-2:#333;--bone-3:#666;--line:rgba(0,0,0,.2);--line-strong:rgba(0,0,0,.5)}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .topbar{position:static;background:#fff;-webkit-backdrop-filter:none;backdrop-filter:none}
+  .reveal{opacity:1!important;transform:none!important;transition:none}
+  .part{break-before:page;padding:32px 0}
+  .hero{padding:32px 0}
+  .fmt{padding:24px 0}
+  .blk,.tl-row,.sheet,.totals,.cell{break-inside:avoid}
+  .cal-tabs{display:none!important}
+  .cal{display:grid!important;min-width:0}
+  .cal .hd{display:block!important}
+  .cal .wk{display:contents!important}
+  .cal-wrap{overflow:visible}
+  .ig{border-color:#999}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" focusable="false">
+  <symbol id="i-head" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.75"/><path d="M4.5 21v-1.5c0-2.8 2.2-5 5-5h5c2.8 0 5 2.2 5 5V21"/></symbol>
+  <symbol id="i-walk" viewBox="0 0 24 24"><path d="M3 11h14M12.5 6.5 17 11l-4.5 4.5"/><path d="M3 19h3M9 19h3M15 19h3"/></symbol>
+  <symbol id="i-low" viewBox="0 0 24 24"><g transform="rotate(-22 12 13)"><rect x="3" y="8" width="18" height="12"/><circle cx="12" cy="14" r="3.5"/><path d="M8 8l1.5-3h5L16 8"/></g></symbol>
+  <symbol id="i-side" viewBox="0 0 24 24"><rect x="2.5" y="8" width="12.5" height="9"/><path d="M15 11.5l6.5-3v8l-6.5-3"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M3.5 9V3.5H9M15 3.5h5.5V9M20.5 15v5.5H15M9 20.5H3.5V15"/><circle cx="12" cy="12" r="3.25"/></symbol>
+  <symbol id="i-cine" viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14"/><path d="M2.5 9h19M2.5 15h19M7 5v4M12 5v4M17 5v4M7 15v4M12 15v4M17 15v4"/></symbol>
+  <symbol id="i-still" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16"/><path d="M3 16.5l5-5 4 4 3-3 6 6"/><circle cx="16.25" cy="8.75" r="1.5"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19"/><path d="M10.5 18.75h3"/><path d="M10.75 9.25l3.75 2.5-3.75 2.5z"/></symbol>
+  <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="10"/><path d="M6 11.5a6 6 0 0 0 12 0M12 17.5V21M9 21h6"/></symbol>
+  <symbol id="i-bar" viewBox="0 0 24 24"><path d="M2 12h3M8 12h8M19 12h3"/><rect x="5" y="7" width="3" height="10"/><rect x="16" y="7" width="3" height="10"/></symbol>
+  <symbol id="i-log" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18"/><path d="M9 8h6M9 12h6M9 16h4"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4.5"/><circle cx="12" cy="12" r="4"/><path d="M17.25 6.75h.01"/></symbol>
+  <symbol id="i-arr" viewBox="0 0 24 24"><path d="M6 18 18 6M9 6h9v9"/></symbol>
+</svg>
+
+<div class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#top">Max Sandell · Content System</a>
+    <nav aria-label="Parts">
+      <a href="#formats"><b>01</b><span>Formats</span></a>
+      <a href="#schedule"><b>02</b><span>Schedule</span></a>
+      <a href="#calendar"><b>03</b><span>Calendar</span></a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-top">
+      <div><span class="micro">Max Sandell · Content System</span><span class="bar"></span></div>
+      <span class="micro">Cursus Capital · 5 Sep 2026 · v2</span>
+    </div>
+    <h1><span>7 formats.</span><span>One film block a week.</span><span>We do the rest.</span></h1>
+
+    <div class="runs">
+      <span class="micro">How it runs — the only process Max needs to know</span>
+      <div class="flow">
+        <div class="step">
+          <span class="chip">Sun · 18:00</span>
+          <span class="node"></span>
+          <h3>Send schedule</h3>
+          <p>Cursus sends the week’s shooting schedule. WhatsApp + PDF.</p>
+          <div class="who"><span class="chip">Cursus</span></div>
+        </div>
+        <div class="step">
+          <span class="chip">Tue · 10:30–12:00</span>
+          <span class="node fill"></span>
+          <h3>Film the block</h3>
+          <p>Max films. Uploads raw clips to the shared Drive folder.</p>
+          <div class="who"><span class="chip ox">Max</span></div>
+        </div>
+        <div class="step">
+          <span class="chip">Tue – Wed</span>
+          <span class="node"></span>
+          <h3>We edit</h3>
+          <p>Cursus edits, subtitles, writes captions. Max gets a preview Wednesday: a thumbs-up or one line of changes.</p>
+          <div class="who"><span class="chip">Cursus</span></div>
+        </div>
+        <div class="step">
+          <span class="chip">Thu → Fri</span>
+          <span class="node"></span>
+          <h3>Scheduled</h3>
+          <p>Thursday: the week is scheduled. Friday: numbers into the calendar.</p>
+          <div class="who"><span class="chip">Cursus</span></div>
+        </div>
+      </div>
+      <div class="legend">
+        <span><i class="sw fill"></i>Max films.</span>
+        <span><i class="sw"></i>Cursus does everything else.</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- 01 · FORMATS -->
+<section class="part" id="formats">
+  <div class="wrap">
+    <div class="part-head reveal">
+      <div class="part-num">01</div>
+      <div><span class="micro">Part one</span><span class="bar"></span><h2 class="part-title">The 7 formats</h2></div>
+      <p class="part-intro">Each format is deconstructed the same way: <b>Hook (0–3s) → Body → CTA</b>, plus the exact shots it needs. Example posts are real, pulled 5 Sep 2026 with their engagement.</p>
+    </div>
+
+    <div class="fmts">
+
+      <!-- F1 -->
+      <article class="fmt reveal" id="f1" style="--fc:var(--f1)">
+        <header class="fmt-head">
+          <div class="fmt-num"><i></i>F1</div>
+          <div>
+            <h3 class="fmt-name">The Reintroduction</h3>
+            <div class="chips"><span class="chip ox">Trust</span><span class="chip">Quarterly · pinned</span></div>
+          </div>
+          <div class="fmt-len">60–90s<small>Reel, or a 5-slide carousel</small></div>
+        </header>
+
+        <div class="blk">
+          <div class="blk-l"><span class="micro">Example</span><span class="sub">Real post, pulled 5 Sep 2026.</span></div>
+          <div class="ex">
+            <div>
+              <span class="micro">Based on</span>
+              <div class="ex-creator">Harry Mackarness<small>ex-British Army officer</small></div>
+              <div class="ex-title">“Allow me to reintroduce myself”</div>
+              <a class="ig" href="https://www.instagram.com/resurgent_harry/p/DXQ6O_gjP4a/" target="_blank" rel="noopener"><svg><use href="#i-ig"/></svg>@resurgent_harry<svg class="arr"><use href="#i-arr"/></svg></a>
+            </div>
+            <div>
+              <div class="stat"><span><b>4.3K</b><small>likes</small></span><span><b>75</b><small>comments</small></span></div>
+              <p class="ex-desc">His top post of 2026. Text on a portrait, full origin story in the caption.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="blk-l"><span class="micro">Deconstruction</span><span class="sub">Hook → Who → Why → Promise → CTA</span></div>
+          <div class="decon">
+            <div class="seg hook" style="--s:3"><div class="seg-bar"></div><div class="seg-txt"><div class="seg-t">0–3s</div><div class="seg-n">Hook</div><p class="seg-c">A line that contradicts what you see: “Most people cross the street when they see me. My clients are women in their fifties.”</p></div></div>
+            <div class="seg b1" style="--s:27"><div class="seg-bar"></div><div class="seg-txt"><div class="seg-t">3–30s</div><div class="seg-n">Who</div><p class="seg-c">Three facts, one line each: 12 years close protection · licensed PT · 140+ women coached.</p></div></div>
+            <div class="seg b2" style="--s:30"><div class="seg-bar"></div><div class="seg-txt"><div class="seg-t">30–60s</div><div class="seg-n">Why</div><p class="seg-c">The turn: why women 40+. One concrete moment, not a speech.</p></div></div>
+            <div class="seg b3" style="--s:20"><div class="seg-bar"></div><div class="seg-txt"><div class="seg-t">60–80s</div><div class="seg-n">Promise</div><p class="seg-c">What a session is like: private, calm, no shouting, no mirrors.</p></div></div>
+            <div class="seg cta" style="--s:5"><div class="seg-bar"></div><div class="seg-txt"><div class="seg-t">Last 5s</div><div class="seg-n">CTA</div><p class="seg-c">“If that’s the kind of coach you want in your corner, the link in bio is a 20-minute call.”</p></div></div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="blk-l"><span class="micro">Shots</span><span class="sub">On screen: the hook line only. Sound: voice + low music.</span></div>
+          <div class="shots">
+            <div class="shot"><svg class="icn"><use href="#i-head"/></svg><div><b><small>4 ×</small>10s</b><span>Talking head · studio, seated, tattoos visible</span></div></div>
+            <div class="shot"><svg class="icn"><use href="#i-cine"/></svg><div><b>3s</b><span>Cinematic · empty studio</span></div></div>
+            <div class="shot"><svg class="icn"><use href="#i-bar"/></svg><div><b>5s</b><span>Hands loading a bar</span></div></div>
+            <div class="shot"><svg class="icn"><use href="#i-log"/></svg><div><b>3s</b><span>Max checking a training log</span></div></div>
+            <div class="shot"><svg class="icn"><use href="#i-still"/></svg><div><b><small>1 ×</small>Still</b><span>Portrait · cover</span></div></div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="blk-l"><span class="micro">Max’s hooks</span></div>
+          <div>
+            <div class="hook"><p class="hook-q">I spent 12 years making sure nothing happened to the people I protected. Now I do the same for your strength.</p></div>
+            <div class="hook"><p class="hook-q">Allow me to reintroduce myself.</p></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- F2 -->
+      <article class="fmt reveal" id="f2" style="--fc:var(--f2)">
+        <header class="fmt-head">
+          <div class="fmt-num"><i></i>F2</div>
+          <div>
+            <h3 class="fmt-name">The List</h3>
+            <div class="chips"><span class="chip ox">Reach</span><span class="chip">Every 2 weeks</span></div>
+          </div>
+          <div class="fmt-len">45–60s<small>Numbered list on screen</small></div>
+        </header>
+
+        <div class="blk">
+          <div class="blk-l"><span class="micro">Example</span><span class="sub">Real post, pulled 5 Sep 2026.</span></div>
+          <div class="ex">
+            <div>
+              <span class="micro">Based on</span>
+              <div class="ex-creator">Paul Dickinson<small>32K-follower account</small></div>
+              <div class="ex-title">“Social media bullshit that needs to f*** right off”</div>
+              <a class="ig" href="https://www.instagram.com/barbells_and_mountains/reel/DbY3Lsiuf5l/" target="_blank" rel="noopener"><svg><use href="#i-ig"/></svg>@barbells_and_mountains<svg class="arr"><use href="#i-arr"/></svg></a>
+            </div>
+            <div>
+              <div class="stat"><span><b>25.9K</b><small>likes</small></span><span><b>1.7K</b><small>comments</small></span></div>
+              <p class="ex-desc">Numbered list on screen. The caption is just “What have I missed?”</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="blk-l"><span class="micro">Deconstruction</span><span class="sub">Hook → Five items → CTA</span></div>
+          <div class="decon">
+            <div class="seg hook" style="--s:3"><div class="seg-bar"></div><div class="seg-txt"><div class="seg-t">0–3s</div><div class="seg-n">Hook</div><p class="seg-c">Title on screen + spoken: “Fitness advice for women over 40 that needs to go in the bin.”</p></div></div>
+            <div class="seg b1" style="--s:47"><div class="seg-bar ticks"><i></i><i></i><i></i><i></i><i></i></div><div class="seg-txt"><div class="seg-t">3–50s</div><div class="seg-n">Five items</div><p class="seg-c">~8s each. The number appears, one sentence, a beat of silence. Never explain twice.</p></div></div>
+            <div class="seg cta" style="--s:5"><div class="seg-bar"></div><div class="seg-txt"><div class="seg-t">Last 5s</div><div class="seg-n">CTA</div><p class="seg-c">“What have I missed?” — the audience finishes the list. That is where the comments come from.</p></div></div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="blk-l"><span class="micro">Shots</span><span class="sub">No B-roll; the text does the work.</span></div>
+          <div class="shots">
+            <div class="shot"><svg class="icn"><use href="#i-walk"/></svg><div><b>50s</b><span>One walking take · Humlegården, phone at chest height, 0.5× lens, two takes</span></div></div>
+            <div class="shot"><svg class="icn"><use href="#i-head"/></svg><div><b>50s</b><span>Or: static in the rack</span></div></div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="blk-l"><span class="micro">Max’s hook</span></div>
+          <div><div class="hook"><p class="hook-q">Fitness advice for women over 40 that needs to go in the bin.</p></div></div>
+        </div>
+
+        <div class="blk">
+          <div class="blk-l"><span class="micro">Item bank</span><span class="sub">Five per list. Pull from here.</span></div>
+          <div>
+            <div class="bank">
+              <span>“toning”</span><span>light weights forever</span><span>cardio as punishment</span><span>“you’re too old to start”</span><span>the 1,200-calorie diet</span><span>daily weigh-ins</span><span>“just do Pilates”</span>
+            </div>
+            <p class="guard" style="margin-top:16px"><b>Guardrail:</b> contrarian about the industry, never about her.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- F3 -->
+      <article class="fmt reveal" id="f3" style="--fc:var(--f3)">
+        <header class="fmt-head">
+          <div class="fmt-num"><i></i>F3</div>
+          <div>
+            <h3 class="fmt-name">The Lens</h3>
+            <div class="chips"><span class="chip ox">Trust + personality</span><span class="chip">Every 2 weeks</span></div>
+          </div>
+          <div class="fmt-len">45–60s<small>A story that lands on a lesson</small></div>
+        </header>
+
+        <div class="blk">
+          <div class="blk-l"><span class="micro">Example</span><span class="sub">Real post, pulled 5 Sep 2026.</span></div>
+          <div class="ex">
+            <div>
+              <span class="micro">Based on</span>
+              <div class="ex-creator">Harry Mackarness<small>military anecdote clip</small></div>
+              <div class="ex-title">“Waking up drunk 20 minutes before an 8-mile march”</div>
+              <a class="ig" href="https://www.instagram.com/thegreymanpodcast/reel/DcM5yfdNlyb/" target="_blank" rel="noopener"><svg><use href="#i-ig"/></svg>@thegreymanpodcast<svg class="arr"><use href="#i-arr"/></svg></a>
+            </div>
+            <div>
+              <div class="stat"><span><b>3.1K</b><small>likes</small></span><span><b>55</b><small>comments</small></span></div>
+              <p class="ex-desc">A story with a laugh that lands on a lesson.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="blk-l"><span class="micro">Deconstruction</span><span class="sub">Hook → Story → Lesson → CTA</span></div>
+          <div class="decon">
+            <div class="seg hook" style="--s:3"><div class="seg-bar"></div><div class="seg-txt"><div class="seg-t">0–3s</div><div class="seg-n">Hook</div><p class="seg-c">The lesson first: “In close protection, a perfect day is a boring day.”</p></div></div>
+            <div class="seg b1" style="--s:32"><div class="seg-bar"></div><div class="seg-txt"><div class="seg-t">3–35s</div><div class="seg-n">Story</div><p class="seg-c">One short anecdote, one concrete detail. Allowed to be funny. Never combat.</p></div></div>
+            <div class="seg b2" style="--s:20"><div class="seg-bar"></div><div class="seg-txt"><div class="seg-t">35–55s</div><div class="seg-n">Lesson</div><p class="seg-c">The turn to her: “That’s your program. Nothing surprising, nothing heroic, every single week.”</p></div></div>
+            <div class="seg cta" style="--s:5"><div class="seg-bar"></div><div class="seg-txt"><div class="seg-t">End</div><div class="seg-n">CTA</div><p class="seg-c">Soft: “Follow for the next one.”</p></div></div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="blk-l"><span class="micro">Shots</span></div>
+          <div class="shots">
+            <div class="shot"><svg class="icn"><use href="#i-head"/></svg><div><b><small>3 ×</small>10s</b><span>Talking head · studio</span></div></div>
+            <div class="shot"><svg class="icn"><use href="#i-walk"/></svg><div><b>40s</b><span>Or: one walking take</span></div></div>
+            <div class="shot"><svg class="icn"><use href="#i-cine"/></svg><div><b>3s</b><span>Cinematic detail · studio door, keys, log book</span></div></div>
+            <div class="shot"><svg class="icn"><use href="#i-low"/></svg><div><b>5s</b><span>Low-angle of a client’s lift · the “lesson” visual</span></div></div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="blk-l"><span class="micro">Max’s hooks</span></div>
+          <div>
+            <div class="hook"><p class="hook-q">The first rule of protecting someone: never surprise them.</p></div>
+            <div class="hook"><p class="hook-q">Bodyguards don’t wing it. Neither should your first session.</p></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- F4 -->
+      <article class="fmt reveal" id="f4" style="--fc:var(--f4)">
+        <header class="fmt-head">
+          <div class="fmt-num"><i></i>F4</div>
+          <div>
+            <h3 class="fmt-name">One Minute</h3>
+            <div class="chips"><span class="chip ox">Consistency</span><span class="chip">3 per week · batch-filmed</span></div>
+          </div>
+          <div class="fmt-len">45–60s<small>One thought, to camera</small></div>
+        </header>
+
+        <div class="blk">
+          <div class="blk-l"><span class="micro">Example</span><span class="sub">Real post, pulled 5 Sep 2026.</span></div>
+          <div class="ex">
+            <div>
+              <span class="micro">Based on</span>
+              <div class="ex-creator">Xavier The Life Coach<small>his whole account is this format</small></div>
+              <div class="ex-title">“I almost gave up on my Instagram”</div>
+              <a class="ig" href="https://www.instagram.com/xavierthelifecoach/reel/Dbdep8-Iwi2/" target="_blank" rel="noopener"><svg><use href="#i-ig"/></svg>@xavierthelifecoach<svg class="arr"><use href="#i-arr"/></svg></a>
+            </div>
+            <div>
+              <div class="stat"><span><b>5.4K</b><small>likes</small></span><span><b>752</b><small>comments</small></span></div>
+              <p class="ex-desc">One thought, to camera, honest, 60 seconds.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="blk-l"><span class="micro">Deconstruction</span><span class="sub">Hook → One idea → Landing → CTA</span></div>
+          <div class="decon">
+            <div class="seg hook" style="--s:3"><div class="seg-bar"></div><div class="seg-txt"><div class="seg-t">0–3s</div><div class="seg-n">Hook</div><p class="seg-c">The thought as one sentence: “You don’t need motivation. You need a Tuesday at seven that’s already booked.”</p></div></div>
+            <div class="seg b1" style="--s:42"><div class="seg-bar"></div><div class="seg-txt"><div class="seg-t">3–45s</div><div class="seg-n">One idea</div><p class="seg-c">Why, in plain words, one example. No second point.</p></div></div>
+            <div class="seg b2" style="--s:10"><div class="seg-bar"></div><div class="seg-txt"><div class="seg-t">45–55s</div><div class="seg-n">Landing</div><p class="seg-c">Say the line again.</p></div></div>
+            <div class="seg cta" style="--s:5"><div class="seg-bar"></div><div class="seg-txt"><div class="seg-t">End</div><div class="seg-n">CTA</div><p class="seg-c">None, or “save this”.</p></div></div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="blk-l"><span class="micro">Shots</span><span class="sub">Batch: three in twenty minutes, every film block.</span></div>
+          <div class="shots">
+            <div class="shot"><svg class="icn"><use href="#i-head"/></svg><div><b>60s</b><span>Talking head · same chair, same window, same framing every time — the sameness is the brand. Subtitles. Nothing else.</span></div></div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="blk-l"><span class="micro">Max’s hook</span></div>
+          <div><div class="hook"><p class="hook-q">You don’t need motivation. You need a Tuesday at seven that’s already booked.</p></div></div>
+        </div>
+
+        <div class="blk">
+          <div class="blk-l"><span class="micro">Idea bank</span><span class="sub">One per film. Say it, explain it, say it again.</span></div>
+          <div class="bank">
+            <span>“Strong is not a size.”</span>
+            <span>“Your knees don’t hurt because you’re old. They hurt because you stopped loading them.”</span>
+            <span>“Recovery is training.”</span>
+            <span>“Nobody at the gym is watching you. They’re watching themselves.”</span>
+            <span>“Discipline is a plan you don’t renegotiate at 6am.”</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- F5 -->
+      <article class="fmt reveal" id="f5" style="--fc:var(--f5)">
+        <header class="fmt-head">
+          <div class="fmt-num"><i></i>F5</div>
+          <div>
+            <h3 class="fmt-name">The Lift</h3>
+            <div class="chips"><span class="chip ox">Saves</span><span class="chip">Weekly · 5-part series · re-run quarterly</span></div>
+          </div>
+          <div class="fmt-len">30–45s<small>Demo + two cues</small></div>
+        </header>
+
+        <div class="blk">
+          <div class="blk-l"><span class="micro">Example</span><span class="sub">Real post, pulled 5 Sep 2026.</span></div>
+          <div class="ex">
+            <div>
+              <span class="micro">Based on</span>
+              <div class="ex-creator">Shane Dorian<small>follow-along</small></div>
+              <div class="ex-title">“Morning activation”</div>
+              <a class="ig" href="https://www.instagram.com/doriancoreperformance/reel/DcRBGa9oxQk/" target="_blank" rel="noopener"><svg><use href="#i-ig"/></svg>@doriancoreperformance<svg class="arr"><use href="#i-arr"/></svg></a>
+            </div>
+            <div>
+              <div class="stat"><span><b>7.6K</b><small>likes</small></span><span><b>171</b><small>comments</small></span></div>
+              <p class="ex-desc">Follow-along with rounds and reps in the caption.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="blk-l"><span class="micro">Deconstruction</span><span class="sub">Hook → Demo → Cues → CTA</span></div>
+          <div class="decon">
+            <div class="seg hook" style="--s:3"><div class="seg-bar"></div><div class="seg-txt"><div class="seg-t">0–3s</div><div class="seg-n">Hook</div><p class="seg-c">“Lift 1 of 5: the deadlift. Because you pick things up every day and nobody taught you how.”</p></div></div>
+            <div class="seg b1" style="--s:22"><div class="seg-bar"></div><div class="seg-txt"><div class="seg-t">3–25s</div><div class="seg-n">Demo</div><p class="seg-c">The lift, side angle, 3 reps. Two cues as on-screen text.</p></div></div>
+            <div class="seg b2" style="--s:15"><div class="seg-bar"></div><div class="seg-txt"><div class="seg-t">25–40s</div><div class="seg-n">Cues</div><p class="seg-c">Max says the two cues to camera.</p></div></div>
+            <div class="seg cta" style="--s:5"><div class="seg-bar"></div><div class="seg-txt"><div class="seg-t">End</div><div class="seg-n">CTA</div><p class="seg-c">“Save this. Comment STRONG for all five.”</p></div></div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="blk-l"><span class="micro">Shots</span><span class="sub">Sets and reps in the caption.</span></div>
+          <div class="shots">
+            <div class="shot"><svg class="icn"><use href="#i-low"/></svg><div><b>5s</b><span>Low-angle wide · the set-up (feet, bar)</span></div></div>
+            <div class="shot"><svg class="icn"><use href="#i-side"/></svg><div><b>8s</b><span>Side angle at hip height · 3 reps</span></div></div>
+            <div class="shot"><svg class="icn"><use href="#i-close"/></svg><div><b>3s</b><span>Close-up · grip</span></div></div>
+            <div class="shot"><svg class="icn"><use href="#i-head"/></svg><div><b>10s</b><span>Max · cue to camera</span></div></div>
+            <div class="shot"><svg class="icn"><use href="#i-cine"/></svg><div><b>3s</b><span>Cinematic · chalk</span></div></div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="blk-l"><span class="micro">Max’s hook</span></div>
+          <div><div class="hook"><p class="hook-q">Lift 1 of 5: the deadlift. Because you pick things up every day and nobody taught you how.</p></div></div>
+        </div>
+
+        <div class="blk">
+          <div class="blk-l"><span class="micro">The five</span><span class="sub">One lift a week. Week 42 closes the series.</span></div>
+          <div class="bank">
+            <span><b>1</b>Deadlift</span><span><b>2</b>Goblet squat</span><span><b>3</b>Push (incline press)</span><span><b>4</b>Row</span><span><b>5</b>Loaded carry</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- F6 -->
+      <article class="fmt reveal" id="f6" style="--fc:var(--f6)">
+        <header class="fmt-head">
+          <div class="fmt-num"><i></i>F6</div>
+          <div>
+            <h3 class="fmt-name">Life Proof</h3>
+            <div class="chips"><span class="chip ox">Proof</span><span class="chip">Monthly, or as clips come in</span></div>
+          </div>
+          <div class="fmt-len">20–40s<small>Client-filmed</small></div>
+        </header>
+
+        <div class="blk">
+          <div class="blk-l"><span class="micro">Example</span><span class="sub">Real post, pulled 5 Sep 2026.</span></div>
+          <div class="ex">
+            <div>
+              <span class="micro">Based on</span>
+              <div class="ex-creator">Shane Dorian<small>surf-trip reel, his top post</small></div>
+              <div class="ex-title">“The pre-trip training paid off”</div>
+              <a class="ig" href="https://www.instagram.com/doriancoreperformance/reel/DbF6lPeIEu3/" target="_blank" rel="noopener"><svg><use href="#i-ig"/></svg>@doriancoreperformance<svg class="arr"><use href="#i-arr"/></svg></a>
+            </div>
+            <div>
+              <div class="stat"><span><b>17.3K</b><small>likes</small></span><span><b>1.0K</b><small>comments</small></span></div>
+              <p class="ex-desc">Training shown through the thing it was for.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="blk-l"><span class="micro">Deconstruction</span><span class="sub">Hook → The thing → CTA</span></div>
+          <div class="decon">
+            <div class="seg hook" style="--s:3"><div class="seg-bar"></div><div class="seg-txt"><div class="seg-t">0–3s</div><div class="seg-n">Hook</div><p class="seg-c">Text on the clip: “She didn’t train to look different. She trained to do this.”</p></div></div>
+            <div class="seg b1" style="--s:27"><div class="seg-bar"></div><div class="seg-txt"><div class="seg-t">3–30s</div><div class="seg-n">The thing</div><p class="seg-c">Client-filmed clip: the hike, the suitcase into the overhead bin, the grandchild, the ski day. Max voice-over, two sentences: name, age, what she trained.</p></div></div>
+            <div class="seg cta" style="--s:5"><div class="seg-bar"></div><div class="seg-txt"><div class="seg-t">End</div><div class="seg-n">CTA</div><p class="seg-c">“What do you want to be strong for?”</p></div></div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="blk-l"><span class="micro">Shots</span><span class="sub">Effort for Max: near zero.</span></div>
+          <div class="shots">
+            <div class="shot"><svg class="icn"><use href="#i-phone"/></svg><div><b>10–20s</b><span>Client phone clip · she sends it (ask at check-in)</span></div></div>
+            <div class="shot"><svg class="icn"><use href="#i-mic"/></svg><div><b>5s</b><span>Max voice memo</span></div></div>
+            <div class="shot"><svg class="icn"><use href="#i-low"/></svg><div><b>3s</b><span>Optional low-angle of her lifting · cut-in</span></div></div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="blk-l"><span class="micro">Max’s hook</span></div>
+          <div>
+            <div class="hook"><p class="hook-q">She didn’t train to look different. She trained to do this.</p></div>
+            <p class="guard" style="margin-top:18px"><b>Guardrail:</b> proof, never before/after bodies.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- F7 -->
+      <article class="fmt reveal" id="f7" style="--fc:var(--f7)">
+        <header class="fmt-head">
+          <div class="fmt-num"><i></i>F7</div>
+          <div>
+            <h3 class="fmt-name">The Keyword</h3>
+            <div class="chips"><span class="chip ox">Leads</span><span class="chip">Every 2 weeks</span></div>
+          </div>
+          <div class="fmt-len">30s<small>One take</small></div>
+        </header>
+
+        <div class="blk">
+          <div class="blk-l"><span class="micro">Example</span><span class="sub">Real post, pulled 5 Sep 2026.</span></div>
+          <div class="ex">
+            <div>
+              <span class="micro">Based on</span>
+              <div class="ex-creator">Harry Mackarness<small>30-second, one-take reel</small></div>
+              <div class="ex-title">“Comment COACHING and I’ll send a DM”</div>
+              <a class="ig" href="https://www.instagram.com/resurgent_harry/reel/DUstBDjDBC0/" target="_blank" rel="noopener"><svg><use href="#i-ig"/></svg>@resurgent_harry<svg class="arr"><use href="#i-arr"/></svg></a>
+            </div>
+            <div>
+              <div class="stat"><span><b>794</b><small>likes</small></span><span><b>30</b><small>comments</small></span></div>
+              <p class="ex-desc">Thirty seconds, one take. The comment is the trigger for the DM.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="blk-l"><span class="micro">Deconstruction</span><span class="sub">Hook → What it is → The word</span></div>
+          <div class="decon">
+            <div class="seg hook" style="--s:3"><div class="seg-bar"></div><div class="seg-txt"><div class="seg-t">0–3s</div><div class="seg-n">Hook</div><p class="seg-c">“If you’re over 40 and you’ve never lifted, I made this for you.”</p></div></div>
+            <div class="seg b1" style="--s:17"><div class="seg-bar"></div><div class="seg-txt"><div class="seg-t">3–20s</div><div class="seg-n">What it is</div><p class="seg-c">Holds the printed guide; three things that are in it.</p></div></div>
+            <div class="seg cta" style="--s:10"><div class="seg-bar"></div><div class="seg-txt"><div class="seg-t">20–30s</div><div class="seg-n">The word</div><p class="seg-c">“Comment STRONG and I’ll send it.”</p></div></div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="blk-l"><span class="micro">Shots</span></div>
+          <div class="shots">
+            <div class="shot"><svg class="icn"><use href="#i-head"/></svg><div><b>20s</b><span>Talking head · holding the guide</span></div></div>
+            <div class="shot"><svg class="icn"><use href="#i-close"/></svg><div><b>5s</b><span>Close-up · the guide pages</span></div></div>
+            <div class="shot"><svg class="icn"><use href="#i-cine"/></svg><div><b>3s</b><span>Cinematic · studio</span></div></div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <div class="blk-l"><span class="micro">Max’s hook</span></div>
+          <div><div class="hook"><p class="hook-q">If you’re over 40 and you’ve never lifted, I made this for you.</p></div></div>
+        </div>
+
+        <div class="blk">
+          <div class="blk-l"><span class="micro">Mechanics</span><span class="sub">What happens after the comment.</span></div>
+          <div class="mech">
+            <span>Comment STRONG</span><i></i><span>ManyChat auto-DM</span><i></i><a href="../start/">/start funnel page</a><i></i><span>Email</span><i></i><span>Intro call</span>
+          </div>
+        </div>
+      </article>
+
+    </div><!-- /fmts -->
+  </div>
+</section>
+
+<!-- 02 · SHOOTING SCHEDULE -->
+<section class="part light" id="schedule">
+  <div class="wrap">
+    <div class="part-head reveal">
+      <div class="part-num">02</div>
+      <div><span class="micro">Part two · What Max gets on Sunday</span><span class="bar"></span><h2 class="part-title">The shooting schedule</h2></div>
+      <p class="part-intro">One call sheet, sent Sunday 18:00. Ninety minutes on Tuesday, in this order.</p>
+    </div>
+
+    <div class="sheet reveal">
+      <div class="sheet-top">
+        <div><span class="micro">Week</span><b>38</b></div>
+        <div><span class="micro">Day</span><b>Tuesday 16 Sep</b></div>
+        <div><span class="micro">Time</span><b>10:30–12:00</b></div>
+        <div><span class="micro">Location</span><b>Studio + Humlegården</b></div>
+      </div>
+      <div class="sheet-kit">
+        <span><b>Wardrobe</b>dark tee, tattoos visible</span>
+        <span><b>Gear</b>phone, small tripod, lav mic</span>
+        <span><b>Client</b>Ingrid (11:10, consent on file)</span>
+      </div>
+    </div>
+
+    <div class="tl">
+      <div class="tl-row reveal">
+        <div class="tl-time">10:30</div>
+        <div>
+          <div class="piece-h"><i class="fsw" style="--fc:var(--f4)"></i><b>F4 · One Minute ×3</b></div>
+          <div class="srow">
+            <svg class="icn"><use href="#i-head"/></svg>
+            <div class="dur"><div class="bars"><i style="--w:100%"></i><i style="--w:100%"></i><i style="--w:100%"></i></div><b>3 × 60s</b></div>
+            <div class="fr"><b>Talking head</b>Studio chair, phone at eye level, window left</div>
+            <div class="nt">Hooks: “Tuesday at seven” · “Your knees” · “Nobody is watching you”</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-row reveal">
+        <div class="tl-time">10:50</div>
+        <div>
+          <div class="piece-h"><i class="fsw" style="--fc:var(--f2)"></i><b>F2 · The List</b></div>
+          <div class="srow">
+            <svg class="icn"><use href="#i-walk"/></svg>
+            <div class="dur"><div class="bars"><i style="--w:83.3%"></i><i style="--w:83.3%"></i></div><b>50s ×2</b></div>
+            <div class="fr"><b>Walking take · 2 takes</b>Humlegården path, phone at chest height, 0.5× lens</div>
+            <div class="nt">Five items on the card. A beat of silence between each. End: “What have I missed?”</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-row reveal">
+        <div class="tl-time">11:10</div>
+        <div>
+          <div class="piece-h"><i class="fsw" style="--fc:var(--f5)"></i><b>F5 · The Lift (deadlift)</b><span class="chip">Ingrid</span></div>
+          <div class="srow">
+            <svg class="icn"><use href="#i-low"/></svg>
+            <div class="dur"><div class="bars"><i style="--w:8.3%"></i></div><b>5s</b></div>
+            <div class="fr"><b>Low-angle wide</b>Floor level, front, feet + bar</div>
+            <div class="nt">Set-up only</div>
+          </div>
+          <div class="srow">
+            <svg class="icn"><use href="#i-side"/></svg>
+            <div class="dur"><div class="bars"><i style="--w:13.3%"></i></div><b>8s</b></div>
+            <div class="fr"><b>Side angle</b>Hip height, 90° to the bar</div>
+            <div class="nt">Ingrid, 3 reps</div>
+          </div>
+          <div class="srow">
+            <svg class="icn"><use href="#i-close"/></svg>
+            <div class="dur"><div class="bars"><i style="--w:5%"></i></div><b>3s</b></div>
+            <div class="fr"><b>Close-up</b>Hands on the bar, grip</div>
+            <div class="nt">Chalk visible</div>
+          </div>
+          <div class="srow">
+            <svg class="icn"><use href="#i-head"/></svg>
+            <div class="dur"><div class="bars"><i style="--w:16.7%"></i></div><b>10s</b></div>
+            <div class="fr"><b>Cue to camera</b>Chest height, Max standing at the bar</div>
+            <div class="nt">“Push the floor away. Bar stays on your legs.”</div>
+          </div>
+          <div class="srow">
+            <svg class="icn"><use href="#i-cine"/></svg>
+            <div class="dur"><div class="bars"><i style="--w:5%"></i></div><b>3s</b></div>
+            <div class="fr"><b>Cinematic</b>Chalk cloud, slow</div>
+            <div class="nt">Cover frame</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-row reveal">
+        <div class="tl-time">11:35</div>
+        <div>
+          <div class="piece-h"><i class="fsw" style="--fc:var(--f3)"></i><b>F3 · The Lens</b></div>
+          <div class="srow">
+            <svg class="icn"><use href="#i-head"/></svg>
+            <div class="dur"><div class="bars"><i style="--w:16.7%"></i><i style="--w:16.7%"></i><i style="--w:16.7%"></i></div><b>3 × 10s</b></div>
+            <div class="fr"><b>Talking head</b>Studio chair</div>
+            <div class="nt">Hook, story, lesson — three separate clips</div>
+          </div>
+          <div class="srow">
+            <svg class="icn"><use href="#i-cine"/></svg>
+            <div class="dur"><div class="bars"><i style="--w:5%"></i></div><b>3s</b></div>
+            <div class="fr"><b>Cinematic detail</b>Studio door / log book</div>
+            <div class="nt">The “lesson” visual</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-row reveal">
+        <div class="tl-time">11:50</div>
+        <div>
+          <div class="piece-h"><i class="fsw" style="--fc:var(--bone-3)"></i><b>B-roll bank</b><span class="chip">10 × 3–5s · ~40s</span></div>
+          <div class="broll">
+            <div><svg class="icn"><use href="#i-cine"/></svg><b>3–5s</b><small>01</small></div>
+            <div><svg class="icn"><use href="#i-cine"/></svg><b>3–5s</b><small>02</small></div>
+            <div><svg class="icn"><use href="#i-cine"/></svg><b>3–5s</b><small>03</small></div>
+            <div><svg class="icn"><use href="#i-cine"/></svg><b>3–5s</b><small>04</small></div>
+            <div><svg class="icn"><use href="#i-cine"/></svg><b>3–5s</b><small>05</small></div>
+            <div><svg class="icn"><use href="#i-cine"/></svg><b>3–5s</b><small>06</small></div>
+            <div><svg class="icn"><use href="#i-cine"/></svg><b>3–5s</b><small>07</small></div>
+            <div><svg class="icn"><use href="#i-cine"/></svg><b>3–5s</b><small>08</small></div>
+            <div><svg class="icn"><use href="#i-cine"/></svg><b>3–5s</b><small>09</small></div>
+            <div><svg class="icn"><use href="#i-cine"/></svg><b>3–5s</b><small>10</small></div>
+          </div>
+          <div class="chips"><span class="chip">Plates loading</span><span class="chip">Empty studio wide</span><span class="chip">Coffee</span><span class="chip">Door</span><span class="chip">Hands</span><span class="chip">Chalk</span></div>
+          <p class="guard" style="margin-top:12px">Used across every edit.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="totals reveal">
+      <div><b>24</b><small>Clips</small></div>
+      <div><b>~7 min</b><small>Raw footage</small></div>
+      <div><b>6</b><small>Posts</small></div>
+    </div>
+    <div class="notes reveal">
+      <div><span class="micro">During the week</span>F6 — ask Karin at Thursday’s check-in for 10 seconds of the hike.</div>
+      <div><span class="micro">Upload</span>Drive → <code>Max / Raw / W38</code> by Tuesday 14:00.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 · CALENDAR -->
+<section class="part" id="calendar">
+  <div class="wrap">
+    <div class="part-head reveal">
+      <div class="part-num">03</div>
+      <div><span class="micro">Part three · Four weeks</span><span class="bar"></span><h2 class="part-title">The content calendar</h2></div>
+      <p class="part-intro"><b>6 posts a week.</b> Slots: Mon 07:00 · Tue 12:00 · Wed 18:00 · Thu 12:00 · Fri 07:00 · Sat 10:00.</p>
+    </div>
+
+    <div class="cal-legend reveal">
+      <span><i class="fsw" style="--fc:var(--f1)"></i><b>F1</b>The Reintroduction</span>
+      <span><i class="fsw" style="--fc:var(--f2)"></i><b>F2</b>The List</span>
+      <span><i class="fsw" style="--fc:var(--f3)"></i><b>F3</b>The Lens</span>
+      <span><i class="fsw" style="--fc:var(--f4)"></i><b>F4</b>One Minute</span>
+      <span><i class="fsw" style="--fc:var(--f5)"></i><b>F5</b>The Lift</span>
+      <span><i class="fsw" style="--fc:var(--f6)"></i><b>F6</b>Life Proof</span>
+      <span><i class="fsw" style="--fc:var(--f7)"></i><b>F7</b>The Keyword</span>
+    </div>
+
+    <div class="cal-tabs" role="tablist" aria-label="Week">
+      <button type="button" data-week="w38" aria-pressed="true">W38</button>
+      <button type="button" data-week="w39" aria-pressed="false">W39</button>
+      <button type="button" data-week="w40" aria-pressed="false">W40</button>
+      <button type="button" data-week="w41" aria-pressed="false">W41</button>
+    </div>
+
+    <div class="cal-wrap reveal">
+      <div class="cal">
+        <div class="hd"><b>Week</b><small>&nbsp;</small></div>
+        <div class="hd"><b>Mon</b><small>07:00</small></div>
+        <div class="hd"><b>Tue</b><small>12:00</small></div>
+        <div class="hd"><b>Wed</b><small>18:00</small></div>
+        <div class="hd"><b>Thu</b><small>12:00</small></div>
+        <div class="hd"><b>Fri</b><small>07:00</small></div>
+        <div class="hd"><b>Sat</b><small>10:00</small></div>
+
+        <div class="wk is-active" id="w38">
+          <div class="wl"><b>W38</b><small>14–20 Sep</small></div>
+          <div class="cell" style="--fc:var(--f5);--tint:var(--f5-t)"><small class="dl">Mon<em>07:00</em></small><div><b>F5</b><p>Deadlift (1/5)</p></div></div>
+          <div class="cell" style="--fc:var(--f4);--tint:var(--f4-t)"><small class="dl">Tue<em>12:00</em></small><div><b>F4</b><p>“Tuesday at seven”</p></div></div>
+          <div class="cell" style="--fc:var(--f2);--tint:var(--f2-t)"><small class="dl">Wed<em>18:00</em></small><div><b>F2</b><p>The List: advice in the bin</p></div></div>
+          <div class="cell" style="--fc:var(--f4);--tint:var(--f4-t)"><small class="dl">Thu<em>12:00</em></small><div><b>F4</b><p>“Your knees”</p></div></div>
+          <div class="cell" style="--fc:var(--f3);--tint:var(--f3-t)"><small class="dl">Fri<em>07:00</em></small><div><b>F3</b><p>The Lens: a boring day</p></div></div>
+          <div class="cell" style="--fc:var(--f1);--tint:var(--f1-t)"><small class="dl">Sat<em>10:00</em></small><div><b>F1</b><p>The Reintroduction (pinned)</p></div></div>
+        </div>
+
+        <div class="wk" id="w39">
+          <div class="wl"><b>W39</b><small>21–27 Sep</small></div>
+          <div class="cell" style="--fc:var(--f5);--tint:var(--f5-t)"><small class="dl">Mon<em>07:00</em></small><div><b>F5</b><p>Goblet squat (2/5)</p></div></div>
+          <div class="cell" style="--fc:var(--f4);--tint:var(--f4-t)"><small class="dl">Tue<em>12:00</em></small><div><b>F4</b><p>“Recovery is training”</p></div></div>
+          <div class="cell" style="--fc:var(--f3);--tint:var(--f3-t)"><small class="dl">Wed<em>18:00</em></small><div><b>F3</b><p>The Lens: never surprise them</p></div></div>
+          <div class="cell" style="--fc:var(--f4);--tint:var(--f4-t)"><small class="dl">Thu<em>12:00</em></small><div><b>F4</b><p>“Nobody is watching you”</p></div></div>
+          <div class="cell" style="--fc:var(--f7);--tint:var(--f7-t)"><small class="dl">Fri<em>07:00</em></small><div><b>F7</b><p>Comment STRONG</p></div></div>
+          <div class="cell" style="--fc:var(--f6);--tint:var(--f6-t)"><small class="dl">Sat<em>10:00</em></small><div><b>F6</b><p>Life proof: Karin’s hike</p></div></div>
+        </div>
+
+        <div class="wk" id="w40">
+          <div class="wl"><b>W40</b><small>28 Sep–4 Oct</small></div>
+          <div class="cell" style="--fc:var(--f5);--tint:var(--f5-t)"><small class="dl">Mon<em>07:00</em></small><div><b>F5</b><p>Push (3/5)</p></div></div>
+          <div class="cell" style="--fc:var(--f4);--tint:var(--f4-t)"><small class="dl">Tue<em>12:00</em></small><div><b>F4</b><p>“Discipline is a plan”</p></div></div>
+          <div class="cell" style="--fc:var(--f2);--tint:var(--f2-t)"><small class="dl">Wed<em>18:00</em></small><div><b>F2</b><p>The List: “toning” edition</p></div></div>
+          <div class="cell" style="--fc:var(--f4);--tint:var(--f4-t)"><small class="dl">Thu<em>12:00</em></small><div><b>F4</b><p>“Strong is not a size”</p></div></div>
+          <div class="cell" style="--fc:var(--f3);--tint:var(--f3-t)"><small class="dl">Fri<em>07:00</em></small><div><b>F3</b><p>The Lens: the plan carries you</p></div></div>
+          <div class="cell" style="--fc:var(--f6);--tint:var(--f6-t)"><small class="dl">Sat<em>10:00</em></small><div><b>F6</b><p>Life proof: the suitcase</p></div></div>
+        </div>
+
+        <div class="wk" id="w41">
+          <div class="wl"><b>W41</b><small>5–11 Oct</small></div>
+          <div class="cell" style="--fc:var(--f5);--tint:var(--f5-t)"><small class="dl">Mon<em>07:00</em></small><div><b>F5</b><p>Row (4/5)</p></div></div>
+          <div class="cell" style="--fc:var(--f4);--tint:var(--f4-t)"><small class="dl">Tue<em>12:00</em></small><div><b>F4</b><p>One Minute</p></div></div>
+          <div class="cell" style="--fc:var(--f3);--tint:var(--f3-t)"><small class="dl">Wed<em>18:00</em></small><div><b>F3</b><p>The Lens</p></div></div>
+          <div class="cell" style="--fc:var(--f4);--tint:var(--f4-t)"><small class="dl">Thu<em>12:00</em></small><div><b>F4</b><p>One Minute</p></div></div>
+          <div class="cell" style="--fc:var(--f7);--tint:var(--f7-t)"><small class="dl">Fri<em>07:00</em></small><div><b>F7</b><p>Comment STRONG</p></div></div>
+          <div class="cell" style="--fc:var(--f6);--tint:var(--f6-t)"><small class="dl">Sat<em>10:00</em></small><div><b>F6</b><p>Life proof</p></div></div>
+        </div>
+      </div>
+    </div>
+    <p class="cal-note">Week 42 closes the series (F5 loaded carry, 5/5) and the rotation repeats with new items from the banks.</p>
+
+    <div class="metrics-l reveal"><span class="micro">Metrics that matter, in order</span><span class="bar"></span></div>
+    <div class="metrics reveal">
+      <div class="m1"><small>01</small><b>Calls booked</b></div>
+      <div class="m2"><small>02</small><b>DMs started</b></div>
+      <div class="m3"><small>03</small><b>Saves</b></div>
+      <div class="m4"><small>04</small><b>Comments</b></div>
+      <div class="m5"><small>05</small><b>Views</b></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>Cursus Capital · Prepared for Max Sandell · Concept draft — names, numbers and links illustrative</div>
+    <nav aria-label="Concept pages"><a href="../">Site</a><a href="../start/">Funnel</a></nav>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var d=document,root=d.documentElement;
+  root.classList.add('js');
+  var each=function(list,fn){Array.prototype.forEach.call(list,fn)};
+
+  /* reveal on scroll */
+  var els=d.querySelectorAll('.reveal');
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce||!('IntersectionObserver' in window)){
+    each(els,function(el){el.classList.add('in')});
+  }else{
+    var io=new IntersectionObserver(function(entries){
+      var i=0;
+      entries.forEach(function(en){
+        if(!en.isIntersecting)return;
+        var el=en.target;
+        el.style.transitionDelay=(i++*60)+'ms';
+        el.classList.add('in');
+        io.unobserve(el);
+      });
+    },{rootMargin:'0px 0px -6% 0px',threshold:0.04});
+    each(els,function(el){io.observe(el)});
+  }
+
+  /* calendar week switcher (mobile) */
+  var tabs=d.querySelectorAll('.cal-tabs button'),weeks=d.querySelectorAll('.cal .wk');
+  function show(id){
+    each(weeks,function(w){w.classList.toggle('is-active',w.id===id)});
+    each(tabs,function(b){b.setAttribute('aria-pressed',b.getAttribute('data-week')===id?'true':'false')});
+  }
+  each(tabs,function(b){b.addEventListener('click',function(){show(b.getAttribute('data-week'))})});
+})();
+</script>
+</body>
+</html>

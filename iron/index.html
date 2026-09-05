@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Max Sandell — Strength Coaching for Women 40+ · Stockholm</title>
+<meta name="description" content="Private strength coaching for women 40+ in Östermalm, Stockholm. Twelve years in close protection, now protecting your strength. One client at a time. No weigh-ins, no before-and-after — strength numbers only.">
+<meta name="theme-color" content="#111113">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+  /* ———————————————————————— IRON tokens ———————————————————————— */
+  :root{
+    --bg:#111113;
+    --bg-2:#18181b;
+    --bg-3:#222226;
+    --line:rgba(236,230,218,.14);
+    --line-strong:rgba(236,230,218,.32);
+    --bone:#ece6da;
+    --bone-2:#b9b2a6;
+    --bone-3:#7f796f;
+    --ox:#8e2733;
+    --ox-hi:#b23a48;
+    --light-bg:#e9e3d7;
+    --light-ink:#141416;
+    --light-line:rgba(20,20,22,.14);
+    /* derived */
+    --light-line-strong:rgba(20,20,22,.36);
+    --light-ink-2:rgba(20,20,22,.76);
+    --light-ink-3:rgba(20,20,22,.54);
+    --fd:'Big Shoulders Display','Arial Narrow','Helvetica Neue',Arial,sans-serif;
+    --fb:'Instrument Sans',-apple-system,'Helvetica Neue',Arial,sans-serif;
+    --pad:clamp(72px,10vw,160px);
+    --nav-h:80px;
+  }
+
+  /* ———————————————————————— base ———————————————————————— */
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;scroll-padding-top:var(--nav-h);-webkit-text-size-adjust:100%}
+  html,body{overflow-x:clip}
+  body{
+    font-family:var(--fb);font-size:17px;line-height:1.6;font-weight:400;
+    color:var(--bone);background:var(--bg);
+    -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  }
+  ::selection{background:var(--ox);color:var(--bone)}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  ul,ol{list-style:none}
+  button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+  [hidden]{display:none!important}
+  :focus-visible{outline:1px solid var(--bone);outline-offset:3px}
+  .light :focus-visible{outline-color:var(--light-ink)}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .skip{position:absolute;left:16px;top:-120px;z-index:100;background:var(--ox);color:var(--bone);padding:14px 18px;font:600 12px/1 var(--fb);text-transform:uppercase;letter-spacing:.18em}
+  .skip:focus{top:16px}
+
+  .wrap{width:100%;max-width:1360px;margin-inline:auto;padding-inline:24px}
+  @media(min-width:720px){.wrap{padding-inline:40px}}
+
+  /* ———————————————————————— type ———————————————————————— */
+  .display{font-family:var(--fd);font-weight:700;text-transform:uppercase;line-height:.92;letter-spacing:-.01em}
+  .h1{font-weight:800;font-size:clamp(56px,11vw,168px)}
+  .h2{font-size:clamp(40px,6vw,88px)}
+  .h2--m{font-size:clamp(38px,4.6vw,68px);text-wrap:balance}
+  .h2--xl{font-weight:800;font-size:clamp(48px,8.5vw,136px)}
+  .ln{display:block}
+  .ox{color:var(--ox)}
+  .micro{font-family:var(--fb);font-weight:600;font-size:11px;line-height:1.5;text-transform:uppercase;letter-spacing:.22em;color:var(--bone-3)}
+  .micro--ox{color:var(--ox)}
+  .light .micro{color:var(--light-ink-3)}
+  .light .micro--ox{color:var(--ox)}
+  .lede{font-size:18px;line-height:1.6;color:var(--bone-2);max-width:50ch}
+  .light .lede{color:var(--light-ink-2)}
+  .body{color:var(--bone-2)}
+  .light .body{color:var(--light-ink-2)}
+  .small{font-size:12.5px;line-height:1.5;letter-spacing:.02em;color:var(--bone-3)}
+  .light .small{color:var(--light-ink-3)}
+
+  /* ———————————————————————— signature marks ———————————————————————— */
+  .kicker{display:flex;align-items:baseline;gap:16px}
+  .kicker__num{font-family:var(--fd);font-weight:700;font-size:20px;line-height:1;letter-spacing:.04em;color:var(--bone-3)}
+  .light .kicker__num{color:var(--light-ink-3)}
+  .bar{display:block;width:48px;height:3px;background:var(--ox)}
+  .sec-kicker{margin-bottom:28px}
+  .sec-kicker .bar{margin-top:14px}
+
+  /* ———————————————————————— buttons ———————————————————————— */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:14px;
+    font-family:var(--fb);font-weight:600;font-size:12px;line-height:1;
+    text-transform:uppercase;letter-spacing:.18em;
+    padding:18px 28px;border:1px solid transparent;border-radius:0;white-space:nowrap;
+    transition:background-color .18s ease,border-color .18s ease,color .18s ease;
+  }
+  .btn svg{width:14px;height:14px;flex:none}
+  .btn--primary{background:var(--ox);color:var(--bone)}
+  .btn--primary:hover{background:var(--ox-hi)}
+  .btn--primary:focus-visible{outline:none;border-color:var(--bone)}
+  .btn--ghost{background:transparent;border-color:var(--line-strong);color:var(--bone)}
+  .btn--ghost:hover{border-color:var(--bone)}
+  .light .btn--ghost{border-color:var(--light-line-strong);color:var(--light-ink)}
+  .light .btn--ghost:hover{border-color:var(--light-ink)}
+  .btn--sm{padding:12px 18px;font-size:11px}
+
+  /* ———————————————————————— chips ———————————————————————— */
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{
+    display:inline-flex;align-items:center;gap:10px;
+    border:1px solid var(--line-strong);padding:9px 12px;
+    font-family:var(--fb);font-weight:600;font-size:10.5px;line-height:1;letter-spacing:.16em;text-transform:uppercase;color:var(--bone-2);
+  }
+  .chip::before{content:"";width:6px;height:6px;background:var(--ox);flex:none}
+
+  /* ———————————————————————— 1px rule grids ———————————————————————— */
+  .rules{display:grid;gap:1px;background:var(--line);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .rules>*{background:var(--bg)}
+  .light .rules{background:var(--light-line);border-color:var(--light-line)}
+  .light .rules>*{background:var(--light-bg)}
+
+  /* ———————————————————————— photography ———————————————————————— */
+  .ph img{filter:grayscale(1) contrast(1.15) brightness(.88) sepia(.18)}
+
+  /* ———————————————————————— motion ———————————————————————— */
+  .js .rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease-out,transform .6s ease-out}
+  .js .rv.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .js .rv{opacity:1;transform:none;transition:none}
+  }
+
+  /* ———————————————————————— section scaffolding ———————————————————————— */
+  .sec{padding:var(--pad) 0}
+  .divider{border-top:1px solid var(--line-strong)}
+  .light{background:var(--light-bg);color:var(--light-ink)}
+  .sec-head{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:40px;align-items:end;margin-bottom:clamp(40px,6vw,72px)}
+  .sec-head .lede{justify-self:end;margin-bottom:6px}
+  @media(max-width:1100px){
+    .sec-head{grid-template-columns:1fr;gap:28px}
+    .sec-head .lede{justify-self:start}
+  }
+
+  /* ———————————————————————— nav ———————————————————————— */
+  .nav{
+    position:fixed;top:0;left:0;right:0;z-index:60;
+    background:transparent;border-bottom:1px solid transparent;
+    transition:background-color .18s ease,border-color .18s ease;
+  }
+  .nav.is-solid{background:var(--bg);border-bottom-color:var(--line)}
+  .nav__inner{display:flex;align-items:center;justify-content:space-between;gap:24px;height:var(--nav-h)}
+  .wordmark{font-family:var(--fd);font-weight:700;font-size:22px;line-height:1;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+  .nav__links{display:flex;gap:32px}
+  .nav__links a{font-family:var(--fb);font-weight:600;font-size:11px;line-height:1;text-transform:uppercase;letter-spacing:.18em;color:var(--bone-2);padding:10px 0;transition:color .18s ease}
+  .nav__links a:hover{color:var(--bone)}
+  .nav:not(.is-solid) .nav__links a{color:var(--bone)}
+  .nav__actions{display:flex;gap:10px}
+  .burger{display:none;width:44px;height:44px;place-items:center;margin-right:-11px}
+  @media(max-width:820px){
+    .nav__links,.nav__actions{display:none}
+    .burger{display:grid}
+  }
+  .menu{
+    position:fixed;inset:0;z-index:55;background:var(--bg);
+    padding:calc(var(--nav-h) + 24px) 24px 32px;
+    display:flex;flex-direction:column;justify-content:space-between;gap:32px;overflow-y:auto;
+  }
+  .menu__nav{border-top:1px solid var(--line-strong)}
+  .menu__link{
+    display:flex;align-items:baseline;gap:18px;
+    font-family:var(--fd);font-weight:700;font-size:clamp(44px,12vw,72px);line-height:1;text-transform:uppercase;letter-spacing:-.01em;
+    padding:18px 0;border-bottom:1px solid var(--line);
+  }
+  .menu__n{font-size:18px;letter-spacing:.04em;color:var(--bone-3)}
+  .menu__actions{display:grid;gap:10px}
+  .menu__actions .btn{width:100%}
+  body.menu-open{overflow:hidden}
+
+  /* ———————————————————————— 01 hero ———————————————————————— */
+  .hero{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;background:var(--bg)}
+  .hero__main{position:relative;flex:1;display:flex;flex-direction:column}
+  .hero__media{position:absolute;top:0;right:0;bottom:0;width:54%;overflow:hidden}
+  .hero__media img{width:100%;height:100%;object-fit:cover;object-position:50% 35%}
+  .hero__media::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(17,17,19,.78) 0,rgba(17,17,19,.42) 150px,rgba(17,17,19,.42) 52%,rgba(17,17,19,.9) 100%);
+  }
+  .hero__inner{position:relative;z-index:1;flex:1;display:flex;flex-direction:column;padding-top:calc(var(--nav-h) + clamp(16px,3vh,28px));padding-bottom:clamp(28px,4vw,40px)}
+  .hero__kicker .bar{margin-bottom:12px}
+  .hero__bottom{margin-top:auto;padding-top:clamp(48px,8vh,96px)}
+  .hero__h1 .ln{display:block}
+  .hero__row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:32px 48px;align-items:end;margin-top:clamp(24px,3vw,36px)}
+  .hero__sub{font-size:18px;line-height:1.5;color:var(--bone-2);max-width:60ch}
+  .hero__cta{display:flex;gap:10px;flex-wrap:wrap}
+  .hero__stats{border-top:1px solid var(--line-strong);background:var(--bg)}
+  .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+  .stat{padding:18px 24px 20px 28px;border-left:1px solid var(--line)}
+  .stat:first-child{border-left:0;padding-left:0}
+  .stat__n{display:block;font-family:var(--fd);font-weight:700;font-size:clamp(40px,5vw,76px);line-height:.9;letter-spacing:-.01em}
+  .stat__n small{font-size:.4em;font-weight:600;color:var(--bone-3);margin-left:.12em;letter-spacing:.02em}
+  .stat__l{display:block;margin-top:8px}
+  @media(max-width:899px){
+    .hero__h1 .ln{display:inline}
+  }
+  @media(max-width:820px){
+    .hero__media{width:100%}
+    .hero__media::after{background:linear-gradient(180deg,rgba(17,17,19,.74) 0%,rgba(17,17,19,.46) 30%,rgba(17,17,19,.8) 56%,var(--bg) 84%)}
+    .hero__kicker .micro,.hero__kicker .kicker__num{color:var(--bone-2)}
+    .hero__row{grid-template-columns:1fr;gap:28px}
+    .hero__cta .btn{flex:1 1 auto}
+  }
+  @media(max-width:560px){
+    .stat{padding:20px 12px 22px 16px}
+    .stat__l{font-size:10px;letter-spacing:.16em}
+  }
+
+  /* ———————————————————————— 02 the truth (light) ———————————————————————— */
+  .truth__grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .truth__col{display:flex;flex-direction:column;padding:36px 32px 44px;min-height:380px}
+  .truth__col:first-child{padding-left:0}
+  .truth__col:last-child{padding-right:0}
+  .truth__fear{font-weight:600;font-size:clamp(28px,2.7vw,38px);line-height:.98;letter-spacing:0;margin:16px 0 32px;max-width:14ch}
+  .truth__rule{border:0;border-top:1px solid var(--light-line);margin-top:auto}
+  .truth__col .micro--ox{margin:26px 0 10px}
+  .truth__col .body{font-size:16px;max-width:36ch}
+  @media(max-width:820px){
+    .truth__grid{grid-template-columns:1fr}
+    .truth__col{padding:32px 0 36px;min-height:0}
+    .truth__fear{margin-bottom:24px}
+    .truth__rule{margin-top:0}
+  }
+
+  /* ———————————————————————— 03 the protector ———————————————————————— */
+  .protector__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .protector__media{position:relative;min-height:100%}
+  .protector__media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 18%}
+  .protector__media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(17,17,19,0) 60%,rgba(17,17,19,.72) 100%);pointer-events:none}
+  .protector__cap{position:absolute;left:40px;bottom:40px;z-index:1}
+  .protector__cap .bar{margin-bottom:14px}
+  .protector__cap .micro{color:var(--bone-2)}
+  .protector__body{padding:var(--pad) clamp(24px,6vw,96px);display:flex;align-items:center}
+  .protector__inner{max-width:600px}
+  .protector__inner .h2--m{margin-bottom:36px}
+  .protector__story p{color:var(--bone-2);margin-bottom:18px;max-width:58ch}
+  .protector__story p strong{color:var(--bone);font-weight:600}
+  .record{margin:40px 0 36px;border-top:1px solid var(--line-strong)}
+  .record__row{display:grid;grid-template-columns:172px minmax(0,1fr);gap:20px;padding:18px 0;border-bottom:1px solid var(--line)}
+  .record__row dt{padding-top:3px;color:var(--bone)}
+  .record__row dd{font-size:15.5px;color:var(--bone-2)}
+  @media(max-width:1100px){
+    .record__row{grid-template-columns:150px minmax(0,1fr)}
+  }
+  @media(max-width:820px){
+    .protector__grid{grid-template-columns:1fr}
+    .protector__media{min-height:0;aspect-ratio:4/5}
+    .protector__cap{left:24px;bottom:24px}
+    .protector__body{padding:clamp(56px,10vw,96px) 24px var(--pad)}
+    .protector__inner{max-width:none}
+    .record__row{grid-template-columns:1fr;gap:6px}
+  }
+
+  /* ———————————————————————— 04 the method ———————————————————————— */
+  .steps{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .step{padding:32px 28px 40px;min-height:340px;display:flex;flex-direction:column;gap:14px}
+  .step:first-child{padding-left:0}
+  .step:last-child{padding-right:0}
+  .step__n{font-family:var(--fd);font-weight:700;font-size:64px;line-height:.9;letter-spacing:-.01em;color:var(--bone-3);margin-bottom:10px}
+  .step__t{font-weight:600;font-size:clamp(26px,2.2vw,32px);line-height:.96;letter-spacing:0}
+  .step .body{font-size:15.5px;margin-top:6px}
+  .evidence{margin-top:clamp(56px,8vw,96px)}
+  .evidence__head{display:flex;justify-content:space-between;align-items:baseline;gap:24px;flex-wrap:wrap;margin-bottom:20px}
+  .evidence__src{border-bottom:1px solid var(--line-strong);padding-bottom:2px}
+  .tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+  .tile{background:var(--bg-3);padding:28px 28px 32px;min-height:280px;display:flex;flex-direction:column}
+  .tile__n{font-family:var(--fd);font-weight:700;font-size:clamp(56px,5.5vw,84px);line-height:.9;letter-spacing:-.01em}
+  .tile__l{margin:18px 0 14px}
+  .tile .body{font-size:15px;margin-top:auto}
+  @media(max-width:1100px){
+    .steps,.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .step{min-height:0}
+    .step:nth-child(2){padding-right:0}
+    .step:nth-child(3){padding-left:0}
+    .tile{min-height:0}
+  }
+  @media(max-width:560px){
+    .steps,.tiles{grid-template-columns:1fr}
+    .step{padding:28px 0 32px}
+  }
+
+  /* ———————————————————————— 05 coaching (light) ———————————————————————— */
+  .offers{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .offer{display:flex;flex-direction:column;gap:18px;padding:40px 36px 44px;min-height:560px}
+  .offer:first-child{padding-left:40px}
+  .light .offers .offer--feature{background:var(--light-ink);color:var(--bone)}
+  .offer--feature .micro{color:var(--bone-3)}
+  .offer--feature .body{color:var(--bone-2)}
+  .offer__name{font-size:clamp(38px,3.4vw,52px)}
+  .offer__sub{font-size:15.5px}
+  .offer__list{display:grid;gap:10px;margin-top:6px}
+  .offer__list li{position:relative;padding-left:26px;font-size:15px;color:var(--light-ink-2)}
+  .offer--feature .offer__list li{color:var(--bone-2)}
+  .offer__list li::before{content:"";position:absolute;left:0;top:.75em;width:12px;height:1px;background:var(--ox)}
+  .offer__price{margin-top:auto;padding-top:24px;border-top:1px solid var(--light-line);display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+  .offer--feature .offer__price{border-color:var(--line)}
+  .offer__amount{font-size:42px;line-height:1;white-space:nowrap}
+  .offer__per{font-family:var(--fb);font-weight:600;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--light-ink-3)}
+  .offer--feature .offer__per{color:var(--bone-3)}
+  .offer .btn{align-self:flex-start;margin-top:8px}
+  .light .offers .offer--feature .btn--ghost{border-color:var(--line-strong);color:var(--bone)}
+  .light .offers .offer--feature .btn--ghost:hover{border-color:var(--bone)}
+  .banner{margin-top:56px;border-top:1px solid var(--light-line-strong);border-bottom:1px solid var(--light-line-strong);padding:28px 0;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+  .banner__t{font-family:var(--fd);font-weight:600;font-size:clamp(24px,2.4vw,32px);line-height:1;text-transform:uppercase;letter-spacing:0}
+  .banner__t span{display:block;font-family:var(--fb);font-weight:400;font-size:15.5px;line-height:1.5;text-transform:none;letter-spacing:0;color:var(--light-ink-2);margin-top:10px}
+  @media(max-width:1100px){
+    .offer{padding:36px 28px 40px;min-height:0}
+    .offer:first-child{padding-left:32px}
+  }
+  @media(max-width:820px){
+    .offers{grid-template-columns:1fr}
+    .offer,.offer:first-child{padding:36px 0 40px}
+    .light .offers .offer--feature{padding:36px 24px 40px}
+  }
+
+  /* ———————————————————————— 06 results ———————————————————————— */
+  .results__grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .results__media{position:relative;border-right:1px solid var(--line);min-height:100%}
+  .results__media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%}
+  .result{padding:36px 0 40px 40px;border-top:1px solid var(--line)}
+  .result:first-child{border-top:0}
+  .result__fig{margin:14px 0 14px;font-family:var(--fd);font-weight:700;font-size:clamp(56px,7vw,112px);line-height:.9;letter-spacing:-.01em}
+  .result__figv{display:inline-flex;align-items:baseline;gap:.1em;flex-wrap:wrap}
+  .result__from{color:var(--bone-3)}
+  .result__arrow{width:.62em;height:.22em;color:var(--ox);align-self:center;flex:none}
+  .result__unit{font-size:.3em;font-weight:600;color:var(--bone-3);letter-spacing:.04em;margin-left:.16em;text-transform:uppercase}
+  .result .body{font-size:15.5px;max-width:44ch}
+  .quotes{margin-top:clamp(56px,8vw,96px);grid-template-columns:repeat(3,minmax(0,1fr))}
+  .quote{display:flex;flex-direction:column;gap:20px;padding:32px 32px 36px}
+  .quote:first-child{padding-left:0}
+  .quote:last-child{padding-right:0}
+  .quote__mark{font-family:var(--fd);font-weight:800;font-size:88px;line-height:.55;height:40px;color:var(--ox)}
+  .quote blockquote{font-family:var(--fd);font-weight:600;font-size:clamp(24px,2.2vw,32px);line-height:1.02;letter-spacing:0;text-transform:uppercase}
+  .quote figcaption{margin-top:auto}
+  @media(max-width:820px){
+    .results__grid{grid-template-columns:1fr}
+    .results__media{min-height:0;aspect-ratio:4/3;border-right:0;border-bottom:1px solid var(--line)}
+    .result{padding:30px 0 34px}
+    .quotes{grid-template-columns:1fr}
+    .quote{padding:28px 0 32px}
+  }
+
+  /* ———————————————————————— 07 faq ———————————————————————— */
+  .faq{background:var(--bg-2)}
+  .faq__grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(32px,6vw,96px);align-items:start}
+  .faq__lede{margin-top:24px}
+  .faq__list{border-top:1px solid var(--line-strong)}
+  .faq details{border-bottom:1px solid var(--line)}
+  .faq summary{
+    list-style:none;cursor:pointer;
+    display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:24px;
+    padding:26px 0;
+    font-family:var(--fd);font-weight:600;font-size:clamp(24px,2.3vw,32px);line-height:1;text-transform:uppercase;letter-spacing:0;
+    transition:color .18s ease;
+  }
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary:hover{color:var(--ox-hi)}
+  .faq__mark{position:relative;width:20px;height:20px;flex:none}
+  .faq__mark::before,.faq__mark::after{content:"";position:absolute;left:0;top:9px;width:20px;height:1.5px;background:currentColor}
+  .faq__mark::after{transform:rotate(90deg)}
+  .faq details[open] .faq__mark::after{visibility:hidden}
+  .faq details p{padding:0 64px 30px 0;color:var(--bone-2);max-width:60ch}
+  @media(max-width:820px){
+    .faq__grid{grid-template-columns:1fr}
+    .faq details p{padding-right:24px}
+  }
+
+  /* ———————————————————————— 08 cta ———————————————————————— */
+  .cta{position:relative;min-height:88vh;display:flex;align-items:flex-end;overflow:hidden;background:var(--bg)}
+  .cta__media{position:absolute;inset:0}
+  .cta__media img{width:100%;height:100%;object-fit:cover;object-position:50% 45%}
+  .cta__media::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(17,17,19,.28) 0%,rgba(17,17,19,.58) 45%,rgba(17,17,19,.94) 100%);
+  }
+  .cta__inner{position:relative;z-index:1;padding-top:clamp(140px,22vh,240px);padding-bottom:clamp(56px,8vw,96px)}
+  .cta .kicker .micro{color:var(--bone-2)}
+  .cta__row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:32px 48px;align-items:end;margin-top:clamp(28px,4vw,44px)}
+  .cta__sub{font-size:18px;line-height:1.5;color:var(--bone-2);max-width:38ch}
+  .cta__actions{display:flex;gap:28px;flex-wrap:wrap;align-items:center}
+  .cta__mail{font-size:15px;color:var(--bone-2);border-bottom:1px solid var(--line-strong);padding-bottom:3px;transition:color .18s ease,border-color .18s ease}
+  .cta__mail:hover{color:var(--bone);border-color:var(--bone)}
+  @media(max-width:820px){
+    .cta{min-height:0}
+    .cta__row{grid-template-columns:1fr}
+    .cta__actions{gap:20px}
+  }
+
+  /* ———————————————————————— footer ———————————————————————— */
+  .footer{border-top:1px solid var(--line-strong);padding:56px 0 32px}
+  .footer__top{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,4fr) minmax(0,3fr);gap:32px;padding-bottom:44px;border-bottom:1px solid var(--line)}
+  .footer__brand .micro{margin-top:14px}
+  .footer__nav{display:flex;flex-wrap:wrap;gap:12px 28px;align-content:start}
+  .footer__nav a,.footer__contact a{font-family:var(--fb);font-weight:600;font-size:11px;line-height:1;text-transform:uppercase;letter-spacing:.18em;color:var(--bone-2);transition:color .18s ease}
+  .footer__nav a:hover,.footer__contact a:hover{color:var(--bone)}
+  .footer__contact{display:grid;gap:16px;justify-items:start;align-content:start}
+  .footer__sources{padding:22px 0;border-bottom:1px solid var(--line);max-width:110ch}
+  .footer__bottom{display:flex;justify-content:space-between;gap:12px 32px;flex-wrap:wrap;padding-top:20px}
+  @media(max-width:820px){
+    .footer__top{grid-template-columns:1fr;gap:28px}
+  }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ———————————————————————— NAV ———————————————————————— -->
+<header class="nav" id="nav">
+  <div class="wrap nav__inner">
+    <a class="wordmark" href="#top" aria-label="Max Sandell — home">Max Sandell</a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#method">Method</a>
+      <a href="#coaching">Coaching</a>
+      <a href="#results">Results</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav__actions">
+      <a class="btn btn--ghost btn--sm" href="#">Client login</a>
+      <a class="btn btn--primary btn--sm" href="#">Book intro call</a>
+    </div>
+    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu">
+      <svg id="ico-burger" width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M2 7h18M2 15h18" stroke="currentColor" stroke-width="1.5"/></svg>
+      <svg id="ico-close" width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true" hidden><path d="M4 4l14 14M18 4 4 18" stroke="currentColor" stroke-width="1.5"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="menu" id="menu" hidden>
+  <nav class="menu__nav" aria-label="Mobile">
+    <a class="menu__link" href="#method"><span class="menu__n">04</span>Method</a>
+    <a class="menu__link" href="#coaching"><span class="menu__n">05</span>Coaching</a>
+    <a class="menu__link" href="#results"><span class="menu__n">06</span>Results</a>
+    <a class="menu__link" href="#faq"><span class="menu__n">07</span>FAQ</a>
+  </nav>
+  <div class="menu__actions">
+    <a class="btn btn--ghost" href="#">Client login</a>
+    <a class="btn btn--primary" href="#">Book intro call</a>
+  </div>
+</div>
+
+<main id="main">
+
+<!-- ———————————————————————— 01 HERO ———————————————————————— -->
+<section class="hero" id="top" aria-labelledby="hero-title">
+  <div class="hero__main">
+    <div class="hero__media ph">
+      <img src="https://images.unsplash.com/photo-1584863231364-2edc166de576?q=80&amp;w=1600&amp;auto=format&amp;fit=crop" alt="A woman in her fifties setting up a heavy deadlift in a power rack, photographed in black and white" fetchpriority="high" decoding="async">
+    </div>
+    <div class="wrap hero__inner">
+      <div class="hero__kicker">
+        <span class="bar"></span>
+        <div class="kicker">
+          <span class="kicker__num">01</span>
+          <span class="micro">Private strength coaching · Women 40+ · Stockholm</span>
+        </div>
+      </div>
+      <div class="hero__bottom">
+        <h1 class="display h1 hero__h1" id="hero-title">
+          <span class="ln">Stronger at <em class="ox" style="font-style:normal">fifty</em></span>
+          <span class="ln">than you were</span>
+          <span class="ln">at thirty.</span>
+        </h1>
+        <div class="hero__row">
+          <p class="hero__sub">He spent his career protecting people. Now he protects your strength.</p>
+          <div class="hero__cta">
+            <a class="btn btn--primary" href="#book">Book a free intro call <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M1.5 8h12M9 3.5 13.5 8 9 12.5" stroke="currentColor" stroke-width="1.5"/></svg></a>
+            <a class="btn btn--ghost" href="#method">How it works</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero__stats">
+    <div class="wrap">
+      <div class="stats">
+        <div class="stat">
+          <span class="stat__n">140+</span>
+          <span class="micro stat__l">Women coached</span>
+        </div>
+        <div class="stat">
+          <span class="stat__n">12<small>yrs</small></span>
+          <span class="micro stat__l">Close protection</span>
+        </div>
+        <div class="stat">
+          <span class="stat__n">1</span>
+          <span class="micro stat__l">Client at a time</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ———————————————————————— 02 THE TRUTH ———————————————————————— -->
+<section class="sec light truth" id="truth" aria-labelledby="truth-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="rv">
+        <div class="sec-kicker">
+          <div class="kicker"><span class="kicker__num">02</span><span class="micro">The truth</span></div>
+          <span class="bar"></span>
+        </div>
+        <h2 class="display h2" id="truth-title"><span class="ln">You were sold shrinking.</span><span class="ln ox">We build strength.</span></h2>
+      </div>
+      <p class="lede rv">Most fitness marketing talks to women over forty like a problem to be minimised. It's backwards. Here is what we hear most often — and what happens here instead.</p>
+    </div>
+
+    <div class="rules truth__grid" data-stagger>
+      <article class="truth__col rv">
+        <p class="micro">The fear</p>
+        <h3 class="display truth__fear">“The gym intimidates me.”</h3>
+        <hr class="truth__rule">
+        <p class="micro micro--ox">The answer</p>
+        <p class="body">A private studio in Östermalm. One client at a time. No mirrors, no crowd, nobody filming. The door closes and the hour is yours.</p>
+      </article>
+      <article class="truth__col rv">
+        <p class="micro">The fear</p>
+        <h3 class="display truth__fear">“I'm done with diet culture.”</h3>
+        <hr class="truth__rule">
+        <p class="micro micro--ox">The answer</p>
+        <p class="body">No weigh-ins. No before-and-after photos. We track strength numbers only — what you lift, carry and climb. Never what you weigh.</p>
+      </article>
+      <article class="truth__col rv">
+        <p class="micro">The fear</p>
+        <h3 class="display truth__fear">“Am I too old? Will I get hurt?”</h3>
+        <hr class="truth__rule">
+        <p class="micro micro--ox">The answer</p>
+        <p class="body">Assessment first, always. Every load is earned before it's added. Joints and bone density are the priority, not the afterthought.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ———————————————————————— 03 THE PROTECTOR ———————————————————————— -->
+<section class="protector" id="about" aria-labelledby="about-title">
+  <div class="protector__grid">
+    <div class="protector__media ph rv">
+      <img src="https://images.unsplash.com/photo-1601422407692-ec4eeec1d9b3?q=80&amp;w=1600&amp;auto=format&amp;fit=crop" alt="Max Sandell, heavily tattooed, standing calmly with a kettlebell in a dark studio" loading="lazy" decoding="async">
+      <div class="protector__cap">
+        <span class="bar"></span>
+        <p class="micro">Max Sandell · Östermalm studio</p>
+      </div>
+    </div>
+    <div class="protector__body">
+      <div class="protector__inner">
+        <div class="sec-kicker rv">
+          <div class="kicker"><span class="kicker__num">03</span><span class="micro">Meet Max</span></div>
+          <span class="bar"></span>
+        </div>
+        <h2 class="display h2 h2--m rv" id="about-title">The most dangerous-looking man in the gym is the safest person in it.</h2>
+        <div class="protector__story rv">
+          <p>Most people cross the street when they see him. Tattooed from wrist to shoulder, built like the soldier he once was — first impressions get Max Sandell wrong. <strong>Five minutes of conversation gets him right.</strong></p>
+          <p>After the Swedish Armed Forces he spent <strong>twelve years in close protection</strong>: a bodyguard for executives and their families across Europe. Twelve years of standing quietly beside people on their most stressful days, making sure nothing happened.</p>
+          <p>Protection taught him what no certificate can. Preparation. Calm under pressure. Reading people. Patience — the unhurried kind. It turns out those are exactly the qualities that matter when a woman walks into a gym for the first time in twenty years. <strong>That is who he coaches now. Only them.</strong></p>
+        </div>
+        <dl class="record rv">
+          <div class="record__row">
+            <dt class="micro">Armed Forces</dt>
+            <dd>Where discipline stopped being a word and became a habit.</dd>
+          </div>
+          <div class="record__row">
+            <dt class="micro">12 yrs · Close protection</dt>
+            <dd>Executives and families across Europe. Preparation, composure, trust — earned daily.</dd>
+          </div>
+          <div class="record__row">
+            <dt class="micro">Today · Östermalm</dt>
+            <dd>A private studio, one client at a time, and one job: women over forty, stronger for the next thirty years.</dd>
+          </div>
+        </dl>
+        <ul class="chips rv" aria-label="Credentials and trust markers">
+          <li class="chip">Licensed PT</li>
+          <li class="chip">Strength &amp; conditioning cert</li>
+          <li class="chip">Trauma &amp; first-aid trained</li>
+          <li class="chip">Insured</li>
+          <li class="chip">Background-checked</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ———————————————————————— 04 THE METHOD ———————————————————————— -->
+<section class="sec divider method" id="method" aria-labelledby="method-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="rv">
+        <div class="sec-kicker">
+          <div class="kicker"><span class="kicker__num">04</span><span class="micro">The method</span></div>
+          <span class="bar"></span>
+        </div>
+        <h2 class="display h2" id="method-title"><span class="ln">Nothing surprising.</span><span class="ln">Nothing heroic.</span><span class="ln">Every week.</span></h2>
+      </div>
+      <p class="lede rv">Twelve weeks at a time. Two or three sessions a week. Loads that go up only because they were earned. That is the whole method — and it works because it never changes.</p>
+    </div>
+
+    <ol class="rules steps" role="list" data-stagger>
+      <li class="step rv">
+        <span class="step__n" aria-hidden="true">01</span>
+        <h3 class="display step__t">Intro call</h3>
+        <p class="micro micro--ox">20 min · Free</p>
+        <p class="body">You talk, he listens. Your history, your worries, what you want your body to do. If it isn't a fit, he'll say so.</p>
+      </li>
+      <li class="step rv">
+        <span class="step__n" aria-hidden="true">02</span>
+        <h3 class="display step__t">Movement assessment</h3>
+        <p class="micro micro--ox">90 min · In the studio</p>
+        <p class="body">How you move, what your joints tolerate, where the weak links are. Nothing taken to failure. Nothing to prove.</p>
+      </li>
+      <li class="step rv">
+        <span class="step__n" aria-hidden="true">03</span>
+        <h3 class="display step__t">Your program</h3>
+        <p class="micro micro--ox">Written for you</p>
+        <p class="body">Built for your joints, your calendar and your goals. Every load is earned before it's added.</p>
+      </li>
+      <li class="step rv">
+        <span class="step__n" aria-hidden="true">04</span>
+        <h3 class="display step__t">Re-test</h3>
+        <p class="micro micro--ox">Every 12 weeks</p>
+        <p class="body">Strength, grip, resting heart rate, blood pressure. The numbers that predict the next thirty years. Never bodyweight.</p>
+      </li>
+    </ol>
+
+    <div class="evidence">
+      <div class="evidence__head rv">
+        <p class="micro">Why strength, why now</p>
+        <a class="small evidence__src" href="#sources">Sources in footer</a>
+      </div>
+      <div class="tiles" data-stagger>
+        <div class="tile rv">
+          <span class="tile__n">3–8%</span>
+          <p class="micro tile__l">Muscle lost per decade</p>
+          <p class="body">After thirty, untrained muscle declines three to eight percent a decade. Strength training doesn't slow that. It reverses it.</p>
+        </div>
+        <div class="tile rv">
+          <span class="tile__n">2×</span>
+          <p class="micro tile__l">Per week, for bone</p>
+          <p class="body">Twice a week, heavy and supervised: the only kind of training that reliably builds bone density after fifty.</p>
+        </div>
+        <div class="tile rv">
+          <span class="tile__n">20+ yrs</span>
+          <p class="micro tile__l">Of gains ahead</p>
+          <p class="body">Muscle responds to training at every age — gains are documented into the nineties. Start at fifty and the runway is long.</p>
+        </div>
+        <div class="tile rv">
+          <span class="tile__n">+50%</span>
+          <p class="micro tile__l">Protein, not less</p>
+          <p class="body">Needs go up with age, not down. Guidelines for older adults run up to half again the standard recommendation.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ———————————————————————— 05 COACHING ———————————————————————— -->
+<section class="sec light coaching" id="coaching" aria-labelledby="coaching-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="rv">
+        <div class="sec-kicker">
+          <div class="kicker"><span class="kicker__num">05</span><span class="micro">Coaching</span></div>
+          <span class="bar"></span>
+        </div>
+        <h2 class="display h2" id="coaching-title"><span class="ln">Three ways in.</span><span class="ln">One standard.</span></h2>
+      </div>
+      <p class="lede rv">Every option starts with the same free call and comes with the same coach, the same patience and the same closed door.</p>
+    </div>
+
+    <div class="rules offers" data-stagger>
+      <article class="offer offer--feature rv">
+        <p class="micro">01 · In the studio</p>
+        <h3 class="display offer__name">Private 1:1</h3>
+        <p class="offer__sub body">Östermalm studio. One client at a time. The hour is yours.</p>
+        <ul class="offer__list">
+          <li>Fully individual programming, 1–3 sessions a week</li>
+          <li>Assessment first, re-test every 12 weeks</li>
+          <li>Message support between sessions</li>
+        </ul>
+        <div class="offer__price">
+          <span class="micro">From</span>
+          <span class="display offer__amount">4&nbsp;900 kr</span>
+          <span class="offer__per">/ month</span>
+        </div>
+        <a class="btn btn--ghost" href="#book">Apply</a>
+      </article>
+      <article class="offer rv">
+        <p class="micro">02 · With a friend</p>
+        <h3 class="display offer__name">Duo</h3>
+        <p class="offer__sub body">Train with a friend or your sister. The first step is lighter with company.</p>
+        <ul class="offer__list">
+          <li>Two clients, still fully private</li>
+          <li>Individual programs, shared hour</li>
+          <li>Shared cost, shared momentum</li>
+        </ul>
+        <div class="offer__price">
+          <span class="micro">From</span>
+          <span class="display offer__amount">2&nbsp;950 kr</span>
+          <span class="offer__per">/ person / month</span>
+        </div>
+        <a class="btn btn--ghost" href="#book">Apply</a>
+      </article>
+      <article class="offer rv">
+        <p class="micro">03 · Online</p>
+        <h3 class="display offer__name">Stronger After 40</h3>
+        <p class="offer__sub body">Twelve weeks with Max's coaching in your pocket — outside Stockholm, or to begin at home.</p>
+        <ul class="offer__list">
+          <li>12-week progressive program</li>
+          <li>Video check-ins with Max</li>
+          <li>Home or gym version of every week</li>
+        </ul>
+        <div class="offer__price">
+          <span class="micro">From</span>
+          <span class="display offer__amount">1&nbsp;450 kr</span>
+          <span class="offer__per">/ month</span>
+        </div>
+        <a class="btn btn--ghost" href="#book">Apply</a>
+      </article>
+    </div>
+
+    <div class="banner rv">
+      <p class="banner__t">Not sure which? Start with the call.<span>It's free and nobody sells you anything.</span></p>
+      <a class="btn btn--ghost" href="#book">Book the call</a>
+    </div>
+  </div>
+</section>
+
+<!-- ———————————————————————— 06 RESULTS ———————————————————————— -->
+<section class="sec divider results" id="results" aria-labelledby="results-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="rv">
+        <div class="sec-kicker">
+          <div class="kicker"><span class="kicker__num">06</span><span class="micro">Results</span></div>
+          <span class="bar"></span>
+        </div>
+        <h2 class="display h2" id="results-title">Proof, without the before and after.</h2>
+      </div>
+      <p class="lede rv">No scale. No photos. Three women, three numbers, names and ages only — because the numbers that matter are the ones you can lift.</p>
+    </div>
+
+    <div class="results__grid">
+      <div class="results__media ph rv">
+        <img src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?q=80&amp;w=1600&amp;auto=format&amp;fit=crop" alt="A woman pressing a loaded barbell overhead with control" loading="lazy" decoding="async">
+      </div>
+      <div class="results__list" data-stagger>
+        <article class="result rv">
+          <p class="micro">Karin, 52</p>
+          <p class="result__fig">
+            <span class="sr">Deadlift: 40 to 82.5 kilograms</span>
+            <span class="result__figv" aria-hidden="true"><span class="result__from">40</span><svg class="result__arrow" viewBox="0 0 48 16" fill="none"><path d="M0 8h46M39 1l7 7-7 7" stroke="currentColor" stroke-width="1.5"/></svg><span>82.5</span><span class="result__unit">kg</span></span>
+          </p>
+          <p class="body">Deadlift, in twelve weeks. Every kilo added because the one before it was earned.</p>
+        </article>
+        <article class="result rv">
+          <p class="micro">Margareta, 61</p>
+          <p class="result__fig">
+            <span class="sr">Four flights of stairs</span>
+            <span class="result__figv" aria-hidden="true"><span>4</span><span class="result__unit">flights</span></span>
+          </p>
+          <p class="body">Carried her own suitcase up four flights of stairs. First time in years.</p>
+        </article>
+        <article class="result rv">
+          <p class="micro">Cecilia, 44</p>
+          <p class="result__fig">
+            <span class="sr">Resting heart rate: 78 to 64 beats per minute</span>
+            <span class="result__figv" aria-hidden="true"><span class="result__from">78</span><svg class="result__arrow" viewBox="0 0 48 16" fill="none"><path d="M0 8h46M39 1l7 7-7 7" stroke="currentColor" stroke-width="1.5"/></svg><span>64</span><span class="result__unit">bpm</span></span>
+          </p>
+          <p class="body">Resting heart rate, six months in. Two sessions a week. No diet.</p>
+        </article>
+      </div>
+    </div>
+
+    <div class="rules quotes" data-stagger>
+      <figure class="quote rv">
+        <span class="quote__mark" aria-hidden="true">“</span>
+        <blockquote>I hadn't set foot in a gym since my thirties. He never once made me feel small. Now I deadlift eighty kilos on a Tuesday like it's normal — because now it is.</blockquote>
+        <figcaption class="micro">Karin, 52 · Private 1:1 · Since 2024</figcaption>
+      </figure>
+      <figure class="quote rv">
+        <span class="quote__mark" aria-hidden="true">“</span>
+        <blockquote>I came in with a fragile back and a lot of fear. We went at my pace, always. Last month I lifted both grandkids into the car and didn't think about my back once.</blockquote>
+        <figcaption class="micro">Margareta, 61 · Duo, with her sister</figcaption>
+      </figure>
+      <figure class="quote rv">
+        <span class="quote__mark" aria-hidden="true">“</span>
+        <blockquote>Every program before this was about making myself less. This is the first one about making myself more.</blockquote>
+        <figcaption class="micro">Cecilia, 44 · Stronger After 40, then private</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ———————————————————————— 07 FAQ ———————————————————————— -->
+<section class="sec divider faq" id="faq" aria-labelledby="faq-title">
+  <div class="wrap faq__grid">
+    <div class="rv">
+      <div class="sec-kicker">
+        <div class="kicker"><span class="kicker__num">07</span><span class="micro">FAQ</span></div>
+        <span class="bar"></span>
+      </div>
+      <h2 class="display h2" id="faq-title">Straight answers.</h2>
+      <p class="lede faq__lede">If yours isn't here, ask it on the call. There's no question he hasn't heard and none he'll judge you for.</p>
+    </div>
+    <div class="faq__list" data-stagger>
+      <details class="rv">
+        <summary>I haven't trained in 20 years.<span class="faq__mark" aria-hidden="true"></span></summary>
+        <p>Then you're the typical client. Muscle responds to training at every age — strength gains are documented in people starting in their seventies and eighties. We start with an assessment, not a workout, and build from what your body can do today.</p>
+      </details>
+      <details class="rv">
+        <summary>Will I get bulky?<span class="faq__mark" aria-hidden="true"></span></summary>
+        <p>No. Building large muscle takes years of highly specific training, eating and hormones — a program this isn't. What you will notice: posture, stairs, sleep, energy, and a body that does what you ask of it. Strong is not a size.</p>
+      </details>
+      <details class="rv">
+        <summary>I have a bad back or a bad knee.<span class="faq__mark" aria-hidden="true"></span></summary>
+        <p>Usually a reason to start, not to wait. The assessment finds what your joints tolerate and the program builds from there — in most cases, appropriate strength work is exactly what a back or a knee has been missing. Where medical clearance is needed first, he'll say so and work alongside your physiotherapist.</p>
+      </details>
+      <details class="rv">
+        <summary>Is the studio private?<span class="faq__mark" aria-hidden="true"></span></summary>
+        <p>Completely. A standalone studio in Östermalm, not a corner of a commercial gym. When you train, the door is closed: no members, no walk-ins, no mirrors, no audience. Duo sessions are the only exception — with the person you chose to bring.</p>
+      </details>
+      <details class="rv">
+        <summary>Do you weigh people?<span class="faq__mark" aria-hidden="true"></span></summary>
+        <p>No. There is no scale in the studio. Progress is measured in strength, grip, resting heart rate and blood pressure — the numbers that predict the next thirty years. Never bodyweight, never photos.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ———————————————————————— 08 CTA ———————————————————————— -->
+<section class="cta divider" id="book" aria-labelledby="book-title">
+  <div class="cta__media ph">
+    <img src="https://images.unsplash.com/photo-1595078475328-1ab05d0a6a0e?q=80&amp;w=1600&amp;auto=format&amp;fit=crop" alt="Chalked hands gripping a loaded barbell in a dark gym" loading="lazy" decoding="async">
+  </div>
+  <div class="wrap cta__inner">
+    <div class="sec-kicker rv">
+      <div class="kicker"><span class="kicker__num">08</span><span class="micro">The call</span></div>
+      <span class="bar"></span>
+    </div>
+    <h2 class="display h2 h2--xl rv" id="book-title"><span class="ln">The hardest part</span><span class="ln">is the first call.</span></h2>
+    <div class="cta__row">
+      <p class="cta__sub rv">Twenty minutes. No commitment. He's easier to talk to than he looks.</p>
+      <div class="cta__actions rv">
+        <a class="btn btn--primary" href="#">Book a free intro call <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M1.5 8h12M9 3.5 13.5 8 9 12.5" stroke="currentColor" stroke-width="1.5"/></svg></a>
+        <a class="cta__mail" href="mailto:hello@maxsandell.com">hello@maxsandell.com</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ———————————————————————— FOOTER ———————————————————————— -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <a class="wordmark" href="#top">Max Sandell</a>
+        <p class="micro">Strength coaching · Women 40+ · Östermalm, Stockholm</p>
+      </div>
+      <nav class="footer__nav" aria-label="Footer">
+        <a href="#method">Method</a>
+        <a href="#coaching">Coaching</a>
+        <a href="#results">Results</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <div class="footer__contact">
+        <a href="mailto:hello@maxsandell.com">hello@maxsandell.com</a>
+        <a href="#">Client login</a>
+      </div>
+    </div>
+    <p class="small footer__sources" id="sources">Sources: Volpi, Nazemi &amp; Fujita, Curr Opin Clin Nutr Metab Care 2004 (muscle loss of 3–8% per decade after 30) · Watson et al., J Bone Miner Res 2018, LIFTMOR trial (twice-weekly heavy resistance training and bone density in postmenopausal women) · Fiatarone et al., N Engl J Med 1994 (strength gains in the very old) · Bauer et al., J Am Med Dir Assoc 2013, PROT-AGE Study Group (protein recommendations for older adults).</p>
+    <div class="footer__bottom small">
+      <span>© 2026 Max Sandell Coaching · Östermalm, Stockholm</span>
+      <span>Concept draft — names, photos and numbers are placeholders.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  var nav = document.getElementById("nav");
+  var burger = document.getElementById("burger");
+  var menu = document.getElementById("menu");
+  var icoBurger = document.getElementById("ico-burger");
+  var icoClose = document.getElementById("ico-close");
+
+  /* nav: transparent over hero, solid on scroll or with the menu open */
+  function paintNav(){
+    var solid = window.scrollY > 40 || document.body.classList.contains("menu-open");
+    nav.classList.toggle("is-solid", solid);
+  }
+  window.addEventListener("scroll", paintNav, {passive:true});
+  paintNav();
+
+  /* mobile menu */
+  function setMenu(open){
+    menu.hidden = !open;
+    icoBurger.hidden = open;
+    icoClose.hidden = !open;
+    document.body.classList.toggle("menu-open", open);
+    burger.setAttribute("aria-expanded", String(open));
+    burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    paintNav();
+  }
+  burger.addEventListener("click", function(){ setMenu(menu.hidden); });
+  menu.addEventListener("click", function(e){ if(e.target.closest("a")) setMenu(false); });
+  document.addEventListener("keydown", function(e){
+    if(e.key === "Escape" && !menu.hidden){ setMenu(false); burger.focus(); }
+  });
+  var mq = window.matchMedia("(min-width: 821px)");
+  var onMq = function(e){ if(e.matches && !menu.hidden) setMenu(false); };
+  if(mq.addEventListener){ mq.addEventListener("change", onMq); } else if(mq.addListener){ mq.addListener(onMq); }
+
+  /* reveal on scroll, staggered 60ms inside [data-stagger] groups */
+  document.querySelectorAll("[data-stagger]").forEach(function(group){
+    var i = 0;
+    Array.prototype.forEach.call(group.children, function(child){
+      if(child.classList.contains("rv")){ child.style.transitionDelay = (i * 60) + "ms"; i++; }
+    });
+  });
+  var revealEls = document.querySelectorAll(".rv");
+  if("IntersectionObserver" in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){ entry.target.classList.add("in"); io.unobserve(entry.target); }
+      });
+    }, {threshold:.08, rootMargin:"0px 0px -6% 0px"});
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add("in"); });
+  }
+
+  /* FAQ: one open at a time */
+  var faqs = document.querySelectorAll(".faq details");
+  faqs.forEach(function(d){
+    d.addEventListener("toggle", function(){
+      if(d.open){ faqs.forEach(function(o){ if(o !== d) o.open = false; }); }
+    });
+  });
+})();
+</script>
+</body>
+</html>
