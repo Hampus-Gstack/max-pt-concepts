@@ -1,6 +1,6 @@
 # IRON — design system (Max, concept VI, power edition)
 
-Replaces "Haven". Same client (women 40+), positioning now built on the present — calm, private, one client at a time, strength for the next thirty years — completely different feel: **power, not softness**. Think a Nike Women campaign shot by a fashion photographer, or a premium watch brand that happens to sell strength. Never girly, never bro-gym, never pink, never cream-and-rose. Her power, treated seriously.
+Replaces "Haven". Same client (people over 40 — all genders, since 6 Sep 2026), positioning built on the present — calm, private, one client at a time, strength for the next thirty years — completely different feel: **power, not softness**. Think a Nike Women campaign shot by a fashion photographer, or a premium watch brand that happens to sell strength. Never girly, never bro-gym, never pink, never cream-and-rose. Their power, treated seriously — copy is gender-neutral ("people over 40", "over-40s", "you").
 
 ## Tokens (use these exact custom properties)
 ```css
@@ -39,7 +39,7 @@ Dark is the default. Use one or two **light (bone) sections** per page for rhyth
 ## Photography treatment
 - Black & white, high contrast, slightly warm: `filter: grayscale(1) contrast(1.15) brightness(.88) sepia(.18);` on a dark ground; on hover no change (no gimmicks).
 - Optional oxblood duotone for ONE hero-scale image: image with `mix-blend-mode: luminosity` over a `var(--ox)` block at low opacity — use sparingly.
-- Subjects: women lifting heavy (deadlift, barbell, chalk), Max (tattooed, calm). Verified Unsplash (append ?q=80&w=1600&auto=format&fit=crop):
+- Subjects: people over 40 lifting heavy (deadlift, barbell, chalk), a mix of genders; Max (tattooed, calm). Verified Unsplash (append ?q=80&w=1600&auto=format&fit=crop):
   - Max: https://images.unsplash.com/photo-1601422407692-ec4eeec1d9b3 (tattooed, kettlebell) · https://images.unsplash.com/photo-1549476464-37392f717541 (dark gym, plate)
   - Women: https://images.unsplash.com/photo-1584863231364-2edc166de576 (rack deadlift) · https://images.unsplash.com/photo-1595078475328-1ab05d0a6a0e (barbell + chalk, moody) · https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5 (overhead press) · https://images.unsplash.com/photo-1518459031867-a89b944bffe4 (coach + client, bright) · https://images.unsplash.com/photo-1518310383802-640c2de311b2 (small group)
 
@@ -60,7 +60,7 @@ Dark is the default. Use one or two **light (bone) sections** per page for rhyth
 - Direct, calm, confident. Short sentences. Second person.
 - Power belongs to *her*: "Stronger at fifty than you were at thirty." "Strong is not a size." "Built for the next thirty years."
 - Never: "ladies", "toned", "bikini", "shred", "summer body", scale numbers, before/after bodies. Military = calm and preparation, never combat stories.
-- **Max's past (his own request, 5 Sep 2026):** his military / security-work years abroad are backstory only — at most one calm sentence inside his story ("Before coaching, years in security work abroad. He left that life; this one is quieter."). Never a headline, sub-line, hook, stat, chip, section name or format concept. The brand is built on what he is NOW: calm, patient, private, one client at a time, evidence-based strength for women 40+.
+- **Max's past (his own request, 5 Sep 2026):** his military / security-work years abroad are backstory only — at most one calm sentence inside his story ("Before coaching, years in security work abroad. He left that life; this one is quieter."). Never a headline, sub-line, hook, stat, chip, section name or format concept. The brand is built on what he is NOW: calm, patient, private, one client at a time, evidence-based strength for people over 40.
 
 ## Hard requirements (every page)
 Single self-contained index.html, inline <style>/<script>, vanilla JS only, Google Fonts via <link>. Responsive 360px → 1440px+, zero horizontal overflow (`html,body{overflow-x:clip}`; wide tables scroll in their own container). Every <img>: alt, loading="lazy" (except hero), object-fit cover container. Focus-visible states. `::selection{background:var(--ox);color:var(--bone)}`. No emoji anywhere. Inline SVG icons only, 1.5px stroke.
