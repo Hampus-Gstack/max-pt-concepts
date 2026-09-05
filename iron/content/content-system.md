@@ -87,7 +87,7 @@ Each format is deconstructed the same way: **Hook (0–3s) → Body → CTA**, p
 - 3–20s WHAT IT IS — holds the printed guide; three things that are in it.
 - 20–30s THE WORD — "Comment STRONG and I'll send it."
 **Shots:** 20s talking head holding the guide · 5s close-up of the guide pages · 3s cinematic gym.
-**Mechanics:** ManyChat auto-DM → /start funnel page → email → intro call.
+**Mechanics:** we reply to every comment with the link, by hand, within the hour → /start funnel page → email → intro call.
 
 ---
 
