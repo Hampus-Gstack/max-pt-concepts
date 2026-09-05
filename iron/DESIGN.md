@@ -1,6 +1,6 @@
 # IRON — design system (Max Sandell, concept VI, power edition)
 
-Replaces "Haven". Same client (women 40+), same positioning ("He spent his career protecting people. Now he protects your strength."), completely different feel: **power, not softness**. Think a Nike Women campaign shot by a fashion photographer, or a premium watch brand that happens to sell strength. Never girly, never bro-gym, never pink, never cream-and-rose. Her power, treated seriously.
+Replaces "Haven". Same client (women 40+), positioning now built on the present — calm, private, one client at a time, strength for the next thirty years — completely different feel: **power, not softness**. Think a Nike Women campaign shot by a fashion photographer, or a premium watch brand that happens to sell strength. Never girly, never bro-gym, never pink, never cream-and-rose. Her power, treated seriously.
 
 ## Tokens (use these exact custom properties)
 ```css
@@ -60,7 +60,7 @@ Dark is the default. Use one or two **light (bone) sections** per page for rhyth
 - Direct, calm, confident. Short sentences. Second person.
 - Power belongs to *her*: "Stronger at fifty than you were at thirty." "Strong is not a size." "Built for the next thirty years."
 - Never: "ladies", "toned", "bikini", "shred", "summer body", scale numbers, before/after bodies. Military = calm and preparation, never combat stories.
-- The protector line stays: "He spent his career protecting people. Now he protects your strength."
+- **Max's past (his own request, 5 Sep 2026):** his military / security-work years abroad are backstory only — at most one calm sentence inside his story ("Before coaching, years in security work abroad. He left that life; this one is quieter."). Never a headline, sub-line, hook, stat, chip, section name or format concept. The brand is built on what he is NOW: calm, patient, private, one client at a time, evidence-based strength for women 40+.
 
 ## Hard requirements (every page)
 Single self-contained index.html, inline <style>/<script>, vanilla JS only, Google Fonts via <link>. Responsive 360px → 1440px+, zero horizontal overflow (`html,body{overflow-x:clip}`; wide tables scroll in their own container). Every <img>: alt, loading="lazy" (except hero), object-fit cover container. Focus-visible states. `::selection{background:var(--ox);color:var(--bone)}`. No emoji anywhere. Inline SVG icons only, 1.5px stroke.
