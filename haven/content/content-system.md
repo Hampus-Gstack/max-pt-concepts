@@ -5,7 +5,7 @@
 
 A repeatable machine that turns Max's week into 5–6 posts a week without Max ever having to "think of content". Four parts:
 
-1. **Format library** — 14 proven content formats, reverse-engineered from the 7 accounts Max sent us, then rebuilt for *his* persona (ex-military, close protection, tattooed, calm) and *his* client (women 40+).
+1. **Format library** — 16 proven content formats, reverse-engineered from the 7 accounts Max sent us, then rebuilt for *his* persona (ex-military, close protection, tattooed, calm) and *his* client (women 40+).
 2. **Shooting log** — one card per piece of content: hook, beats, shot list, location, duration. Max films what the card says. Nothing else.
 3. **Weekly shooting schedule** — one 90-minute film block per week, batch-filmed. Sent Sunday evening.
 4. **Content calendar** — Cursus edits, captions, schedules and reports. Max only films.

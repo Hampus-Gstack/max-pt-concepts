@@ -1,0 +1,1760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Max Sandell — Content System</title>
+<meta name="description" content="Internal content system for Max Sandell by Cursus Capital: what 7 reference accounts taught us, the principles, a library of content formats, the weekly rhythm, the shooting log, a sample week, a 4-week calendar, the pipeline and the guardrails.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Mulish:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Cormorant:ital,wght@1,500;1,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ivory:#f6f1ea;
+    --ivory-deep:#efe8dd;
+    --porcelain:#faf7f2;
+    --ink:#221c18;
+    --ink-soft:#4c423a;
+    --ink-faint:#7a6e63;
+    --espresso:#241d18;
+    --espresso-2:#2d251f;
+    --clay:#b0685a;
+    --clay-deep:#95544a;
+    --clay-wash:#eeddd6;
+    --sand:#cbb9a2;
+    --sage:#8e9484;
+    --hairline:rgba(34,28,24,.16);
+    --hairline-light:rgba(246,241,234,.22);
+    --shadow:0 24px 60px -28px rgba(34,28,24,.28);
+    --radius-arch:200px;
+    --ease:cubic-bezier(.22,.61,.21,1);
+    --font-display:'Marcellus',Georgia,serif;
+    --font-body:'Mulish',-apple-system,'Helvetica Neue',sans-serif;
+    --font-accent:'Cormorant',Georgia,serif;
+    --top-h:104px;
+  }
+
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:var(--top-h)}
+  html,body{overflow-x:clip}
+  body{
+    font-family:var(--font-body);
+    background:var(--ivory);
+    color:var(--ink);
+    font-size:1rem;
+    line-height:1.7;
+    font-weight:400;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  ::selection{background:var(--clay);color:var(--ivory)}
+  img,svg{max-width:100%}
+  img{display:block}
+  a{color:inherit;text-decoration:none}
+  ul,ol{list-style:none}
+  button{font:inherit;cursor:pointer;border:none;background:none}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.86em;background:var(--ivory-deep);padding:.1em .45em;border-radius:6px;border:1px solid var(--hairline)}
+
+  :focus-visible{
+    outline:2px solid var(--clay);
+    outline-offset:3px;
+    border-radius:2px;
+  }
+
+  /* ————— utilities ————— */
+  .wrap{width:min(1180px,calc(100% - 3rem));margin-inline:auto}
+  @media(max-width:560px){.wrap{width:calc(100% - 2.5rem)}}
+
+  .micro{
+    font-size:.7rem;
+    letter-spacing:.24em;
+    text-transform:uppercase;
+    font-weight:600;
+    color:var(--clay);
+  }
+  .micro--ink{color:var(--ink-faint)}
+  .micro-rule{display:inline-flex;align-items:center;gap:.9rem}
+  .micro-rule::before{content:"";width:34px;height:1px;background:var(--clay);flex:none}
+
+  h1,h2,h3,h4{font-family:var(--font-display);font-weight:400;line-height:1.14;letter-spacing:.01em}
+  h2{font-size:clamp(1.9rem,4.2vw,2.9rem)}
+  h3{font-size:1.3rem}
+
+  .lede{color:var(--ink-soft);max-width:60ch;font-size:1.04rem}
+  .lede strong,.body strong{font-weight:700;color:var(--ink)}
+  em{font-style:italic}
+
+  .rv{opacity:0;transform:translateY(22px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+  .rv.in{opacity:1;transform:none}
+  .rv-d1{transition-delay:.08s}
+  .rv-d2{transition-delay:.16s}
+  .rv-d3{transition-delay:.24s}
+  .rv-d4{transition-delay:.32s}
+  @media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .rv{opacity:1;transform:none;transition:none}
+    *,*::before,*::after{animation-duration:.01ms !important;transition-duration:.01ms !important}
+  }
+
+  .u-link{position:relative;padding-bottom:2px}
+  .u-link::after{
+    content:"";position:absolute;left:0;bottom:0;width:100%;height:1px;
+    background:currentColor;transform:scaleX(0);transform-origin:right;
+    transition:transform .45s var(--ease);
+  }
+  .u-link:hover::after,.u-link:focus-visible::after{transform:scaleX(1);transform-origin:left}
+
+  .btn{
+    display:inline-flex;align-items:center;gap:.65rem;
+    font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;
+    padding:1.05rem 1.9rem;border-radius:999px;
+    transition:background .35s var(--ease),color .35s var(--ease),transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s var(--ease);
+  }
+  .btn svg{flex:none;transition:transform .35s var(--ease)}
+  .btn:hover svg{transform:translateX(4px)}
+  .btn--clay{background:var(--clay);color:var(--porcelain);box-shadow:0 14px 30px -14px rgba(176,104,90,.55)}
+  .btn--clay:hover{background:var(--clay-deep);transform:translateY(-2px)}
+  .btn--ghost{border:1px solid var(--hairline);color:var(--ink)}
+  .btn--ghost:hover{border-color:var(--ink);transform:translateY(-2px)}
+  .btn--ivory{background:var(--ivory);color:var(--ink)}
+  .btn--ivory:hover{background:#fff;transform:translateY(-2px)}
+  .btn--ghost-light{border:1px solid var(--hairline-light);color:var(--ivory)}
+  .btn--ghost-light:hover{border-color:var(--ivory);transform:translateY(-2px)}
+
+  .fid{font-family:var(--font-display);font-weight:400;letter-spacing:.06em;color:var(--clay-deep);white-space:nowrap}
+  .num{font-variant-numeric:tabular-nums;white-space:nowrap}
+
+  /* ————— top bar ————— */
+  .top{
+    position:sticky;top:0;z-index:50;
+    background:rgba(246,241,234,.92);
+    -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+    box-shadow:0 1px 0 var(--hairline);
+    transition:box-shadow .4s var(--ease);
+  }
+  .top.scrolled{box-shadow:0 1px 0 var(--hairline),0 10px 30px -22px rgba(34,28,24,.35)}
+  .top__row{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;padding:.8rem 0 .65rem}
+  .brand{display:flex;flex-direction:column;line-height:1.25}
+  .brand__mark{font-family:var(--font-display);font-size:1.18rem;letter-spacing:.05em}
+  .brand__mark span{color:var(--sand);margin:0 .35rem}
+  .brand__tag{font-size:.61rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-faint);font-weight:600}
+  .top__meta{font-size:.61rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-faint);font-weight:600;white-space:nowrap}
+  .toc{border-top:1px solid var(--hairline)}
+  .toc__list{
+    position:relative;display:flex;gap:0;overflow-x:auto;
+    scrollbar-width:none;-ms-overflow-style:none;
+    -webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 2rem),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 2rem),transparent);
+  }
+  .toc__list::-webkit-scrollbar{display:none}
+  .toc__list a{
+    flex:none;display:inline-flex;align-items:baseline;gap:.4rem;
+    padding:.72rem .62rem .62rem;margin-bottom:-1px;
+    font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--ink-faint);
+    border-bottom:2px solid transparent;white-space:nowrap;
+    transition:color .3s var(--ease),border-color .3s var(--ease);
+  }
+  .toc__list a:first-child{padding-left:0}
+  .toc__list a b{font-family:var(--font-display);font-weight:400;font-size:.8rem;letter-spacing:.02em;color:var(--sand);transition:color .3s var(--ease)}
+  .toc__list a:hover,.toc__list a.is-active{color:var(--ink);border-bottom-color:var(--clay)}
+  .toc__list a.is-active b,.toc__list a:hover b{color:var(--clay)}
+  @media(max-width:900px){
+    .toc .wrap{width:100%}
+    .toc__list{padding:0 1.5rem;-webkit-mask-image:linear-gradient(90deg,transparent,#000 1.5rem,#000 calc(100% - 1.5rem),transparent);mask-image:linear-gradient(90deg,transparent,#000 1.5rem,#000 calc(100% - 1.5rem),transparent)}
+    .toc__list a:first-child{padding-left:.85rem}
+  }
+  @media(max-width:560px){
+    .top__meta{display:none}
+    .brand__mark{font-size:1.02rem}
+    .toc__list{padding:0 1.25rem}
+  }
+
+  /* ————— hero ————— */
+  .hero{position:relative;padding:clamp(4.2rem,9vw,6.8rem) 0 clamp(3.5rem,7vw,5.5rem);overflow:hidden}
+  .hero__halo{position:absolute;z-index:-1;border-radius:50%;filter:blur(70px);opacity:.55;pointer-events:none}
+  .hero__halo--1{width:520px;height:520px;background:#ecdcd2;top:-160px;right:-140px}
+  .hero__halo--2{width:420px;height:420px;background:#e5e2d4;bottom:-200px;left:-160px}
+  .hero h1{font-size:clamp(2.6rem,5.6vw,4.35rem);margin:1.3rem 0 1.6rem}
+  .hero h1 em{font-family:var(--font-accent);font-style:italic;font-weight:500;color:var(--clay);letter-spacing:0}
+  .hero__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(2rem,5vw,4rem);align-items:end}
+  .hero__what{display:flex;align-items:baseline;gap:.9rem;margin-bottom:.9rem}
+  .hero__what b{font-family:var(--font-display);font-weight:400;font-size:1.4rem;color:var(--sand);line-height:1}
+  .hero__sub{max-width:52ch;color:var(--ink-soft);font-size:1.12rem}
+  .parts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.1rem;margin-top:clamp(2.4rem,5vw,3.6rem);counter-reset:part}
+  .part{
+    counter-increment:part;
+    display:flex;flex-direction:column;
+    background:var(--porcelain);border:1px solid var(--hairline);border-radius:18px;
+    padding:1.6rem 1.45rem 1.45rem;
+    transition:transform .45s var(--ease),box-shadow .45s var(--ease);
+  }
+  .part:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+  .part::before{content:"0" counter(part);font-family:var(--font-display);font-size:1.5rem;color:var(--clay);line-height:1}
+  .part h3{font-size:1.16rem;margin:.95rem 0 .55rem}
+  .part p{font-size:.92rem;color:var(--ink-soft);line-height:1.6}
+  .part .u-link{margin-top:auto;padding-top:1.1rem;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--clay);align-self:flex-start}
+  .part .u-link::after{bottom:-1px}
+  .division{margin-top:clamp(2.8rem,6vw,4.4rem);padding-top:2rem;border-top:1px solid var(--hairline)}
+  .division__big{font-family:var(--font-display);font-size:clamp(1.9rem,4.6vw,3.4rem);line-height:1.15;margin-top:.9rem;max-width:22ch}
+  .division__big em{font-family:var(--font-accent);font-style:italic;font-weight:500;color:var(--clay)}
+  @media(max-width:1000px){.parts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media(max-width:860px){.hero__grid{grid-template-columns:1fr}}
+  @media(max-width:560px){.parts{grid-template-columns:1fr}}
+
+  /* ————— section scaffolding ————— */
+  section{position:relative}
+  .sec{padding:clamp(4.4rem,9vw,7.2rem) 0}
+  .hairline-top{border-top:1px solid var(--hairline)}
+  .porcelain{background:var(--porcelain)}
+  .deep{background:var(--ivory-deep)}
+  .sec-head{
+    display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(1.1rem,3vw,2.2rem);
+    align-items:start;max-width:880px;margin-bottom:clamp(2.4rem,5vw,3.6rem);
+  }
+  .sec-head__num{font-family:var(--font-display);font-size:clamp(2.6rem,6vw,4rem);line-height:.9;color:var(--sand);padding-top:.15rem}
+  .sec-head h2{margin:.85rem 0 .9rem}
+  .sec-head .lede{margin-top:.2rem}
+  .sub-head{margin:clamp(2.2rem,4vw,3rem) 0 1.1rem}
+  .sub-head h3{margin-top:.7rem;font-size:clamp(1.3rem,2.4vw,1.65rem)}
+  .body{color:var(--ink-soft);max-width:70ch}
+  .body p+p{margin-top:1rem}
+
+  /* dark sections */
+  .dark{background:var(--espresso);color:#efe7dc;overflow:hidden}
+  .dark::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(700px 480px at 82% 10%,rgba(176,104,90,.14),transparent 65%),
+      radial-gradient(600px 500px at 8% 90%,rgba(142,148,132,.1),transparent 65%);
+  }
+  .dark .wrap{position:relative}
+  .dark h2,.dark h3{color:var(--ivory)}
+  .dark .lede,.dark .body{color:rgba(239,231,220,.74)}
+  .dark .sec-head__num{color:rgba(203,185,162,.5)}
+  .dark .micro--ink{color:rgba(203,185,162,.9)}
+  .dark .fid{color:#d9a294}
+  .dark code{background:rgba(246,241,234,.08);border-color:var(--hairline-light);color:var(--ivory)}
+
+  /* ————— tables ————— */
+  .tscroll{
+    overflow-x:auto;-webkit-overflow-scrolling:touch;
+    border:1px solid var(--hairline);border-radius:16px;background:var(--porcelain);
+  }
+  .tbl{width:100%;border-collapse:collapse;font-size:.92rem;line-height:1.5}
+  .tbl th{
+    font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--ink-faint);
+    text-align:left;padding:.95rem 1.1rem;border-bottom:1px solid var(--hairline);background:var(--ivory-deep);white-space:nowrap;
+  }
+  .tbl td{padding:1rem 1.1rem;border-bottom:1px solid var(--hairline);vertical-align:top;color:var(--ink-soft)}
+  .tbl tr:last-child td{border-bottom:none}
+  .tbl td:first-child{color:var(--ink)}
+  .tbl--bench{min-width:1060px}
+  .tbl--bench td:nth-child(5){min-width:300px}
+  .handle{display:block;font-weight:700;color:var(--ink)}
+  .who{display:block;font-size:.8rem;color:var(--ink-faint)}
+  .eng{display:grid;gap:.4rem;min-width:130px}
+  .eng b{font-family:var(--font-display);font-weight:400;font-size:1.15rem;color:var(--ink);line-height:1}
+  .eng i{display:block;height:5px;background:var(--clay-wash);border-radius:3px;overflow:hidden}
+  .eng i::after{content:"";display:block;height:100%;width:var(--w);min-width:3px;background:var(--clay);border-radius:3px}
+  .tbl--cadence td:first-child{font-family:var(--font-display);letter-spacing:.06em}
+  .tbl--cadence td:nth-child(2){white-space:nowrap;font-variant-numeric:tabular-nums}
+  .tbl--week td:first-child{font-family:var(--font-display);letter-spacing:.06em;white-space:nowrap}
+  .tbl--week td:nth-child(2){white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--ink-faint)}
+  .tbl--week{min-width:700px}
+
+  /* ————— section 1 ————— */
+  .pull{border-left:2px solid var(--clay);padding:.4rem 0 .4rem 1.6rem;margin:clamp(2.4rem,5vw,3.4rem) 0;max-width:74ch}
+  .pull__lead{font-family:var(--font-accent);font-style:italic;font-weight:500;font-size:clamp(1.7rem,3.2vw,2.3rem);line-height:1.25;color:var(--clay-deep);margin-bottom:.8rem}
+  .pull p{color:var(--ink-soft);font-size:1.03rem}
+  .findings{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 clamp(1.6rem,4vw,3.2rem);margin-top:1.2rem}
+  .finding{border-top:1px solid var(--hairline);padding:1.3rem 0 1.5rem;font-size:.95rem;color:var(--ink-soft)}
+  .finding strong{display:block;font-family:var(--font-display);font-weight:400;font-size:1.14rem;color:var(--ink);margin-bottom:.4rem;line-height:1.25}
+  .note{background:var(--ivory-deep);border:1px solid var(--hairline);border-radius:14px;padding:1.25rem 1.5rem;font-size:.95rem;color:var(--ink-soft)}
+  .note .micro{display:block;margin-bottom:.45rem}
+  .note--porcelain{background:var(--porcelain)}
+  .findings+.note{margin-top:2.2rem;max-width:74ch}
+  @media(max-width:700px){.findings{grid-template-columns:1fr}}
+
+  /* ————— section 2 ————— */
+  .principles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(1.6rem,4vw,3rem) clamp(2rem,5vw,4.5rem);counter-reset:principle}
+  .principle{border-top:1px solid var(--hairline-light);padding-top:1.6rem;counter-increment:principle}
+  .principle::before{content:counter(principle,upper-roman);font-family:var(--font-accent);font-style:italic;font-weight:500;font-size:1.25rem;color:var(--sand);letter-spacing:.1em}
+  .principle h3{margin:.7rem 0 .85rem;font-size:1.42rem}
+  .principle p{color:rgba(239,231,220,.78);font-size:.99rem;max-width:52ch}
+  @media(max-width:760px){.principles{grid-template-columns:1fr;gap:1.4rem}}
+
+  /* ————— pillar colours ————— */
+  [data-pillar="A"]{--pc:#b0685a;--pt:#f0e0da}
+  [data-pillar="B"]{--pc:#3a2f28;--pt:#e8e1d9}
+  [data-pillar="C"]{--pc:#6b7362;--pt:#e2e5dd}
+  [data-pillar="D"]{--pc:#977f60;--pt:#efe6d6}
+  [data-pillar="E"]{--pc:#7a6e63;--pt:#faf7f2}
+  [data-pillar="F"]{--pc:#95544a;--pt:#e7cfc7}
+
+  /* ————— section 3: format library ————— */
+  .effort-key{
+    display:flex;flex-wrap:wrap;gap:.7rem 1.8rem;align-items:center;
+    padding:1.1rem 0;border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);
+    font-size:.9rem;color:var(--ink-soft);margin-bottom:clamp(2.6rem,5vw,3.6rem);
+  }
+  .effort-key>span:first-child{color:var(--ink);font-weight:600}
+  .effort-key li{display:inline-flex;align-items:center;gap:.6rem}
+  .pillar{margin-top:clamp(3.2rem,6vw,4.6rem)}
+  .pillar:first-of-type{margin-top:0}
+  .pillar__head{display:flex;align-items:baseline;gap:1.1rem;flex-wrap:wrap;margin-bottom:1.4rem;padding-bottom:1rem;border-bottom:1px solid var(--ink)}
+  .pillar__letter{font-family:var(--font-display);font-size:clamp(2rem,4vw,2.8rem);color:var(--pc);line-height:1}
+  .pillar__head h3{font-size:clamp(1.35rem,2.6vw,1.8rem)}
+  .pillar__intent{font-family:var(--font-accent);font-style:italic;font-weight:500;font-size:1.25rem;color:var(--ink-faint);margin-left:auto}
+  .fmt{background:var(--porcelain);border:1px solid var(--hairline);border-radius:20px;margin-bottom:1.2rem;overflow:hidden}
+  .fmt__head{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:1.2rem;align-items:start;padding:1.5rem 1.7rem 1.35rem;border-bottom:1px solid var(--hairline)}
+  .fmt__id{
+    font-family:var(--font-display);font-size:1rem;letter-spacing:.06em;
+    width:50px;height:50px;border-radius:13px;display:grid;place-items:center;
+    background:var(--pt);color:var(--pc);border:1px solid var(--pc);
+  }
+  .fmt__title h4{font-size:clamp(1.25rem,2.2vw,1.55rem);line-height:1.2}
+  .fmt__inspired{font-size:.86rem;color:var(--ink-faint);margin-top:.45rem;max-width:74ch;line-height:1.55}
+  .fmt__inspired .ev{color:var(--clay-deep);font-weight:600}
+  .fmt__chips{display:flex;flex-wrap:wrap;gap:.45rem;justify-content:flex-end;max-width:300px}
+  .chip{
+    display:inline-flex;align-items:center;gap:.45rem;
+    font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;
+    padding:.45rem .8rem;border-radius:999px;border:1px solid var(--hairline);color:var(--ink-soft);background:var(--ivory);
+    line-height:1.3;
+  }
+  .chip small{font-weight:600;letter-spacing:.04em;text-transform:none;font-size:.74rem;color:var(--ink-faint)}
+  .chip--low{background:rgba(142,148,132,.16);border-color:rgba(142,148,132,.45);color:#5b6353}
+  .chip--medium{background:rgba(203,185,162,.3);border-color:rgba(203,185,162,.8);color:#6c5a44}
+  .chip--high{background:var(--clay-wash);border-color:rgba(176,104,90,.5);color:var(--clay-deep)}
+  .chip--zero{background:var(--porcelain);border-style:dashed;color:var(--ink-faint)}
+  .chip--cadence{background:transparent}
+  .fmt__body{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}
+  .fmt__col{padding:1.5rem 1.7rem 1.7rem}
+  .fmt__col--side{background:var(--ivory);border-left:1px solid var(--hairline)}
+  .fld{display:grid;gap:1.15rem;align-content:start}
+  .fld dt{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:var(--clay);margin-bottom:.35rem}
+  .fld dd{font-size:.94rem;color:var(--ink-soft);line-height:1.6}
+  .fld dd em{color:var(--ink)}
+  .fld dd.cta{font-weight:600;color:var(--ink)}
+  .fld dd.guard{border-left:2px solid var(--clay);padding-left:.9rem}
+  .hooks{display:grid;gap:.55rem}
+  .hooks li{font-family:var(--font-accent);font-style:italic;font-weight:500;font-size:1.24rem;line-height:1.32;color:var(--ink);padding-left:.95rem;position:relative}
+  .hooks li::before{content:"\201C";position:absolute;left:0;top:0;color:var(--sand)}
+  .hooks li::after{content:"\201D";color:var(--sand)}
+  .tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.15rem}
+  .tags li{font-size:.8rem;padding:.3rem .7rem;border-radius:999px;background:var(--ivory-deep);border:1px solid var(--hairline);color:var(--ink-soft);line-height:1.4}
+  .fmt__col--side .tags li{background:var(--porcelain)}
+  .tags--serif li{font-family:var(--font-display);font-size:.9rem;background:var(--porcelain);border-radius:10px;padding:.55rem .9rem;color:var(--ink);letter-spacing:.01em}
+  .shots{display:grid;gap:.4rem;counter-reset:shot}
+  .shots li{position:relative;padding-left:1.8rem;counter-increment:shot}
+  .shots li::before{content:counter(shot,decimal-leading-zero);position:absolute;left:0;top:.1em;font-family:var(--font-display);font-size:.74rem;color:var(--clay);letter-spacing:.06em}
+  .flow{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem .5rem}
+  .flow li{font-size:.82rem;padding:.35rem .75rem;border-radius:999px;background:var(--porcelain);border:1px solid var(--hairline);color:var(--ink)}
+  .flow li+li::before{content:"\2192";margin-right:.5rem;color:var(--clay)}
+  .pairs{display:grid;gap:1rem}
+  .pairs .tags li{background:var(--porcelain)}
+  .pairs .tags--no li{border-style:dashed;color:var(--ink-faint)}
+  @media(max-width:860px){
+    .fmt__head{grid-template-columns:auto minmax(0,1fr)}
+    .fmt__chips{grid-column:1/-1;justify-content:flex-start;max-width:none}
+    .fmt__body{grid-template-columns:1fr}
+    .fmt__col--side{border-left:none;border-top:1px solid var(--hairline)}
+  }
+  @media(max-width:560px){
+    .fmt__head,.fmt__col{padding-left:1.2rem;padding-right:1.2rem}
+    .pillar__intent{margin-left:0;width:100%}
+  }
+
+  /* ————— section 4: rhythm ————— */
+  .rhythm{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:clamp(2rem,5vw,4.5rem);align-items:start}
+  .rhythm .micro-rule{margin-bottom:1rem}
+  .rhythm__title{font-size:clamp(1.3rem,2.4vw,1.65rem);margin:.4rem 0 .5rem}
+  .rhythm__title strong{font-weight:400}
+  .rhythm__p{color:var(--ink-soft);font-size:.96rem}
+  .fblock{display:flex;gap:6px;margin:1.6rem 0 1.4rem;counter-reset:seg}
+  .fblock li{flex:var(--m) 1 0;min-width:0;border-top:4px solid var(--seg);padding:.85rem .1rem 0 0;font-size:.86rem;line-height:1.5;color:var(--ink-soft)}
+  .fblock li .min{display:block;font-family:var(--font-display);font-weight:400;font-size:1.3rem;color:var(--ink);line-height:1;margin-bottom:.4rem}
+  .fblock li .min small{font-family:var(--font-body);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);margin-left:.3rem;font-weight:700}
+  .rhythm .note{margin-top:1.4rem}
+  .output{margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid var(--hairline);font-size:.96rem;color:var(--ink-soft)}
+  .output strong{font-family:var(--font-display);font-weight:400;font-size:1.2rem;color:var(--ink)}
+  @media(max-width:900px){.rhythm{grid-template-columns:1fr}}
+  @media(max-width:560px){
+    .fblock{flex-direction:column;gap:0}
+    .fblock li{border-top:none;border-left:4px solid var(--seg);padding:.7rem 0 .8rem 1rem;display:grid;grid-template-columns:78px 1fr;gap:.6rem;align-items:baseline}
+    .fblock li .min{margin:0}
+  }
+
+  /* ————— section 5: shooting log ————— */
+  .sheets{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:1.6rem;align-items:start}
+  .sheet{background:var(--porcelain);border:1px solid var(--hairline);border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}
+  .sheet--ex{position:sticky;top:calc(var(--top-h) + 16px)}
+  .sheet__top{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.95rem 1.4rem;background:var(--espresso);color:var(--ivory)}
+  .sheet__top .micro{color:var(--sand)}
+  .sheet__id{font-family:var(--font-display);letter-spacing:.1em;font-size:.95rem}
+  .sheet__rows{display:grid;grid-template-columns:172px minmax(0,1fr)}
+  .sheet__rows>div{padding:.8rem 1.25rem;border-top:1px solid var(--hairline);font-size:.92rem;line-height:1.55;min-width:0}
+  .sheet__rows>div:nth-child(-n+2){border-top:none}
+  .sheet__rows>.k{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--ink-faint);background:var(--ivory);border-right:1px solid var(--hairline);padding-top:.98rem;line-height:1.4}
+  .sheet__rows>.v{color:var(--ink-soft)}
+  .sheet__rows .hook{font-family:var(--font-accent);font-style:italic;font-weight:500;font-size:1.22rem;color:var(--ink);line-height:1.32}
+  .sheet__rows .onscreen{font-family:var(--font-display);letter-spacing:.2em;font-size:.86rem;color:var(--ink)}
+  .beats{display:grid;gap:.35rem;counter-reset:beat}
+  .beats li{position:relative;padding-left:1.5rem;counter-increment:beat}
+  .beats li::before{content:counter(beat) ".";position:absolute;left:0;font-family:var(--font-display);color:var(--clay);font-size:.86rem}
+  .status{display:flex;flex-wrap:wrap;align-items:center;gap:.3rem .35rem}
+  .status span{font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;padding:.3rem .6rem;border:1px solid var(--hairline);border-radius:999px;color:var(--ink-soft);background:var(--ivory)}
+  .status i{color:var(--sand);font-style:normal;font-size:.8rem}
+  @media(max-width:900px){.sheets{grid-template-columns:1fr}.sheet--ex{position:static}}
+  @media(max-width:560px){
+    .sheet__rows{grid-template-columns:1fr}
+    .sheet__rows>div{padding:.55rem 1.1rem}
+    .sheet__rows>.k{border-right:none;padding:.8rem 1.1rem .15rem;background:transparent}
+    .sheet__rows>.v{border-top:none;padding-top:0;padding-bottom:.85rem}
+    .sheet__rows>div:nth-child(2){border-top:none}
+  }
+
+  /* ————— section 6: sample week ————— */
+  .week__notes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.1rem;margin-top:1.4rem}
+  @media(max-width:760px){.week__notes{grid-template-columns:1fr}}
+
+  /* ————— section 7: calendar ————— */
+  .legend{display:flex;flex-wrap:wrap;gap:.5rem 1.4rem;margin-bottom:1.4rem;font-size:.8rem;color:var(--ink-soft)}
+  .legend li{display:inline-flex;align-items:center;gap:.5rem}
+  .legend i{width:14px;height:14px;border-radius:4px;background:var(--pt);border:1px solid var(--pc);flex:none}
+  .legend b{font-family:var(--font-display);font-weight:400;color:var(--ink);letter-spacing:.06em}
+  .cal{display:grid;grid-template-columns:128px repeat(6,minmax(0,1fr));gap:6px}
+  .cal__hd{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:var(--ink-faint);padding:.3rem .6rem .7rem}
+  .cal__week{display:contents}
+  .cal__label{padding:.85rem .6rem;border-top:1px solid var(--ink)}
+  .cal__label b{font-family:var(--font-display);font-weight:400;font-size:1.25rem;display:block;line-height:1.1}
+  .cal__label span{font-size:.72rem;color:var(--ink-faint);letter-spacing:.04em;white-space:nowrap}
+  .cal__cell{
+    background:var(--pt);border:1px solid transparent;border-radius:12px;padding:.85rem .85rem .95rem;min-height:128px;
+    display:flex;flex-direction:column;gap:.4rem;font-size:.85rem;line-height:1.42;color:var(--ink-soft);
+  }
+  .cal__cell .fid{color:var(--pc);font-size:.84rem}
+  .cal__cell--reach{border-color:var(--pc);box-shadow:0 12px 26px -20px rgba(34,28,24,.5)}
+  .cal__cell--reach .cal__txt{color:var(--ink);font-weight:600}
+  .cal__note{margin-top:1.6rem;max-width:70ch}
+  @media screen and (max-width:860px){
+    .cal{display:block}
+    .cal__hd{display:none}
+    .cal__week{display:block;margin-bottom:1.5rem}
+    .cal__label{padding:.85rem 0 .6rem}
+    .cal__cell{min-height:0;margin-bottom:6px;flex-direction:row;align-items:baseline;gap:.7rem;padding:.7rem .85rem}
+    .cal__cell::before{content:attr(data-day);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--ink-faint);flex:none;width:2.2rem}
+  }
+
+  /* ————— section 8: pipeline ————— */
+  .pipe{max-width:960px;position:relative;padding-left:1.6rem}
+  .pipe::before{content:"";position:absolute;left:0;top:.6rem;bottom:.6rem;width:1px;background:var(--hairline-light)}
+  .pipe__row{display:grid;grid-template-columns:170px 150px minmax(0,1fr);gap:1.4rem;padding:1.2rem 0;border-top:1px solid var(--hairline-light);align-items:baseline;position:relative}
+  .pipe__row:first-child{border-top:none}
+  .pipe__row::before{content:"";position:absolute;left:-1.6rem;top:1.75rem;width:7px;height:7px;border-radius:50%;background:var(--clay);transform:translateX(-3px)}
+  .pipe__when{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--sand);font-weight:700}
+  .pipe__who{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:rgba(239,231,220,.9)}
+  .pipe__who i{color:var(--clay);font-style:normal;margin:0 .3rem}
+  .pipe__note{text-transform:none;letter-spacing:0;font-weight:600;color:rgba(239,231,220,.6)}
+  .pipe__what{color:rgba(239,231,220,.8);font-size:.97rem}
+  .pipe__what .tick{display:inline-block;vertical-align:-2px;margin:0 .15rem;color:#d9a294}
+  .pipe__aside{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(2rem,5vw,4.5rem);margin-top:clamp(2.6rem,5vw,3.8rem);padding-top:2.2rem;border-top:1px solid var(--hairline-light)}
+  .pipe__aside .micro-rule{margin-bottom:1rem}
+  .dark .tags li{background:rgba(246,241,234,.06);border-color:var(--hairline-light);color:rgba(239,231,220,.88)}
+  .dark .tags li b{color:var(--ivory);font-weight:600}
+  .tools__note{margin-top:1.1rem;color:rgba(239,231,220,.72);font-size:.95rem}
+  .metrics{counter-reset:m;display:grid}
+  .metrics li{counter-increment:m;font-family:var(--font-display);color:var(--ivory);line-height:1.1;display:flex;align-items:baseline;gap:1rem;padding:.6rem 0;border-top:1px solid var(--hairline-light)}
+  .metrics li:first-child{border-top:none;padding-top:0}
+  .metrics li::before{content:"0" counter(m);font-family:var(--font-body);font-size:.66rem;letter-spacing:.18em;color:var(--sand);font-weight:700;flex:none;width:1.6rem}
+  .metrics li:nth-child(1){font-size:clamp(2rem,4.4vw,3.1rem);color:#d9a294}
+  .metrics li:nth-child(2){font-size:clamp(1.55rem,3vw,2.2rem)}
+  .metrics li:nth-child(3){font-size:1.5rem}
+  .metrics li:nth-child(4){font-size:1.25rem}
+  .metrics li:nth-child(5){font-size:1.05rem;color:rgba(239,231,220,.75)}
+  .metrics__last{margin-top:1rem;font-family:var(--font-accent);font-style:italic;font-weight:500;font-size:1.2rem;color:rgba(239,231,220,.55)}
+  @media(max-width:860px){
+    .pipe__row{grid-template-columns:1fr;gap:.3rem}
+    .pipe__aside{grid-template-columns:1fr}
+  }
+
+  /* ————— section 9: guardrails ————— */
+  .guardrails{background:linear-gradient(180deg,var(--ivory) 0%,var(--clay-wash) 140%)}
+  .rules{max-width:860px;counter-reset:rule}
+  .rule{display:grid;grid-template-columns:64px minmax(0,1fr);gap:1.2rem;padding:1.45rem 0;border-top:1px solid var(--hairline);counter-increment:rule}
+  .rule:last-child{border-bottom:1px solid var(--hairline)}
+  .rule::before{content:"0" counter(rule);font-family:var(--font-display);font-size:1.45rem;color:var(--clay);line-height:1.1;padding-top:.1rem}
+  .rule p{color:var(--ink-soft);font-size:1rem}
+  .rule p strong{color:var(--ink);font-weight:600}
+  .closing{margin-top:clamp(3rem,6vw,4.6rem);text-align:center;max-width:760px;margin-inline:auto}
+  .closing .micro{display:block;margin-bottom:1.1rem}
+  .closing blockquote{font-family:var(--font-accent);font-style:italic;font-weight:500;font-size:clamp(1.9rem,4.2vw,3rem);line-height:1.22;color:var(--clay-deep)}
+  @media(max-width:480px){.rule{grid-template-columns:1fr;gap:.35rem}}
+
+  /* ————— footer ————— */
+  .footer{background:var(--espresso);color:rgba(239,231,220,.72);padding:3.4rem 0 2.4rem;border-top:1px solid var(--hairline-light)}
+  .footer__grid{display:flex;justify-content:space-between;gap:2rem;flex-wrap:wrap;align-items:center;padding-bottom:2.2rem;border-bottom:1px solid var(--hairline-light)}
+  .footer .brand__mark{color:var(--ivory)}
+  .footer .brand__tag{color:rgba(239,231,220,.5)}
+  .footer__links{display:flex;gap:.8rem;flex-wrap:wrap}
+  .footer .btn{padding:.8rem 1.4rem;font-size:.7rem}
+  .footer__meta{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;padding-top:1.6rem;font-size:.76rem;letter-spacing:.04em;color:rgba(239,231,220,.5)}
+
+  /* ————— print ————— */
+  @media print{
+    :root{--top-h:0px}
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    html{scroll-behavior:auto}
+    body{background:#fff;font-size:10.5pt;line-height:1.5}
+    .top{display:none}
+    .rv{opacity:1 !important;transform:none !important;transition:none !important}
+    .wrap{width:100%}
+    .hero{padding:.6cm 0 0}
+    .hero__halo{display:none}
+    .hero h1{font-size:2.5rem;margin:.6rem 0 .8rem}
+    .hero__sub{font-size:1rem}
+    .parts{margin-top:1.2rem;gap:.6rem}
+    .part{padding:.95rem 1rem .85rem}
+    .part h3{margin:.6rem 0 .35rem}
+    .division{margin-top:1.3rem;padding-top:.9rem}
+    .division__big{font-size:1.9rem}
+    .sec-head{break-after:avoid;page-break-after:avoid;margin-bottom:1.4rem}
+    .sec{padding:.8cm 0 .6cm;break-before:page;page-break-before:always}
+    .dark{background:#fff;color:var(--ink)}
+    .dark::before{display:none}
+    .dark h2,.dark h3,.principle h3,.metrics li,.metrics li:nth-child(1),.metrics li:nth-child(5){color:var(--ink)}
+    .dark .lede,.dark .body,.principle p,.pipe__what,.tools__note,.metrics__last{color:var(--ink-soft)}
+    .pipe__who,.dark .tags li,.dark .tags li b{color:var(--ink)}
+    .pipe__note{color:var(--ink-faint)}
+    .metrics li:nth-child(1){color:var(--clay-deep)}
+    .dark .tags li{background:#fff;border-color:var(--hairline)}
+    .principle,.pipe__row,.metrics li,.pipe__aside{border-color:var(--hairline)}
+    .pipe::before{background:var(--hairline)}
+    .pipe__when{color:var(--clay-deep)}
+    .dark .fid{color:var(--clay-deep)}
+    .guardrails{background:#fff}
+    .sheet--ex{position:static}
+    .fmt,.part,.finding,.principle,.rule,.pipe__row,.cal__week,.note,.pull,.tbl tr,.sheet__rows>div{break-inside:avoid;page-break-inside:avoid}
+    .tscroll,.sheet{break-inside:auto}
+    .tbl th,.num{white-space:normal}
+    .eng{min-width:0}
+    .tbl--bench{table-layout:fixed}
+    .tbl th{letter-spacing:.1em;font-size:6.6pt}
+    .tbl--bench th:nth-child(1){width:20%}.tbl--bench th:nth-child(2){width:11%}.tbl--bench th:nth-child(3){width:13%}.tbl--bench th:nth-child(4){width:15%}.tbl--bench th:nth-child(5){width:28%}.tbl--bench th:nth-child(6){width:13%}
+    .pillar{break-before:page;page-break-before:always}
+    .pillar:first-of-type{break-before:auto;page-break-before:auto}
+    .footer{break-inside:avoid;page-break-inside:avoid;padding:1.6rem 0 1rem}
+    .footer__grid{padding-bottom:1rem}
+    .fmt,.sheet,.part{box-shadow:none}
+    .tscroll{overflow:visible;border-radius:0}
+    .tbl{font-size:8.5pt}
+    .tbl--bench,.tbl--week{min-width:0}
+    .tbl--bench td:nth-child(5){min-width:0}
+    .tbl th,.tbl td{padding:.5rem .6rem}
+    .cal{grid-template-columns:90px repeat(6,minmax(0,1fr));gap:4px}
+    .cal__cell{min-height:0;font-size:7.5pt;padding:.5rem .55rem}
+    .footer{background:#fff;color:var(--ink-soft);border-top:1px solid var(--hairline)}
+    .footer .brand__mark{color:var(--ink)}
+    .footer .brand__tag,.footer__meta{color:var(--ink-faint)}
+    .footer__links{display:none}
+    .footer__grid,.footer__meta{border-color:var(--hairline)}
+  }
+</style>
+</head>
+<body>
+
+<!-- ————————— TOP BAR ————————— -->
+<header class="top" id="top">
+  <div class="wrap top__row">
+    <a class="brand" href="#s0" aria-label="Max Sandell — Content System, back to top">
+      <span class="brand__mark">Max Sandell<span>·</span>Content System</span>
+      <span class="brand__tag">Internal playbook</span>
+    </a>
+    <span class="top__meta">Cursus Capital · v1 · Sep 2026</span>
+  </div>
+  <nav class="toc" aria-label="Sections">
+    <div class="wrap">
+      <div class="toc__list" id="toc">
+        <a href="#s0"><b>00</b>What this is</a>
+        <a href="#s1"><b>01</b>Benchmark</a>
+        <a href="#s2"><b>02</b>Principles</a>
+        <a href="#s3"><b>03</b>Formats</a>
+        <a href="#s4"><b>04</b>Rhythm</a>
+        <a href="#s5"><b>05</b>Shooting log</a>
+        <a href="#s6"><b>06</b>Sample week</a>
+        <a href="#s7"><b>07</b>Calendar</a>
+        <a href="#s8"><b>08</b>Pipeline</a>
+        <a href="#s9"><b>09</b>Guardrails</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+<!-- ————————— 0 · HERO ————————— -->
+<section class="hero" id="s0" aria-labelledby="t0">
+  <div class="hero__halo hero__halo--1"></div>
+  <div class="hero__halo hero__halo--2"></div>
+  <div class="wrap">
+    <p class="micro micro-rule rv in">Cursus Capital · Content system · v1 · 5 Sep 2026</p>
+    <h1 id="t0" class="rv rv-d1 in">Max Sandell<br><em>Content System</em></h1>
+    <div class="hero__grid">
+      <div class="rv rv-d2 in">
+        <p class="hero__what"><b>00</b><span class="micro micro--ink">What this is</span></p>
+        <p class="hero__sub">A repeatable machine that turns Max’s week into 5–6 posts a week without Max ever having to “think of content”. Four parts:</p>
+      </div>
+    </div>
+    <ol class="parts">
+      <li class="part rv rv-d1 in">
+        <h3>Format library</h3>
+        <p>16 proven content formats, reverse-engineered from the 7 accounts Max sent us, then rebuilt for <em>his</em> persona (ex-military, close protection, tattooed, calm) and <em>his</em> client (women 40+).</p>
+        <a class="u-link" href="#s3">Section 03</a>
+      </li>
+      <li class="part rv rv-d2 in">
+        <h3>Shooting log</h3>
+        <p>One card per piece of content: hook, beats, shot list, location, duration. Max films what the card says. Nothing else.</p>
+        <a class="u-link" href="#s5">Section 05</a>
+      </li>
+      <li class="part rv rv-d3 in">
+        <h3>Weekly shooting schedule</h3>
+        <p>One 90-minute film block per week, batch-filmed. Sent Sunday evening.</p>
+        <a class="u-link" href="#s6">Section 06</a>
+      </li>
+      <li class="part rv rv-d4 in">
+        <h3>Content calendar</h3>
+        <p>Cursus edits, captions, schedules and reports. Max only films.</p>
+        <a class="u-link" href="#s7">Section 07</a>
+      </li>
+    </ol>
+    <div class="division rv">
+      <p class="micro micro-rule">Division of labour</p>
+      <p class="division__big">Max films. <em>Cursus does everything else.</em></p>
+    </div>
+  </div>
+</section>
+
+<!-- ————————— 1 · BENCHMARK ————————— -->
+<section class="sec porcelain hairline-top" id="s1" aria-labelledby="t1">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-head__num" aria-hidden="true">01</span>
+      <div>
+        <p class="micro micro-rule">Benchmark · 7 accounts · 84 posts</p>
+        <h2 id="t1">What the 7 reference accounts taught us</h2>
+        <p class="lede">We pulled the 12 most recent/pinned posts from each account (84 posts total, 5 Sep 2026) with likes, comments, captions and on-screen text.</p>
+      </div>
+    </div>
+
+    <div class="tscroll rv">
+      <table class="tbl tbl--bench">
+        <thead>
+          <tr>
+            <th scope="col">Account</th>
+            <th scope="col">Followers</th>
+            <th scope="col">Median likes (last 12)</th>
+            <th scope="col">Median engagement</th>
+            <th scope="col">Top post</th>
+            <th scope="col">Top post likes / comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="handle">@barbells_and_mountains</span><span class="who">Paul Dickinson</span></td>
+            <td class="num">31.8K</td>
+            <td class="num">~650</td>
+            <td><div class="eng" style="--w:51%"><b>~2.0%</b><i></i></div></td>
+            <td>Reel: “Social media bullshit that needs to f*** right off” — a 5-item contrarian list</td>
+            <td class="num">25.9K / 1.7K</td>
+          </tr>
+          <tr>
+            <td><span class="handle">@doriancoreperformance</span><span class="who">Shane Dorian</span></td>
+            <td class="num">100K</td>
+            <td class="num">~3.9K</td>
+            <td><div class="eng" style="--w:100%"><b>~3.9%</b><i></i></div></td>
+            <td>Reel: surf trip — “the pre-trip training paid off” (life proof)</td>
+            <td class="num">17.3K / 1.0K</td>
+          </tr>
+          <tr>
+            <td><span class="handle">@xavierthelifecoach</span></td>
+            <td class="num">99K</td>
+            <td class="num">~2.7K (own posts)</td>
+            <td><div class="eng" style="--w:69%"><b>~2.7%</b><i></i></div></td>
+            <td>Reel: “I almost gave up on my Instagram” (vulnerability, behind the scenes)</td>
+            <td class="num">5.4K / 752</td>
+          </tr>
+          <tr>
+            <td><span class="handle">@resurgent_harry</span><span class="who">Harry Mackarness, ex-British Army officer</span></td>
+            <td class="num">117K</td>
+            <td class="num">~860</td>
+            <td><div class="eng" style="--w:18%"><b>~0.7%</b><i></i></div></td>
+            <td>Post: “Allow me to reintroduce myself” — origin story, text on photo</td>
+            <td class="num">4.3K / 75</td>
+          </tr>
+          <tr>
+            <td><span class="handle">@jasonbrowntraining</span><span class="who">PhD-c, CSCS</span></td>
+            <td class="num">77K</td>
+            <td class="num">~100</td>
+            <td><div class="eng" style="--w:3.3%"><b>~0.13%</b><i></i></div></td>
+            <td>Branded text card: “Your program shouldn’t change…”</td>
+            <td class="num">213 / 9</td>
+          </tr>
+          <tr>
+            <td><span class="handle">@fitinmidlife</span><span class="who">Jason Smith</span></td>
+            <td class="num">274K</td>
+            <td class="num">~100</td>
+            <td><div class="eng" style="--w:1%"><b>~0.04%</b><i></i></div></td>
+            <td>Reel: “Midlife drift doesn’t happen overnight” — relatable slow-decline story</td>
+            <td class="num">602 / 46</td>
+          </tr>
+          <tr>
+            <td><span class="handle">@gary_fitover40</span><span class="who">Gary Stanley</span></td>
+            <td class="num">21K</td>
+            <td class="num">~12</td>
+            <td><div class="eng" style="--w:1.5%"><b>~0.06%</b><i></i></div></td>
+            <td>Post: “I turn 50 in a few weeks…”</td>
+            <td class="num">67 / 3</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <blockquote class="pull rv">
+      <p class="pull__lead">The pattern is not subtle.</p>
+      <p>Follower count does not predict engagement. The three accounts with a strong point of view and a personal story (Paul, Shane, Xavier) get 2–4% of their audience engaging on a median post. The three accounts posting generic coach tips (Jason S., Jason B., Gary) get 0.04–0.13% — one-tenth to one-hundredth as much, despite bigger audiences. Gary’s account is the cautionary tale: templated “coach for men 40+” content with meme-style hooks, listicles and “DM me READY” CTAs, and a median of 12 likes on 21K followers.</p>
+    </blockquote>
+
+    <div class="sub-head rv">
+      <p class="micro micro-rule">What actually performed, across all seven</p>
+    </div>
+    <ul class="findings">
+      <li class="finding rv"><strong>Story beats tips.</strong>Origin stories, “then vs now”, personal history. Harry’s reintroduction post is his best post of the year. Paul’s “every diet I’ve tried in 20 years” did 3.6K / 353 comments.</li>
+      <li class="finding rv rv-d1"><strong>Contrarian lists explode the comments.</strong>Paul’s two “things that need to go” reels: 25.9K / 1.7K and 3.2K / 448. The CTA is always “What have I missed?” — the audience finishes the list.</li>
+      <li class="finding rv"><strong>Purpose beats aesthetics.</strong>Shane trains <em>to surf</em>; his surf-trip reel (17.3K) outperforms every workout demo. Training for a life, not a body.</li>
+      <li class="finding rv rv-d1"><strong>Simple evidence, one action.</strong>Shane’s “muscle loss starts in your 30s and speeds up after 40” — 3.6K / 108 as a plain photo post.</li>
+      <li class="finding rv"><strong>Follow-along routines get saved.</strong>Shane’s 20-minute “morning activation” with reps in the caption: 7.6K / 171.</li>
+      <li class="finding rv rv-d1"><strong>Personality and humour.</strong>Harry’s military anecdote clip (waking up drunk before an 8-mile march): 3.1K / 55.</li>
+      <li class="finding rv"><strong>A daily consistency engine.</strong>Xavier’s “Daily Morning Minute Message” — one thought, 60 seconds, to camera. It’s the format that keeps the account alive between the big posts.</li>
+      <li class="finding rv rv-d1"><strong>Comment-keyword lead gen works.</strong>Harry’s “Comment COACHING and I’ll DM you”: 794 / 30 on a low-effort reel.</li>
+    </ul>
+    <div class="note rv">
+      <span class="micro">What did not work</span>
+      Tips without a person behind them, generic hooks (“Does this describe you?”), client results as abstract graphics, and anything that looks like a template.
+    </div>
+  </div>
+</section>
+
+<!-- ————————— 2 · PRINCIPLES ————————— -->
+<section class="sec dark" id="s2" aria-labelledby="t2">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-head__num" aria-hidden="true">02</span>
+      <div>
+        <p class="micro micro-rule">Principles · six</p>
+        <h2 id="t2">Principles for Max’s content</h2>
+      </div>
+    </div>
+    <ol class="principles">
+      <li class="principle rv">
+        <h3>He is the format.</h3>
+        <p>A tattooed ex-close-protection officer who is the calmest, most patient person in the room is a story no other trainer in Stockholm can tell. Every piece should be un-copyable by someone without his background.</p>
+      </li>
+      <li class="principle rv rv-d1">
+        <h3>Protector, never drill sergeant.</h3>
+        <p>Close protection is about preparation, calm, and making the day boring for the client. That is the lens: “I plan so nothing goes wrong. That’s what your program is.”</p>
+      </li>
+      <li class="principle rv">
+        <h3>Speak to her, not at her.</h3>
+        <p>The audience is women 40+. Address the fears we heard in Haven’s research: intimidating gyms, diet-culture fatigue, “am I too old”, “will I get hurt”, “where do I even start.”</p>
+      </li>
+      <li class="principle rv rv-d1">
+        <h3>Strength, never shrinking.</h3>
+        <p>No before/after bodies, no scale numbers, no “summer body”. Proof is deadlifts, bone density, blood pressure, carrying grandkids, hiking.</p>
+      </li>
+      <li class="principle rv">
+        <h3>One idea per piece.</h3>
+        <p>If a script needs a second point, it’s two pieces.</p>
+      </li>
+      <li class="principle rv rv-d1">
+        <h3>Batch, don’t improvise.</h3>
+        <p>One film block a week produces the whole week. Improvised content is what kills consistency.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ————————— 3 · FORMAT LIBRARY ————————— -->
+<section class="sec" id="s3" aria-labelledby="t3">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-head__num" aria-hidden="true">03</span>
+      <div>
+        <p class="micro micro-rule">Format library · six pillars</p>
+        <h2 id="t3">Format library</h2>
+        <p class="lede">Effort = Max’s time.</p>
+      </div>
+    </div>
+    <ul class="effort-key rv" aria-label="Effort key">
+      <li><span class="chip chip--low">Low</span>filmed on a phone during normal work</li>
+      <li><span class="chip chip--medium">Medium</span>10–15 minutes in the film block</li>
+      <li><span class="chip chip--high">High</span>needs a client, a location or a second camera</li>
+    </ul>
+
+    <!-- Pillar A -->
+    <div class="pillar" data-pillar="A">
+      <div class="pillar__head rv">
+        <span class="pillar__letter" aria-hidden="true">A</span>
+        <h3>Pillar A — Who Max is</h3>
+        <span class="pillar__intent">trust</span>
+      </div>
+
+      <article class="fmt rv" id="a1">
+        <header class="fmt__head">
+          <span class="fmt__id">A1</span>
+          <div class="fmt__title">
+            <h4>“Allow me to reintroduce myself”</h4>
+            <p class="fmt__inspired">Inspired by @resurgent_harry <span class="ev">(4.3K / 75 — his top post)</span>. An origin-story post, re-cut quarterly for new followers.</p>
+          </div>
+          <div class="fmt__chips">
+            <span class="chip chip--medium">Medium</span>
+            <span class="chip chip--cadence">Quarterly · pinned</span>
+          </div>
+        </header>
+        <div class="fmt__body">
+          <dl class="fld fmt__col">
+            <div><dt>What</dt><dd>3–5 slide carousel (moody portrait + text) or a 60–90s talking-head reel. Military → close protection → why he now trains women 40+.</dd></div>
+            <div><dt>Hooks</dt><dd><ul class="hooks">
+              <li>I spent 12 years making sure nothing happened to the people I protected. Now I do the same for your strength.</li>
+              <li>Most people cross the street when they see me. My clients are women in their fifties.</li>
+              <li>Allow me to reintroduce myself.</li>
+            </ul></dd></div>
+            <div><dt>CTA</dt><dd class="cta">“If that sounds like the kind of coach you’d want in your corner, the link in bio is a 20-minute call.”</dd></div>
+            <div><dt>Why it works for her</dt><dd>It answers the question she’s already asking when she sees him — <em>who is this man and why should I trust him?</em></dd></div>
+          </dl>
+          <dl class="fld fmt__col fmt__col--side">
+            <div><dt>Shot list</dt><dd><ol class="shots">
+              <li>Slow push-in on Max seated in the studio, tattoos visible, calm</li>
+              <li>Hands wrapping a client’s barbell</li>
+              <li>Empty studio at morning light</li>
+              <li>Still portrait for the carousel cover</li>
+            </ol></dd></div>
+            <div><dt>On-screen text</dt><dd>The hook line only, serif, small.</dd></div>
+            <div><dt>Duration</dt><dd>60–90s reel / 5 slides</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="fmt rv" id="a2">
+        <header class="fmt__head">
+          <span class="fmt__id">A2</span>
+          <div class="fmt__title">
+            <h4>“The protector’s lens”</h4>
+            <p class="fmt__inspired">Inspired by Harry’s military anecdote clips <span class="ev">(3.1K / 55)</span> and Xavier’s personal-crossover reels <span class="ev">(4.5K / 600)</span>. One close-protection lesson, translated into training.</p>
+          </div>
+          <div class="fmt__chips">
+            <span class="chip chip--medium">Medium</span>
+            <span class="chip chip--cadence">Every 2 weeks</span>
+          </div>
+        </header>
+        <div class="fmt__body">
+          <dl class="fld fmt__col">
+            <div><dt>What</dt><dd>45–60s talking head or walking-and-talking outdoors.</dd></div>
+            <div><dt>Hooks</dt><dd><ul class="hooks">
+              <li>In close protection, a boring day is a perfect day. Same in training.</li>
+              <li>The first thing you learn protecting people: never surprise the person you’re protecting.</li>
+              <li>Bodyguards don’t wing it. Neither should your first session.</li>
+            </ul></dd></div>
+            <div><dt>CTA</dt><dd class="cta">Soft (“Follow for the next one”).</dd></div>
+            <div><dt>Why it works</dt><dd>It makes his background an asset for <em>her</em> rather than something intimidating. Humour welcome; never war stories.</dd></div>
+          </dl>
+          <dl class="fld fmt__col fmt__col--side">
+            <div><dt>Shot list</dt><dd><ol class="shots">
+              <li>Walking shot along Strandvägen or through Humlegården, phone at chest height</li>
+              <li>One cutaway of the studio door / Max checking a training log</li>
+            </ol></dd></div>
+            <div><dt>Duration</dt><dd>45–60s</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="fmt rv" id="a3">
+        <header class="fmt__head">
+          <span class="fmt__id">A3</span>
+          <div class="fmt__title">
+            <h4>“What she said on the first call”</h4>
+            <p class="fmt__inspired">Inspired by @fitinmidlife’s “midlife drift” story <span class="ev">(602 / 46 — his best post despite 274K followers)</span>. Anonymised first-call fears, answered.</p>
+          </div>
+          <div class="fmt__chips">
+            <span class="chip chip--low">Low</span>
+            <span class="chip chip--cadence">Weekly</span>
+          </div>
+        </header>
+        <div class="fmt__body">
+          <dl class="fld fmt__col">
+            <div><dt>What</dt><dd>45s talking head. Max reads one thing a prospective client said, then answers it honestly.</dd></div>
+            <div><dt>Hooks</dt><dd><ul class="hooks">
+              <li>‘I don’t want to be the oldest person in the gym.’ — every third woman who calls me.</li>
+              <li>‘I’ve never lifted anything heavier than my kids.’ Good. That’s heavier than you think.</li>
+              <li>‘Will you make me do burpees?’ No. Never.</li>
+            </ul></dd></div>
+            <div><dt>CTA</dt><dd class="cta">“Book the call. Say the scary thing out loud. It’s usually smaller than you think.”</dd></div>
+            <div><dt>Why it works</dt><dd>She hears her own objection said out loud by someone who isn’t judging it.</dd></div>
+          </dl>
+          <dl class="fld fmt__col fmt__col--side">
+            <div><dt>Shot list</dt><dd><ol class="shots">
+              <li>Max at the studio desk, phone on a small tripod, natural light</li>
+              <li>Optional B-roll of the empty, quiet studio</li>
+            </ol></dd></div>
+            <div><dt>Duration</dt><dd>30–45s</dd></div>
+          </dl>
+        </div>
+      </article>
+    </div>
+
+    <!-- Pillar B -->
+    <div class="pillar" data-pillar="B">
+      <div class="pillar__head rv">
+        <span class="pillar__letter" aria-hidden="true">B</span>
+        <h3>Pillar B — Contrarian</h3>
+        <span class="pillar__intent">reach</span>
+      </div>
+
+      <article class="fmt rv" id="b1">
+        <header class="fmt__head">
+          <span class="fmt__id">B1</span>
+          <div class="fmt__title">
+            <h4>“Fitness advice for women over 40 that needs to go in the bin”</h4>
+            <p class="fmt__inspired">Inspired by @barbells_and_mountains <span class="ev">(25.9K / 1.7K and 3.2K / 448)</span>. A 5-item contrarian list, delivered walking or in the gym, items as on-screen text.</p>
+          </div>
+          <div class="fmt__chips">
+            <span class="chip chip--medium">Medium</span>
+            <span class="chip chip--cadence">Every 2 weeks</span>
+          </div>
+        </header>
+        <div class="fmt__body">
+          <dl class="fld fmt__col">
+            <div><dt>What</dt><dd>45–60s reel. Max lists 5 things, one line each, with a beat of silence between.</dd></div>
+            <div><dt>Hooks</dt><dd><ul class="hooks">
+              <li>Fitness advice for women over 40 that needs to go in the bin.</li>
+              <li>Five things I’d ban from every gym if I could.</li>
+              <li>‘Toning’ isn’t a thing. Let’s talk about that.</li>
+            </ul></dd></div>
+            <div><dt>Items bank</dt><dd><ul class="tags">
+              <li>“toning”</li><li>light weights for high reps</li><li>“shrink for summer”</li><li>cardio as punishment</li><li>“you’re too old to start lifting”</li><li>the 1,200-calorie diet</li><li>“just do Pilates”</li><li>fasted training for women in perimenopause</li><li>scale weigh-ins as the only metric</li>
+            </ul></dd></div>
+            <div><dt>CTA</dt><dd class="cta">“What have I missed?” — the audience finishes the list; this is where the comments come from.</dd></div>
+          </dl>
+          <dl class="fld fmt__col fmt__col--side">
+            <div><dt>Shot list</dt><dd><ol class="shots">
+              <li>Walking shot (outdoors, moving background) OR standing in the rack, static</li>
+              <li>On-screen: numbered list appears item by item</li>
+            </ol></dd></div>
+            <div><dt>Duration</dt><dd>45–60s</dd></div>
+            <div><dt>Guardrail</dt><dd class="guard">Contrarian about the <em>industry</em>, never about <em>her</em>. Paul swears; Max doesn’t need to.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="fmt rv" id="b2">
+        <header class="fmt__head">
+          <span class="fmt__id">B2</span>
+          <div class="fmt__title">
+            <h4>“I’m sick of…”</h4>
+            <p class="fmt__inspired">Inspired by Paul’s “I’m sick of ‘what I eat in a day’ posts” <span class="ev">(1.1K / 118)</span>. One-topic mini rant.</p>
+          </div>
+          <div class="fmt__chips">
+            <span class="chip chip--low">Low</span>
+            <span class="chip chip--cadence">Every 2 weeks <small>· alternating with B1</small></span>
+          </div>
+        </header>
+        <div class="fmt__body">
+          <dl class="fld fmt__col">
+            <div><dt>What</dt><dd>30–45s, single idea, tighter than B1.</dd></div>
+            <div><dt>Hooks</dt><dd><ul class="hooks">
+              <li>I’m sick of ‘what I eat in a day’ posts. What you eat on one perfect day means nothing.</li>
+              <li>I’m sick of seeing women told to eat less and move more at 48.</li>
+              <li>I’m sick of the word ‘toned’.</li>
+            </ul></dd></div>
+            <div><dt>CTA</dt><dd class="cta">“Agree? Send this to someone who needs to hear it.”</dd></div>
+          </dl>
+          <dl class="fld fmt__col fmt__col--side">
+            <div><dt>Shot list</dt><dd><ol class="shots">
+              <li>Talking head, slightly closer than usual</li>
+              <li>One cutaway</li>
+            </ol></dd></div>
+            <div><dt>Duration</dt><dd>30–45s</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="fmt rv" id="b3">
+        <header class="fmt__head">
+          <span class="fmt__id">B3</span>
+          <div class="fmt__title">
+            <h4>“Two truths”</h4>
+            <p class="fmt__inspired">Inspired by @doriancoreperformance’s evidence posts <span class="ev">(3.6K / 108)</span> and “the long game” <span class="ev">(3.2K / 106)</span>. One fact, one action.</p>
+          </div>
+          <div class="fmt__chips">
+            <span class="chip chip--low">Low</span>
+            <span class="chip chip--cadence">Weekly</span>
+          </div>
+        </header>
+        <div class="fmt__body">
+          <dl class="fld fmt__col">
+            <div><dt>What</dt><dd>Text card (carousel, 2 slides) or 20s reel. Slide 1: the fact. Slide 2: what to do about it.</dd></div>
+            <div><dt>Fact bank</dt><dd><ul class="tags">
+              <li>muscle mass drops ~3–8% per decade after 30 and faster after menopause</li>
+              <li>bone density: strength training is the only exercise that reliably builds it</li>
+              <li>grip strength predicts longevity better than BMI</li>
+              <li>a woman who starts lifting at 50 can add strength for 20 years</li>
+              <li>protein needs go <em>up</em> after 40, not down</li>
+            </ul></dd></div>
+            <div><dt>CTA</dt><dd class="cta">“Save this for the next time someone tells you to eat less.”</dd></div>
+          </dl>
+          <dl class="fld fmt__col fmt__col--side">
+            <div><dt>Shot list</dt><dd><ol class="shots">
+              <li>None needed for the card</li>
+              <li>For reel — Max at the whiteboard in the studio</li>
+            </ol></dd></div>
+            <div><dt>Duration</dt><dd>2 slides / 20s</dd></div>
+            <div><dt>Guardrail</dt><dd class="guard">Cite the source in the caption. Never diagnose, never mention hormone therapy.</dd></div>
+          </dl>
+        </div>
+      </article>
+    </div>
+
+    <!-- Pillar C -->
+    <div class="pillar" data-pillar="C">
+      <div class="pillar__head rv">
+        <span class="pillar__letter" aria-hidden="true">C</span>
+        <h3>Pillar C — Proof</h3>
+        <span class="pillar__intent">without before/after</span>
+      </div>
+
+      <article class="fmt rv" id="c1">
+        <header class="fmt__head">
+          <span class="fmt__id">C1</span>
+          <div class="fmt__title">
+            <h4>“Numbers that matter”</h4>
+            <p class="fmt__inspired">Inspired by Gary’s blood-results graphic — a good idea executed without story. Ours has the story.</p>
+          </div>
+          <div class="fmt__chips">
+            <span class="chip chip--medium">Medium <small>· needs client consent</small></span>
+            <span class="chip chip--cadence">Every 2 weeks</span>
+          </div>
+        </header>
+        <div class="fmt__body">
+          <dl class="fld fmt__col">
+            <div><dt>What</dt><dd>Carousel or 30s reel. One client’s <em>strength or health</em> number over time: deadlift 40 → 80 kg; grip strength; resting HR; blood pressure; bone density scan; stairs without stopping.</dd></div>
+            <div><dt>Hooks</dt><dd><ul class="hooks">
+              <li>Karin, 52. Deadlift in March: 40 kg. Deadlift today: 82.5 kg. Bodyweight: none of your business.</li>
+              <li>This is the only ‘before and after’ I post.</li>
+            </ul></dd></div>
+            <div><dt>CTA</dt><dd class="cta">“This is what 12 weeks looks like when nobody’s shouting at you.”</dd></div>
+          </dl>
+          <dl class="fld fmt__col fmt__col--side">
+            <div><dt>Shot list</dt><dd><ol class="shots">
+              <li>The actual lift (phone, side angle, low), Max spotting</li>
+              <li>The number handwritten on the whiteboard</li>
+            </ol></dd></div>
+            <div><dt>Duration</dt><dd>30s</dd></div>
+            <div><dt>Guardrail</dt><dd class="guard">Never bodyweight, never photos of her body as the point. First name + age only, with written consent.</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="fmt rv" id="c2">
+        <header class="fmt__head">
+          <span class="fmt__id">C2</span>
+          <div class="fmt__title">
+            <h4>“Life proof”</h4>
+            <p class="fmt__inspired">Inspired by Shane’s surf-trip reel <span class="ev">(17.3K / 1K)</span> and Harry’s travel posts <span class="ev">(3.6K, 1.4K)</span>. Clients doing the thing they trained for.</p>
+          </div>
+          <div class="fmt__chips">
+            <span class="chip chip--low">Low <small>· for Max — clients film</small></span>
+            <span class="chip chip--cadence">Monthly, or as they come</span>
+          </div>
+        </header>
+        <div class="fmt__body">
+          <dl class="fld fmt__col">
+            <div><dt>What</dt><dd>20–40s reel from client-submitted phone clips: the hike, the ski trip, lifting the suitcase into the overhead bin, carrying a grandchild, moving house. Max voice-over, two sentences.</dd></div>
+            <div><dt>Hooks</dt><dd><ul class="hooks">
+              <li>She didn’t train to look different. She trained to do this.</li>
+              <li>Kebnekaise, 58 years old, no poles.</li>
+            </ul></dd></div>
+            <div><dt>CTA</dt><dd class="cta">“What do you want to be strong <em>for</em>? Tell me below.”</dd></div>
+          </dl>
+          <dl class="fld fmt__col fmt__col--side">
+            <div><dt>Shot list</dt><dd><ol class="shots">
+              <li>Client clips (ask at check-in: “send me 10 seconds of the thing”)</li>
+              <li>Max recording a voice memo</li>
+            </ol></dd></div>
+            <div><dt>Duration</dt><dd>20–40s</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="fmt rv" id="c3">
+        <header class="fmt__head">
+          <span class="fmt__id">C3</span>
+          <div class="fmt__title">
+            <h4>“In her words”</h4>
+            <p class="fmt__inspired">Client interview, one question only.</p>
+          </div>
+          <div class="fmt__chips">
+            <span class="chip chip--high">High <small>· client + scheduling</small></span>
+            <span class="chip chip--cadence">Monthly</span>
+          </div>
+        </header>
+        <div class="fmt__body">
+          <dl class="fld fmt__col">
+            <div><dt>What</dt><dd>45–60s. Max asks a single question off-camera; she answers.</dd></div>
+            <div><dt>Questions</dt><dd><ul class="hooks">
+              <li>What were you afraid of before the first session?</li>
+              <li>What surprised you about Max?</li>
+              <li>What can you do now that you couldn’t a year ago?</li>
+            </ul></dd></div>
+            <div><dt>CTA</dt><dd class="cta">“She was nervous too. Link in bio.”</dd></div>
+          </dl>
+          <dl class="fld fmt__col fmt__col--side">
+            <div><dt>Shot list</dt><dd><ol class="shots">
+              <li>Client seated in the studio, warm light, phone on tripod at eye level, Max’s voice off-camera</li>
+              <li>Cover frame: her mid-sentence, smiling</li>
+            </ol></dd></div>
+            <div><dt>Duration</dt><dd>45–60s</dd></div>
+          </dl>
+        </div>
+      </article>
+    </div>
+
+    <!-- Pillar D -->
+    <div class="pillar" data-pillar="D">
+      <div class="pillar__head rv">
+        <span class="pillar__letter" aria-hidden="true">D</span>
+        <h3>Pillar D — Train with Max</h3>
+        <span class="pillar__intent">saves</span>
+      </div>
+
+      <article class="fmt rv" id="d1">
+        <header class="fmt__head">
+          <span class="fmt__id">D1</span>
+          <div class="fmt__title">
+            <h4>“The 5 lifts every woman over 40 should own”</h4>
+            <p class="fmt__inspired">Inspired by Shane’s routine demos <span class="ev">(7.6K / 171)</span>. One lift per reel; a five-part series; also the lead magnet for the funnel.</p>
+          </div>
+          <div class="fmt__chips">
+            <span class="chip chip--medium">Medium</span>
+            <span class="chip chip--cadence">Weekly until the series is done <small>· then re-run quarterly</small></span>
+          </div>
+        </header>
+        <div class="fmt__body">
+          <dl class="fld fmt__col">
+            <div><dt>What</dt><dd>30–45s. A client (or Max) performs the lift; Max explains <em>why this lift</em> in one sentence, then the two cues that matter.</dd></div>
+            <div><dt>The five</dt><dd><ul class="tags">
+              <li>deadlift (hinge)</li><li>goblet squat</li><li>push (incline press or push-up)</li><li>pull (row)</li><li>loaded carry</li>
+            </ul></dd></div>
+            <div><dt>Hooks</dt><dd><ul class="hooks">
+              <li>Lift 1 of 5: the deadlift. Because you pick things up every day and nobody taught you how.</li>
+              <li>The one exercise I’d give every woman over 40 if I could only give one.</li>
+            </ul></dd></div>
+            <div><dt>CTA</dt><dd class="cta">“Save this. Comment STRONG and I’ll send you all five as a guide.”</dd></div>
+          </dl>
+          <dl class="fld fmt__col fmt__col--side">
+            <div><dt>Shot list</dt><dd><ol class="shots">
+              <li>Side angle at hip height</li>
+              <li>A close-up of the set-up (feet, grip)</li>
+              <li>Max’s cue delivered to camera</li>
+              <li>Reps and sets in the caption</li>
+            </ol></dd></div>
+            <div><dt>Duration</dt><dd>30–45s</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="fmt rv" id="d2">
+        <header class="fmt__head">
+          <span class="fmt__id">D2</span>
+          <div class="fmt__title">
+            <h4>“The morning five”</h4>
+            <p class="fmt__inspired">Inspired by @fitinmidlife’s 6-movement morning routine <span class="ev">(128 / 14)</span> and Shane’s activation <span class="ev">(7.6K / 171)</span>. A 4-minute follow-along.</p>
+          </div>
+          <div class="fmt__chips">
+            <span class="chip chip--low">Low</span>
+            <span class="chip chip--cadence">Every 2 weeks</span>
+          </div>
+        </header>
+        <div class="fmt__body">
+          <dl class="fld fmt__col">
+            <div><dt>What</dt><dd>45–60s time-lapse or cut-down of a 5-move routine, reps in caption.</dd></div>
+            <div><dt>Hooks</dt><dd><ul class="hooks">
+              <li>Four minutes before your coffee. That’s it.</li>
+              <li>If your back is stiff every morning, do this before you sit down.</li>
+            </ul></dd></div>
+            <div><dt>CTA</dt><dd class="cta">“Save it, do it tomorrow, tell me how it felt.”</dd></div>
+          </dl>
+          <dl class="fld fmt__col fmt__col--side">
+            <div><dt>Shot list</dt><dd><ol class="shots">
+              <li>Living-room or studio floor, wide static shot, natural light</li>
+              <li>Max demonstrates each move for 8s</li>
+            </ol></dd></div>
+            <div><dt>Duration</dt><dd>45–60s</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="fmt rv" id="d3">
+        <header class="fmt__head">
+          <span class="fmt__id">D3</span>
+          <div class="fmt__title">
+            <h4>“Session snapshot”</h4>
+            <p class="fmt__inspired">Cinematic B-roll of a real private session. Removes the fear of the unknown.</p>
+          </div>
+          <div class="fmt__chips">
+            <span class="chip chip--low">Low</span>
+            <span class="chip chip--cadence">Weekly</span>
+          </div>
+        </header>
+        <div class="fmt__body">
+          <dl class="fld fmt__col">
+            <div><dt>What</dt><dd>15–25s, no talking. Text overlay: what we did and why. Music, slow.</dd></div>
+            <div><dt>Hooks (text)</dt><dd><ul class="hooks">
+              <li>Tuesday, 07:00. Ingrid, 61. Week 6. Today: hinge pattern, 3 sets, then coffee.</li>
+              <li>This is what a first session actually looks like. No mirrors, no crowd, no shouting.</li>
+            </ul></dd></div>
+            <div><dt>CTA</dt><dd class="cta">None, or “Questions about what a session is like? Ask below.”</dd></div>
+            <div><dt>Why it works</dt><dd>The #1 fear is <em>not knowing what happens in there</em>. This shows it — quiet, private, calm.</dd></div>
+          </dl>
+          <dl class="fld fmt__col fmt__col--side">
+            <div><dt>Shot list</dt><dd>Filmed by Max on his phone during sessions (with consent). Faces optional.<ul class="tags">
+              <li>the barbell being loaded</li><li>chalk</li><li>her hands</li><li>the log book</li><li>the studio door</li><li>coffee cups</li>
+            </ul></dd></div>
+            <div><dt>Duration</dt><dd>15–25s</dd></div>
+          </dl>
+        </div>
+      </article>
+    </div>
+
+    <!-- Pillar E -->
+    <div class="pillar" data-pillar="E">
+      <div class="pillar__head rv">
+        <span class="pillar__letter" aria-hidden="true">E</span>
+        <h3>Pillar E — Consistency engine</h3>
+      </div>
+
+      <article class="fmt rv" id="e1">
+        <header class="fmt__head">
+          <span class="fmt__id">E1</span>
+          <div class="fmt__title">
+            <h4>“One minute with Max”</h4>
+            <p class="fmt__inspired">Inspired by @xavierthelifecoach’s Daily Morning Minute Message <span class="ev">(2–5K per post on 99K)</span>. One thought, to camera, 60 seconds. Batch-filmed: 6–8 in one sitting.</p>
+          </div>
+          <div class="fmt__chips">
+            <span class="chip chip--low">Low <small>· all 3 filmed in 20 minutes</small></span>
+            <span class="chip chip--cadence">3 per week</span>
+          </div>
+        </header>
+        <div class="fmt__body">
+          <dl class="fld fmt__col">
+            <div><dt>What</dt><dd>45–60s talking head. One idea. No editing beyond subtitles and a cover.</dd></div>
+            <div><dt>Idea bank</dt><dd><ul class="tags">
+              <li>“Strong is not a size.”</li>
+              <li>“You don’t need motivation, you need a Tuesday 07:00 that’s already booked.”</li>
+              <li>“Your knees don’t hurt because you’re old. They hurt because you stopped loading them.”</li>
+              <li>“Recovery is training.”</li>
+              <li>“The gym isn’t scary. Strangers are. There are none here.”</li>
+              <li>“Discipline is just a plan you don’t renegotiate at 6am.”</li>
+            </ul></dd></div>
+            <div><dt>CTA</dt><dd class="cta">Rotate — none / “follow” / “save”.</dd></div>
+          </dl>
+          <dl class="fld fmt__col fmt__col--side">
+            <div><dt>Shot list</dt><dd><ol class="shots">
+              <li>Same seat, same light, same framing every time — the consistency <em>is</em> the brand</li>
+              <li>Phone on tripod, eye level, slightly below</li>
+            </ol></dd></div>
+            <div><dt>Duration</dt><dd>45–60s</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="fmt rv" id="e2">
+        <header class="fmt__head">
+          <span class="fmt__id">E2</span>
+          <div class="fmt__title">
+            <h4>“Words on the wall”</h4>
+            <p class="fmt__inspired">Inspired by @jasonbrowntraining’s branded text cards <span class="ev">(his best-performing format: 187–224 on 77K)</span>. A single aphorism in the Haven visual system.</p>
+          </div>
+          <div class="fmt__chips">
+            <span class="chip chip--zero">Zero <small>· Cursus produces</small></span>
+            <span class="chip chip--cadence">2 per week</span>
+          </div>
+        </header>
+        <div class="fmt__body">
+          <dl class="fld fmt__col">
+            <div><dt>What</dt><dd>One image. Ivory ground, Marcellus serif, one line, small monogram.</dd></div>
+            <div><dt>CTA</dt><dd class="cta">None.</dd></div>
+          </dl>
+          <dl class="fld fmt__col fmt__col--side">
+            <div><dt>Line bank</dt><dd><ul class="tags tags--serif">
+              <li>Strong for the long run.</li>
+              <li>You are not too old. You are under-trained.</li>
+              <li>Protect your strength like it’s someone you love.</li>
+              <li>Nobody is watching you at the gym. They’re watching themselves.</li>
+              <li>Toned is just strong, whispered.</li>
+            </ul></dd></div>
+          </dl>
+        </div>
+      </article>
+    </div>
+
+    <!-- Pillar F -->
+    <div class="pillar" data-pillar="F">
+      <div class="pillar__head rv">
+        <span class="pillar__letter" aria-hidden="true">F</span>
+        <h3>Pillar F — Conversion</h3>
+      </div>
+
+      <article class="fmt rv" id="f1">
+        <header class="fmt__head">
+          <span class="fmt__id">F1</span>
+          <div class="fmt__title">
+            <h4>“Comment STRONG”</h4>
+            <p class="fmt__inspired">Inspired by Harry’s “Comment COACHING and I’ll DM you” <span class="ev">(794 / 30)</span>. Comment-keyword lead gen, wired to the funnel.</p>
+          </div>
+          <div class="fmt__chips">
+            <span class="chip chip--low">Low</span>
+            <span class="chip chip--cadence">Every 2 weeks</span>
+          </div>
+        </header>
+        <div class="fmt__body">
+          <dl class="fld fmt__col">
+            <div><dt>What</dt><dd>30s reel: Max holds up the printed “5 lifts” guide, says what it is, says the word.</dd></div>
+            <div><dt>Hooks</dt><dd><ul class="hooks">
+              <li>If you’re over 40 and you’ve never lifted, I made this for you. Comment STRONG and I’ll send it.</li>
+              <li>Five lifts. One page. Free. Comment STRONG.</li>
+            </ul></dd></div>
+            <div><dt>CTA</dt><dd class="cta">The keyword.</dd></div>
+          </dl>
+          <dl class="fld fmt__col fmt__col--side">
+            <div><dt>Mechanics</dt><dd>ManyChat (or Meta’s native automation) replies to the keyword with the guide link.<ol class="flow" style="margin-top:.6rem">
+              <li>Keyword</li><li>Guide link</li><li>/start funnel page</li><li>Email captured</li><li>Intro-call CTA</li>
+            </ol></dd></div>
+            <div><dt>Duration</dt><dd>30s</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="fmt rv" id="f2">
+        <header class="fmt__head">
+          <span class="fmt__id">F2</span>
+          <div class="fmt__title">
+            <h4>“This is for you if / not for you if”</h4>
+            <p class="fmt__inspired">Qualification post. Harry’s “Comment COACHING” reel did this well; Gary’s “Does this describe you?” did it without personality <span class="ev">(5 / 4)</span>.</p>
+          </div>
+          <div class="fmt__chips">
+            <span class="chip chip--low">Low</span>
+            <span class="chip chip--cadence">Monthly</span>
+          </div>
+        </header>
+        <div class="fmt__body">
+          <dl class="fld fmt__col">
+            <div><dt>What</dt><dd>45s talking head or 6-slide carousel. Three “for you” lines, three “not for you” lines.</dd></div>
+            <div><dt>CTA</dt><dd class="cta">“Free intro call. Link in bio. No hard sell — I’m bad at it.”</dd></div>
+          </dl>
+          <dl class="fld fmt__col fmt__col--side pairs">
+            <div><dt>For you if</dt><dd><ul class="tags">
+              <li>you haven’t trained in years and you’re nervous about it</li>
+              <li>you want to be strong for the next 30 years, not thin for the next 30 days</li>
+              <li>you want one calm person in your corner</li>
+            </ul></dd></div>
+            <div><dt>Not for you if</dt><dd><ul class="tags tags--no">
+              <li>you want a 6-week transformation</li>
+              <li>you want someone to shout at you</li>
+              <li>you want to be weighed every week</li>
+            </ul></dd></div>
+          </dl>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ————————— 4 · WEEKLY RHYTHM ————————— -->
+<section class="sec deep hairline-top" id="s4" aria-labelledby="t4">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-head__num" aria-hidden="true">04</span>
+      <div>
+        <p class="micro micro-rule">Weekly rhythm · 6 posts · one film block</p>
+        <h2 id="t4">The weekly rhythm</h2>
+      </div>
+    </div>
+    <div class="rhythm">
+      <div class="rv">
+        <p class="micro micro-rule">Posting cadence · 6 per week</p>
+        <div class="tscroll">
+          <table class="tbl tbl--cadence">
+            <thead><tr><th scope="col">Day</th><th scope="col">Slot</th><th scope="col">Format</th></tr></thead>
+            <tbody>
+              <tr><td>Mon</td><td>07:00</td><td><b class="fid">D1</b> lift demo (or <b class="fid">D2</b> routine) — saves</td></tr>
+              <tr><td>Tue</td><td>12:00</td><td><b class="fid">E1</b> one minute with Max</td></tr>
+              <tr><td>Wed</td><td>18:00</td><td>Reach piece: <b class="fid">B1</b> / <b class="fid">B2</b> / <b class="fid">A1</b> / <b class="fid">A2</b> (rotating)</td></tr>
+              <tr><td>Thu</td><td>12:00</td><td><b class="fid">E2</b> words on the wall · or <b class="fid">B3</b> two truths</td></tr>
+              <tr><td>Fri</td><td>07:00</td><td><b class="fid">E1</b> one minute with Max</td></tr>
+              <tr><td>Sat</td><td>10:00</td><td>Proof or atmosphere: <b class="fid">C1</b> / <b class="fid">C2</b> / <b class="fid">C3</b> / <b class="fid">D3</b> (rotating)</td></tr>
+              <tr><td>Sun</td><td>—</td><td>rest, or <b class="fid">E2</b></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="rv rv-d1">
+        <p class="micro micro-rule">Film day</p>
+        <h3 class="rhythm__title">One 90-minute block, same day every week</h3>
+        <p class="rhythm__p">Proposed: Tuesday 10:30–12:00, between sessions.</p>
+        <ol class="fblock" aria-label="Film block breakdown, 90 minutes">
+          <li style="--m:20;--seg:var(--clay)"><b class="min">20<small>min</small></b>3× <b class="fid">E1</b> (same seat, same light; change shirt between takes if he wants)</li>
+          <li style="--m:20;--seg:var(--espresso-2)"><b class="min">20<small>min</small></b>1× reach piece (<b class="fid">B1</b>/<b class="fid">B2</b>/<b class="fid">A2</b>/<b class="fid">A3</b>), walking or studio</li>
+          <li style="--m:20;--seg:var(--sand)"><b class="min">20<small>min</small></b>1× <b class="fid">D1</b> lift demo (with the 11:00 client if she’s consented, otherwise Max)</li>
+          <li style="--m:15;--seg:var(--sage)"><b class="min">15<small>min</small></b>Cutaways/B-roll: hands, chalk, log book, door, coffee</li>
+          <li style="--m:15;--seg:var(--sand)"><b class="min">15<small>min</small></b>Buffer / retakes</li>
+        </ol>
+        <div class="note note--porcelain">
+          <span class="micro">During the week</span>
+          Plus, during the week, zero-effort captures: <b class="fid">D3</b> session snapshots on his phone (10s clips), and <b class="fid">C2</b> client clips forwarded from WhatsApp.
+        </div>
+        <p class="output">Output per film block: <strong>5 pieces + B-roll → 6 posts</strong> (E2 cards are made by Cursus).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ————————— 5 · SHOOTING LOG ————————— -->
+<section class="sec porcelain" id="s5" aria-labelledby="t5">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-head__num" aria-hidden="true">05</span>
+      <div>
+        <p class="micro micro-rule">Shooting log · one card per piece</p>
+        <h2 id="t5">Shooting log</h2>
+        <p class="lede">One card per piece. Cursus writes it; Max films it; nothing is left to decide on the day.</p>
+      </div>
+    </div>
+    <div class="sheets">
+      <article class="sheet rv" aria-label="Shooting log template">
+        <header class="sheet__top"><span class="micro">Template</span><span class="sheet__id">W38-03</span></header>
+        <div class="sheet__rows">
+          <div class="k">ID</div><div class="v">W38-03</div>
+          <div class="k">Format</div><div class="v"><b class="fid">B1</b> · “…needs to go in the bin”</div>
+          <div class="k">Working title</div><div class="v">Five things women over 40 are told that need to go</div>
+          <div class="k">Hook (spoken, first 3s)</div><div class="v"><span class="hook">“Fitness advice for women over 40 that needs to go in the bin.”</span></div>
+          <div class="k">Hook (on screen)</div><div class="v"><span class="onscreen">ADVICE THAT NEEDS TO GO</span></div>
+          <div class="k">Beats</div><div class="v"><ol class="beats">
+            <li>“Toning.” It isn’t a thing. Muscle or no muscle.</li>
+            <li>Light weights, high reps, forever.</li>
+            <li>Cardio as punishment for eating.</li>
+            <li>“You’re too old to start lifting.” Nobody is.</li>
+            <li>Weighing yourself every morning like it’s a grade.</li>
+          </ol></div>
+          <div class="k">Location</div><div class="v">Walking, Humlegården, morning light</div>
+          <div class="k">Framing</div><div class="v">Phone at chest height, Max walking toward camera, 0.5× lens</div>
+          <div class="k">Wardrobe</div><div class="v">Dark tee, tattoos visible, no cap</div>
+          <div class="k">Props</div><div class="v">none</div>
+          <div class="k">Duration target</div><div class="v">50s</div>
+          <div class="k">B-roll needed</div><div class="v">none (list appears as text)</div>
+          <div class="k">Delivery</div><div class="v">Calm, one beat of silence between items. Don’t rush item 4.</div>
+          <div class="k">CTA (spoken)</div><div class="v">“What have I missed?”</div>
+          <div class="k">Caption (Cursus drafts)</div><div class="v">List repeated + “What have I missed? Add yours below.”</div>
+          <div class="k">Post slot</div><div class="v">Wed 17 Sep, 18:00</div>
+          <div class="k">Status</div><div class="v"><div class="status"><span>to film</span><i>→</i><span>filmed</span><i>→</i><span>edited</span><i>→</i><span>scheduled</span><i>→</i><span>posted</span></div></div>
+          <div class="k">7-day result</div><div class="v"><ul class="tags"><li>views</li><li>saves</li><li>comments</li><li>DMs</li><li>calls booked</li></ul></div>
+        </div>
+      </article>
+
+      <article class="sheet sheet--ex rv rv-d1" aria-label="Filled example, W38-01">
+        <header class="sheet__top"><span class="micro">Filled example</span><span class="sheet__id">W38-01 · E1</span></header>
+        <div class="sheet__rows">
+          <div class="k">ID</div><div class="v">W38-01</div>
+          <div class="k">Format</div><div class="v"><b class="fid">E1</b> · One minute with Max</div>
+          <div class="k">Hook (spoken)</div><div class="v"><span class="hook">“You don’t need motivation. You need a Tuesday at seven that’s already booked.”</span></div>
+          <div class="k">Beats</div><div class="v"><ol class="beats">
+            <li>Motivation is weather; a booked slot is a calendar.</li>
+            <li>In close protection nothing ran on motivation — everything ran on the plan.</li>
+            <li>Book the slot, show up, let the plan carry you on the days you don’t feel it.</li>
+          </ol></div>
+          <div class="k">Location / framing</div><div class="v">Studio chair, window left, phone on tripod at eye level</div>
+          <div class="k">Duration</div><div class="v">45s</div>
+          <div class="k">CTA</div><div class="v">none</div>
+          <div class="k">Post slot</div><div class="v">Tue 16 Sep, 12:00</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ————————— 6 · SAMPLE WEEK ————————— -->
+<section class="sec hairline-top" id="s6" aria-labelledby="t6">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-head__num" aria-hidden="true">06</span>
+      <div>
+        <p class="micro micro-rule">Sample week · W38</p>
+        <h2 id="t6">Sample weekly shooting schedule — Week 38 (14–20 Sep 2026)</h2>
+        <p class="lede">Sent to Max on Sunday 14 Sep, 18:00 (WhatsApp + PDF).</p>
+      </div>
+    </div>
+    <div class="sub-head rv" style="margin-top:0">
+      <p class="micro micro-rule">Film block</p>
+      <h3>Tuesday 16 Sep, 10:30–12:00 — film block, studio + Humlegården</h3>
+    </div>
+    <div class="tscroll rv">
+      <table class="tbl tbl--week">
+        <thead><tr><th scope="col">Time</th><th scope="col">ID</th><th scope="col">Format</th><th scope="col">What to film</th></tr></thead>
+        <tbody>
+          <tr><td>10:30</td><td>W38-01, 02, 04</td><td><b class="fid">E1</b> ×3</td><td>Three one-minute pieces from the idea bank (cards attached). Same chair, same light.</td></tr>
+          <tr><td>10:50</td><td>W38-03</td><td><b class="fid">B1</b></td><td>“Advice that needs to go in the bin” — walking, Humlegården. Five items, card attached.</td></tr>
+          <tr><td>11:10</td><td>W38-05</td><td><b class="fid">D1</b></td><td>Deadlift set-up with Ingrid (consent confirmed Fri). Side angle, hip height. Two cues: “push the floor away”, “bar stays on your legs”.</td></tr>
+          <tr><td>11:30</td><td>—</td><td>B-roll</td><td>Chalk, hands on bar, log book, studio door, coffee. 10 clips × 8s.</td></tr>
+          <tr><td>11:45</td><td>—</td><td>Buffer</td><td>Retakes if any.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="week__notes">
+      <div class="note rv">
+        <span class="micro">During the week · phone, 10 seconds each</span>
+        <b class="fid">D3</b> snapshot Thursday 07:00 session (Karin — consent on file). Forward any client clips from WhatsApp to the shared folder.
+      </div>
+      <div class="note rv rv-d1">
+        <span class="micro">Upload</span>
+        Everything to the shared Drive folder <code>Max / Raw / W38</code> by Tuesday 14:00. Cursus edits Tuesday–Wednesday.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ————————— 7 · CALENDAR ————————— -->
+<section class="sec porcelain hairline-top" id="s7" aria-labelledby="t7">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-head__num" aria-hidden="true">07</span>
+      <div>
+        <p class="micro micro-rule">Calendar · 4 weeks</p>
+        <h2 id="t7">Sample 4-week content calendar (14 Sep – 11 Oct 2026)</h2>
+      </div>
+    </div>
+    <ul class="legend rv" aria-label="Pillar colour key">
+      <li data-pillar="A"><i></i><b>A</b> Who Max is</li>
+      <li data-pillar="B"><i></i><b>B</b> Contrarian</li>
+      <li data-pillar="C"><i></i><b>C</b> Proof</li>
+      <li data-pillar="D"><i></i><b>D</b> Train with Max</li>
+      <li data-pillar="E"><i></i><b>E</b> Consistency engine</li>
+      <li data-pillar="F"><i></i><b>F</b> Conversion</li>
+    </ul>
+    <div class="cal rv">
+      <div class="cal__hd">Week</div>
+      <div class="cal__hd">Mon</div><div class="cal__hd">Tue</div><div class="cal__hd">Wed</div><div class="cal__hd">Thu</div><div class="cal__hd">Fri</div><div class="cal__hd">Sat</div>
+
+      <div class="cal__week">
+        <div class="cal__label"><b>W38</b><span>14–20 Sep</span></div>
+        <div class="cal__cell" data-pillar="D" data-day="Mon"><span class="fid">D1</span><span class="cal__txt">Deadlift (lift 1/5)</span></div>
+        <div class="cal__cell" data-pillar="E" data-day="Tue"><span class="fid">E1</span><span class="cal__txt">“Tuesday at seven”</span></div>
+        <div class="cal__cell cal__cell--reach" data-pillar="B" data-day="Wed"><span class="fid">B1</span><span class="cal__txt">Advice that needs to go</span></div>
+        <div class="cal__cell" data-pillar="E" data-day="Thu"><span class="fid">E2</span><span class="cal__txt">“Strong is not a size.”</span></div>
+        <div class="cal__cell" data-pillar="E" data-day="Fri"><span class="fid">E1</span><span class="cal__txt">“Your knees”</span></div>
+        <div class="cal__cell" data-pillar="D" data-day="Sat"><span class="fid">D3</span><span class="cal__txt">Session snapshot — Thursday 07:00</span></div>
+      </div>
+
+      <div class="cal__week">
+        <div class="cal__label"><b>W39</b><span>21–27 Sep</span></div>
+        <div class="cal__cell" data-pillar="D" data-day="Mon"><span class="fid">D1</span><span class="cal__txt">Goblet squat (2/5)</span></div>
+        <div class="cal__cell" data-pillar="E" data-day="Tue"><span class="fid">E1</span><span class="cal__txt">“Recovery is training”</span></div>
+        <div class="cal__cell cal__cell--reach" data-pillar="A" data-day="Wed"><span class="fid">A1</span><span class="cal__txt">Allow me to reintroduce myself (pinned)</span></div>
+        <div class="cal__cell" data-pillar="B" data-day="Thu"><span class="fid">B3</span><span class="cal__txt">Two truths: muscle after 40</span></div>
+        <div class="cal__cell" data-pillar="E" data-day="Fri"><span class="fid">E1</span><span class="cal__txt">“Nobody is watching you”</span></div>
+        <div class="cal__cell" data-pillar="C" data-day="Sat"><span class="fid">C1</span><span class="cal__txt">Numbers that matter — Karin, deadlift 40→82.5</span></div>
+      </div>
+
+      <div class="cal__week">
+        <div class="cal__label"><b>W40</b><span>28 Sep–4 Oct</span></div>
+        <div class="cal__cell" data-pillar="D" data-day="Mon"><span class="fid">D1</span><span class="cal__txt">Push (3/5)</span></div>
+        <div class="cal__cell" data-pillar="E" data-day="Tue"><span class="fid">E1</span><span class="cal__txt">“Discipline is a plan”</span></div>
+        <div class="cal__cell cal__cell--reach" data-pillar="B" data-day="Wed"><span class="fid">B2</span><span class="cal__txt">I’m sick of “what I eat in a day”</span></div>
+        <div class="cal__cell" data-pillar="E" data-day="Thu"><span class="fid">E2</span><span class="cal__txt">“You are not too old…”</span></div>
+        <div class="cal__cell" data-pillar="E" data-day="Fri"><span class="fid">E1</span><span class="cal__txt">“Strangers, not gyms”</span></div>
+        <div class="cal__cell" data-pillar="C" data-day="Sat"><span class="fid">C2</span><span class="cal__txt">Life proof — the hike</span></div>
+      </div>
+
+      <div class="cal__week">
+        <div class="cal__label"><b>W41</b><span>5–11 Oct</span></div>
+        <div class="cal__cell" data-pillar="D" data-day="Mon"><span class="fid">D1</span><span class="cal__txt">Row (4/5)</span></div>
+        <div class="cal__cell" data-pillar="E" data-day="Tue"><span class="fid">E1</span></div>
+        <div class="cal__cell cal__cell--reach" data-pillar="A" data-day="Wed"><span class="fid">A2</span><span class="cal__txt">The protector’s lens: “a boring day is a perfect day”</span></div>
+        <div class="cal__cell" data-pillar="B" data-day="Thu"><span class="fid">B3</span><span class="cal__txt">Two truths: grip strength</span></div>
+        <div class="cal__cell" data-pillar="E" data-day="Fri"><span class="fid">E1</span></div>
+        <div class="cal__cell cal__cell--reach" data-pillar="F" data-day="Sat"><span class="fid">F1</span><span class="cal__txt">Comment STRONG (guide launch)</span></div>
+      </div>
+    </div>
+    <p class="note cal__note rv">Week 42 closes the <b class="fid">D1</b> series (loaded carry, 5/5) and runs <b class="fid">F2</b> (for you / not for you). Then the rotation repeats with new idea-bank items.</p>
+  </div>
+</section>
+
+<!-- ————————— 8 · PIPELINE ————————— -->
+<section class="sec dark" id="s8" aria-labelledby="t8">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-head__num" aria-hidden="true">08</span>
+      <div>
+        <p class="micro micro-rule">Pipeline · who does what, when</p>
+        <h2 id="t8">How the pipeline runs</h2>
+      </div>
+    </div>
+    <ol class="pipe rv">
+      <li class="pipe__row"><span class="pipe__when">Sunday 18:00</span><span class="pipe__who">Cursus<i>→</i>Max</span><span class="pipe__what">Weekly shooting schedule + 5 shooting-log cards (WhatsApp + PDF).</span></li>
+      <li class="pipe__row"><span class="pipe__when">Tuesday 10:30–12:00</span><span class="pipe__who">Max</span><span class="pipe__what">Films the block. Uploads raw to shared Drive folder by 14:00.</span></li>
+      <li class="pipe__row"><span class="pipe__when">Tuesday–Wednesday</span><span class="pipe__who">Cursus</span><span class="pipe__what">Edit: cut, subtitles, cover frame, Haven-styled text; draft captions + hashtags; make <b class="fid">E2</b> cards.</span></li>
+      <li class="pipe__row"><span class="pipe__when">Wednesday</span><span class="pipe__who">Cursus<i>→</i>Max</span><span class="pipe__what">Preview link. Max replies <svg class="tick" width="16" height="13" viewBox="0 0 15 12" fill="none" role="img" aria-label="tick"><path d="M1.5 6.5 5.5 10.5 13.5 1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> or one line of changes. (Silence by Thursday 12:00 = approved.)</span></li>
+      <li class="pipe__row"><span class="pipe__when">Thursday</span><span class="pipe__who">Cursus</span><span class="pipe__what">Schedule the week in Meta Business Suite (IG + FB). Calendar updated.</span></li>
+      <li class="pipe__row"><span class="pipe__when">Daily</span><span class="pipe__who">Cursus</span><span class="pipe__what">Reply to comments within 2h in Max’s voice from a prepared answer bank; flag real leads to Max the same day.</span></li>
+      <li class="pipe__row"><span class="pipe__when">Friday</span><span class="pipe__who">Cursus</span><span class="pipe__what">7-day numbers into the calendar: views, saves, comments, DMs, calls booked.</span></li>
+      <li class="pipe__row"><span class="pipe__when">Monthly</span><span class="pipe__who">Cursus + Max <small class="pipe__note">(20 min call)</small></span><span class="pipe__what">Which two formats won — double them. Which one lost — cut it. Next month’s idea bank.</span></li>
+    </ol>
+    <div class="pipe__aside">
+      <div class="rv">
+        <p class="micro micro-rule">Tools</p>
+        <ul class="tags">
+          <li><b>Google Drive</b> · raw + edits</li>
+          <li><b>Google Sheet</b> · calendar + results</li>
+          <li><b>Meta Business Suite</b> · scheduling, free</li>
+          <li><b>ManyChat</b> · comment-keyword DMs, ~15 USD/mo</li>
+          <li><b>CapCut/Premiere</b> · edit</li>
+        </ul>
+        <p class="tools__note">Nothing Max has to log into except WhatsApp and Drive.</p>
+      </div>
+      <div class="rv rv-d1">
+        <p class="micro micro-rule">Metrics that matter · in this order</p>
+        <ol class="metrics">
+          <li>calls booked</li>
+          <li>DMs started</li>
+          <li>saves</li>
+          <li>comments</li>
+          <li>views</li>
+        </ol>
+        <p class="metrics__last">Likes are last.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ————————— 9 · GUARDRAILS ————————— -->
+<section class="sec guardrails" id="s9" aria-labelledby="t9">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-head__num" aria-hidden="true">09</span>
+      <div>
+        <p class="micro micro-rule">Guardrails · six rules</p>
+        <h2 id="t9">Guardrails</h2>
+      </div>
+    </div>
+    <ol class="rules">
+      <li class="rule rv"><p><strong>No before/after body photos.</strong> No scale numbers. No “summer body”, “toned”, “shred”, “bikini”.</p></li>
+      <li class="rule rv"><p><strong>No client identifiable without written consent;</strong> first name + age only.</p></li>
+      <li class="rule rv"><p><strong>No medical claims.</strong> Facts are cited in the caption. Never mention HRT or supplements by brand.</p></li>
+      <li class="rule rv"><p><strong>Military:</strong> lessons and calm, never combat stories, never anything that dramatises violence.</p></li>
+      <li class="rule rv"><p><strong>Tone:</strong> calm, dry, kind. Max never shouts, never points at the camera, never uses the word “ladies”.</p></li>
+      <li class="rule rv"><p><strong>Every piece must pass one question</strong> — below.</p></li>
+    </ol>
+    <div class="closing rv">
+      <span class="micro">Every piece must pass one question</span>
+      <blockquote>Would a nervous 52-year-old feel safer after watching this?</blockquote>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ————————— FOOTER ————————— -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div class="brand">
+        <span class="brand__mark">Max Sandell<span>·</span>Content System</span>
+        <span class="brand__tag">Cursus Capital · v1 · 2026-09-05</span>
+      </div>
+      <nav class="footer__links" aria-label="Related pages">
+        <a class="btn btn--ivory" href="../">The Haven site<svg width="16" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M1 6h13M10 1.5 14.5 6 10 10.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="btn btn--ghost-light" href="../start/">The funnel<svg width="16" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M1 6h13M10 1.5 14.5 6 10 10.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </nav>
+    </div>
+    <div class="footer__meta">
+      <span>Cursus Capital · Prepared for Max Sandell · Concept draft — names and numbers are illustrative</span>
+      <span>Source of truth: content-system.md</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  var top = document.getElementById("top");
+  var toc = document.getElementById("toc");
+  var links = Array.prototype.slice.call(toc.querySelectorAll('a[href^="#"]'));
+  var secs = links.map(function(a){ return document.getElementById(a.getAttribute("href").slice(1)); }).filter(Boolean);
+  var active = null;
+
+  function setActive(id){
+    if(active === id) return;
+    active = id;
+    links.forEach(function(a){
+      var on = a.getAttribute("href") === "#" + id;
+      a.classList.toggle("is-active", on);
+      if(on){
+        a.setAttribute("aria-current", "true");
+        var left = a.offsetLeft - (toc.clientWidth - a.offsetWidth) / 2;
+        if(typeof toc.scrollTo === "function"){ toc.scrollTo({left:left, behavior:"smooth"}); }
+        else { toc.scrollLeft = left; }
+      }else{
+        a.removeAttribute("aria-current");
+      }
+    });
+  }
+
+  var ticking = false;
+  function spy(){
+    ticking = false;
+    var y = window.scrollY;
+    var line = top.offsetHeight + 48;
+    var cur = secs.length ? secs[0].id : null;
+    for(var i = 0; i < secs.length; i++){
+      if(secs[i].getBoundingClientRect().top <= line) cur = secs[i].id;
+    }
+    if(window.innerHeight + y >= document.documentElement.scrollHeight - 2 && secs.length) cur = secs[secs.length - 1].id;
+    if(cur) setActive(cur);
+    top.classList.toggle("scrolled", y > 12);
+  }
+  function onScroll(){ if(!ticking){ ticking = true; window.requestAnimationFrame(spy); } }
+  window.addEventListener("scroll", onScroll, {passive:true});
+  window.addEventListener("resize", onScroll);
+  spy();
+
+  /* reveal on scroll */
+  var revealEls = document.querySelectorAll(".rv:not(.in)");
+  if("IntersectionObserver" in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          e.target.classList.add("in");
+          io.unobserve(e.target);
+        }
+      });
+    },{threshold:.08,rootMargin:"0px 0px -6% 0px"});
+    revealEls.forEach(function(el){ io.observe(el); });
+  }else{
+    revealEls.forEach(function(el){ el.classList.add("in"); });
+  }
+
+  /* print: show everything */
+  window.addEventListener("beforeprint", function(){
+    document.querySelectorAll(".rv").forEach(function(el){ el.classList.add("in"); });
+  });
+})();
+</script>
+</body>
+</html>
