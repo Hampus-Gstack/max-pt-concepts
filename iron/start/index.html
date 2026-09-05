@@ -160,7 +160,7 @@
   .specs li{
     display:flex;align-items:center;justify-content:center;text-align:center;
     padding:10px 6px;
-    font-weight:600;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+    font-weight:600;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
     color:var(--bone-2);line-height:1.35;
   }
   .specs li+li{border-left:1px solid var(--line-strong)}
@@ -228,7 +228,7 @@
   .chip{
     display:inline-flex;align-items:center;gap:8px;
     border:1px solid var(--line-strong);padding:7px 10px;
-    font-weight:600;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+    font-weight:600;font-size:11px;letter-spacing:.16em;text-transform:uppercase;
     color:var(--bone-2);line-height:1.2;
   }
   .chip svg{color:var(--ox-hi)}
@@ -371,6 +371,11 @@
     html{scroll-behavior:auto}
     .rv{opacity:1;transform:none;transition:none}
     *,*::before,*::after{animation-duration:.01ms !important;transition-duration:.01ms !important;transition-delay:0s !important}
+  }
+
+  /* mobile tap targets: enlarge hit area without moving layout */
+  @media (pointer:coarse){
+    nav a:not(.btn):not(.primary), header a:not(.btn):not(.primary), footer a, .foot a, .secnav a, .toc a{display:inline-block;padding:11px 8px;margin:-11px -8px}
   }
 </style>
 </head>
